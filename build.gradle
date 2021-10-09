@@ -12,7 +12,19 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    jaxb
+}
+
 dependencies {
+    jaxb (
+            'com.sun.xml.bind:jaxb-xjc:3.0.1',
+            'com.sun.xml.bind:jaxb-impl:3.0.1',
+            'org.glassfish.jaxb:jaxb-runtime:3.0.1',
+    )
+    // necessary for compiling jaxb generated code
+    implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.1'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
@@ -20,3 +32,24 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task jaxb {
+    System.setProperty('javax.xml.accessExternalSchema', 'all')
+    def jaxbTargetDir = file("src/main/java/")
+    doLast {
+        jaxbTargetDir.mkdirs()
+        ant.taskdef(
+                name: 'xjc',
+                classname: 'com.sun.tools.xjc.XJCTask',
+                classpath: configurations.jaxb.asPath
+        )
+        ant.jaxbTargetDir = jaxbTargetDir
+        ant.xjc(
+                destdir: '${jaxbTargetDir}',
+                package: 'cat.aoc.client_pci.jaxb',
+                schema: 'src/main/resources/xsd/peticion.2.0.xsd'
+        )
+    }
+}
+
+compileJava.dependsOn jaxb
