@@ -7,3 +7,8 @@ Client d'exemple pels integradors de la PCI
 ```bash
 gradlew jaxb
 ```
+
+### Passar els tests
+```bash
+gradlew test
+```
