@@ -1,6 +1,6 @@
 package cat.aoc.client_pci;
 
-import cat.aoc.client_pci.jaxb.Atributos;
+import cat.aoc.client_pci.jaxb.pci.Atributos;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

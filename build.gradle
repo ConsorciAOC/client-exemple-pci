@@ -17,7 +17,7 @@ configurations {
 }
 
 dependencies {
-    jaxb (
+    jaxb(
             'com.sun.xml.bind:jaxb-xjc:3.0.1',
             'com.sun.xml.bind:jaxb-impl:3.0.1',
             'org.glassfish.jaxb:jaxb-runtime:3.0.1',
@@ -34,21 +34,31 @@ test {
 }
 
 task jaxb {
+    description 'Convert XSD\'s to java classes'
     System.setProperty('javax.xml.accessExternalSchema', 'all')
     def jaxbTargetDir = file("src/main/java/")
     doLast {
         jaxbTargetDir.mkdirs()
-        ant.taskdef(
-                name: 'xjc',
-                classname: 'com.sun.tools.xjc.XJCTask',
-                classpath: configurations.jaxb.asPath
-        )
-        ant.jaxbTargetDir = jaxbTargetDir
-        ant.xjc(
-                destdir: '${jaxbTargetDir}',
-                package: 'cat.aoc.client_pci.jaxb',
-                schema: 'src/main/resources/xsd/peticion.2.0.xsd'
-        )
+        file('src/main/resources/xsd/').eachDir(xsdProject -> {
+            println('Genearating source code from: ' + xsdProject.name)
+            file(xsdProject).eachFile(file -> {
+                if (file.name.contains('.xsd')) {
+                    def xsd = file.name.split('.xsd')[0]
+                    ant.taskdef(
+                            name: 'xjc',
+                            classname: 'com.sun.tools.xjc.XJCTask',
+                            classpath: configurations.jaxb.asPath
+                    )
+                    ant.jaxbTargetDir = jaxbTargetDir
+                    ant.xjc(
+                            destdir: '${jaxbTargetDir}',
+                            package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
+                            schema: file.getAbsoluteFile()
+                    )
+                }
+
+            })
+        })
     }
 }
 
