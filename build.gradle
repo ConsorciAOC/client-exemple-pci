@@ -41,21 +41,41 @@ task jaxb {
         jaxbTargetDir.mkdirs()
         file('src/main/resources/xsd/').eachDir(xsdProject -> {
             println('Genearating source code from: ' + xsdProject.name)
-            file(xsdProject).eachFile(file -> {
-                if (file.name.contains('.xsd')) {
-                    def xsd = file.name.split('.xsd')[0]
+
+			file(xsdProject).eachFileMatch(~/.*.xsd$/,schemaFile -> {
+                
+                    def xsd = schemaFile.name.split('.xsd')[0]
+					
                     ant.taskdef(
                             name: 'xjc',
                             classname: 'com.sun.tools.xjc.XJCTask',
                             classpath: configurations.jaxb.asPath
                     )
                     ant.jaxbTargetDir = jaxbTargetDir
-                    ant.xjc(
-                            destdir: '${jaxbTargetDir}',
-                            package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
-                            schema: file.getAbsoluteFile()
-                    )
-                }
+					println xsdProject.name
+					println schemaFile.getAbsoluteFile()
+					
+
+					// TODO: I DON'T FEEL OK... HOWEVER IT'S LATE, FIND ANOTHER WAY TO AVOID "BINDING" ATTRIBUTE (USING EMPTY VALUE DOESN'T WORK)
+					def bindingFile = ''
+					if(file(schemaFile.getAbsolutePath() - '.xsd' + '.xjb').exists()) {
+						bindingFile = schemaFile.getAbsolutePath() - '.xsd' + '.xjb'
+						
+						ant.xjc(
+							destdir: '${jaxbTargetDir}',
+							package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
+							schema: schemaFile.getAbsoluteFile(),
+							binding: "${bindingFile}"
+						)	
+						
+					}else {
+						
+						ant.xjc(
+							destdir: '${jaxbTargetDir}',
+							package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
+							schema: schemaFile.getAbsoluteFile(),
+						)
+					}
 
             })
         })
