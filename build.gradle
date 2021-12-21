@@ -25,8 +25,12 @@ dependencies {
     // necessary for compiling jaxb generated code
     implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.1'
 
+    // necessary for marshalling
+    implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '3.0.1'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
 }
 
 test {
