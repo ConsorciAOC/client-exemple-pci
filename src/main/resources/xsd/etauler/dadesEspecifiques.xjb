@@ -5,9 +5,9 @@
 version="3.0">
 
     <bindings schemaLocation="dadesEspecifiques.xsd">
-            <bindings node="(//xs:element[@name='classificacio'])[1]">
-                <class name="classificacioSeq"/>
-            </bindings>
+        <bindings node="(//xs:element[@name='classificacio'])[1]">
+            <class name="classificacioSeq"/>
+        </bindings>
     </bindings>
 
 </bindings>
