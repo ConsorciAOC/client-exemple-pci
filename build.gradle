@@ -17,19 +17,19 @@ configurations {
 }
 
 dependencies {
+    //implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.1' // JAXB API
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.1' // JAXB reference implementation (curiously with com.sun coordinates)
+
+    // necessary for generating JAVA classes with gradle 'jaxb' task
     jaxb(
-            'com.sun.xml.bind:jaxb-xjc:3.0.1',
-            'com.sun.xml.bind:jaxb-impl:3.0.1',
-            'org.glassfish.jaxb:jaxb-runtime:3.0.1',
+            'com.sun.xml.bind:jaxb-impl:3.0.1', // JAXB Impl
+            'com.sun.xml.bind:jaxb-xjc:3.0.1', // XJC tools
     )
-    // necessary for compiling jaxb generated code
-    implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.1'
 
-    // necessary for marshalling
-    implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '3.0.1'
+    // Testing dependencies
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.2'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.2'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
 }
 
@@ -86,4 +86,4 @@ task jaxb {
     }
 }
 
-compileJava.dependsOn jaxb
+//compileJava.dependsOn jaxb
