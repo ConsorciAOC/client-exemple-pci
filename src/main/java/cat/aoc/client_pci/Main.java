@@ -1,7 +1,6 @@
 package cat.aoc.client_pci;
 
 import cat.aoc.client_pci.jaxb.pci.Peticion;
-import cat.aoc.client_pci.jaxb.pci.SolicitudTransmision;
 import cat.aoc.client_pci.jaxb.tfn.PeticioDadesCompletes;
 import cat.aoc.client_pci.tfn.DatosEspecificosTFN;
 import cat.aoc.client_pci.tfn.TFNClient;

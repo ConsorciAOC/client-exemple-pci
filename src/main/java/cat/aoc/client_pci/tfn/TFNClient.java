@@ -1,6 +1,5 @@
 package cat.aoc.client_pci.tfn;
 
-import cat.aoc.client_pci.DatosEspecificos;
 import cat.aoc.client_pci.jaxb.pci.*;
 import cat.aoc.client_pci.jaxb.tfn.PeticioDadesCompletes;
 import cat.aoc.client_pci.jaxb.tfn.TTipusDocumentacio;
@@ -62,7 +61,7 @@ public class TFNClient {
         solicitudTransmision.setDatosGenericos(buildDatosGenericos());
         DatosEspecificosTFN datosEspecificos = new DatosEspecificosTFN();
         datosEspecificos.setPeticioDadesCompletes(buildPeticioDadesCompletes());
-        solicitudTransmision.setDatosEspecificos((DatosEspecificos) datosEspecificos);
+        solicitudTransmision.setDatosEspecificos(datosEspecificos);
         return solicitudTransmision;
     }
 
