@@ -1,5 +1,6 @@
 package cat.aoc.client_pci.tfn;
 
+import cat.aoc.client_pci.DatosEspecificos;
 import cat.aoc.client_pci.jaxb.pci.*;
 import cat.aoc.client_pci.jaxb.tfn.PeticioDadesCompletes;
 import cat.aoc.client_pci.jaxb.tfn.TTipusDocumentacio;
@@ -12,12 +13,6 @@ public class TFNClient {
         Peticion peticion = new Peticion();
         peticion.setAtributos(buildAtributos());
         peticion.setSolicitudes(buildSolicitudes());
-        return peticion;
-    }
-
-    // Per fer diferents proves ràpid
-    public Peticion setDatosEspecificos(Peticion peticion, Object datosEspecificos){
-        peticion.getSolicitudes().getSolicitudTransmision().get(0).setDatosEspecificos(datosEspecificos);
         return peticion;
     }
 
@@ -65,7 +60,9 @@ public class TFNClient {
     private SolicitudTransmision buildSolicitudTransmision(){
         SolicitudTransmision solicitudTransmision = new SolicitudTransmision();
         solicitudTransmision.setDatosGenericos(buildDatosGenericos());
-        solicitudTransmision.setDatosEspecificos(buildDatosEspecificos()); // HERE!!!!!! :(
+        DatosEspecificosTFN datosEspecificos = new DatosEspecificosTFN();
+        datosEspecificos.setPeticioDadesCompletes(buildPeticioDadesCompletes());
+        solicitudTransmision.setDatosEspecificos((DatosEspecificos) datosEspecificos);
         return solicitudTransmision;
     }
 
@@ -93,12 +90,6 @@ public class TFNClient {
         transmision.setIdSolicitud("1");
         transmision.setIdTransmision("1");
         return transmision;
-    }
-
-    private Object buildDatosEspecificos() {
-        DatosEspecificosTFN datosEspecificosTFN = new DatosEspecificosTFN();
-        datosEspecificosTFN.setPeticioDadesCompletes(buildPeticioDadesCompletes());
-        return new DatosEspecificosTFN();
     }
 
     private static PeticioDadesCompletes buildPeticioDadesCompletes(){
