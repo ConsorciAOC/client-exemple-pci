@@ -259,8 +259,15 @@
         <xs:complexType>
             <xs:all>
                 <xs:element ref="DatosGenericos"/>
-                <xs:element name="DatosEspecificos" type="xs:anyType" minOccurs="0"/>
+                <xs:element ref="DatosEspecificos" minOccurs="0"/>
             </xs:all>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DatosEspecificos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="TiempoEstimadoRespuesta">

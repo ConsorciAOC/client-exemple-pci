@@ -5,6 +5,7 @@ import cat.aoc.client_pci.jaxb.tfn.PeticioDadesCompletes;
 import cat.aoc.client_pci.jaxb.tfn.TTipusDocumentacio;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TFNClient {
 
@@ -59,8 +60,9 @@ public class TFNClient {
     private SolicitudTransmision buildSolicitudTransmision(){
         SolicitudTransmision solicitudTransmision = new SolicitudTransmision();
         solicitudTransmision.setDatosGenericos(buildDatosGenericos());
-        DatosEspecificosTFN datosEspecificos = new DatosEspecificosTFN();
-        datosEspecificos.setPeticioDadesCompletes(buildPeticioDadesCompletes());
+        DatosEspecificos datosEspecificos = new DatosEspecificos();
+        List<Object> any = datosEspecificos.getAny();
+        any.add(buildPeticioDadesCompletes());
         solicitudTransmision.setDatosEspecificos(datosEspecificos);
         return solicitudTransmision;
     }

@@ -2,7 +2,6 @@ package cat.aoc.client_pci;
 
 import cat.aoc.client_pci.jaxb.pci.Peticion;
 import cat.aoc.client_pci.jaxb.tfn.PeticioDadesCompletes;
-import cat.aoc.client_pci.tfn.DatosEspecificosTFN;
 import cat.aoc.client_pci.tfn.TFNClient;
 import jakarta.xml.bind.*;
 
@@ -26,7 +25,7 @@ public class Main {
     }
 
     private static String marshalPeticion(Peticion peticion) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Peticion.class, DatosEspecificosTFN.class, PeticioDadesCompletes.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Peticion.class, PeticioDadesCompletes.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // pretty print
         StringWriter stringWriter = new StringWriter();
@@ -35,7 +34,7 @@ public class Main {
     }
 
     private static Peticion unmarshalPeticion(String xml) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Peticion.class, DatosEspecificosTFN.class, PeticioDadesCompletes.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Peticion.class, PeticioDadesCompletes.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         return (Peticion) jaxbUnmarshaller.unmarshal(new StringReader(xml));
     }
