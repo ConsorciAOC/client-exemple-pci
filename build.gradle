@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '2.6.3'
 }
 
 group 'cat.aoc.client_pci'
@@ -12,19 +14,37 @@ repositories {
     mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom('org.springframework.boot:spring-boot-dependencies:2.6.3')
+    }
+}
+
 configurations {
     jaxb
 }
 
 dependencies {
-    //implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.1' // JAXB API
+    implementation group: 'jakarta.activation', name: 'jakarta.activation-api', version: '2.0.1'
+
+    implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.1' // JAXB API
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.1' // JAXB reference implementation (curiously with com.sun coordinates)
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.1'
 
     // necessary for generating JAVA classes with gradle 'jaxb' task
     jaxb(
             'com.sun.xml.bind:jaxb-impl:3.0.1', // JAXB Impl
             'com.sun.xml.bind:jaxb-xjc:3.0.1', // XJC tools
+            'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1',
+            'jakarta.activation:jakarta.activation-api:2.0.1'
     )
+
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.springframework.ws:spring-ws-security'
+
+    // Lombok
+    compileOnly('org.projectlombok:lombok:1.18.22')
+    annotationProcessor('org.projectlombok:lombok:1.18.22')
 
     // Testing dependencies
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.2'
@@ -43,6 +63,7 @@ task jaxb {
     def jaxbTargetDir = file("src/main/java/")
     doLast {
         jaxbTargetDir.mkdirs()
+
         file('src/main/resources/xsd/').eachDir(xsdProject -> {
             println('Genearating source code from: ' + xsdProject.name)
 
@@ -58,7 +79,6 @@ task jaxb {
                     ant.jaxbTargetDir = jaxbTargetDir
 					println xsdProject.name
 					println schemaFile.getAbsoluteFile()
-					
 
 					// TODO: I DON'T FEEL OK... HOWEVER IT'S LATE, FIND ANOTHER WAY TO AVOID "BINDING" ATTRIBUTE (USING EMPTY VALUE DOESN'T WORK)
 					def bindingFile = ''
@@ -67,23 +87,29 @@ task jaxb {
 						
 						ant.xjc(
 							destdir: '${jaxbTargetDir}',
-							package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
+							//package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
 							schema: schemaFile.getAbsoluteFile(),
 							binding: "${bindingFile}"
-						)	
-						
+						)
+
 					}else {
-						
 						ant.xjc(
 							destdir: '${jaxbTargetDir}',
-							package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
+							//package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
 							schema: schemaFile.getAbsoluteFile(),
 						)
 					}
 
             })
         })
+        // WSDL Compilation
+        ant.xjc(
+                destdir: '${jaxbTargetDir}',
+                schema: 'src/main/resources/wsdl/sincron.wsdl',
+                language: 'WSDL'
+        )
     }
 }
 
 //compileJava.dependsOn jaxb
+

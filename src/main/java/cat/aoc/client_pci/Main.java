@@ -1,42 +1,26 @@
 package cat.aoc.client_pci;
 
-import cat.aoc.client_pci.jaxb.pci.Peticion;
-import cat.aoc.client_pci.jaxb.tfn.PeticioDadesCompletes;
-import cat.aoc.client_pci.tfn.TFNClient;
-import jakarta.xml.bind.*;
+import cat.aoc.client_pci.serveis.tfn.TFNClient;
+import lombok.extern.slf4j.Slf4j;
+import net.gencat.scsp.esquemes.peticion.Peticion;
+import org.openuri.Procesa;
+import org.openuri.ProcesaResponse;
 
-import java.io.StringReader;
-import java.io.StringWriter;
-
+@Slf4j
 public class Main {
 
-    public static void main(String[] args) throws JAXBException {
+    public static void main(String[] args) throws Exception {
         TFNClient tfnClient = new TFNClient();
         Peticion peticionTFN = tfnClient.buildPeticion();
+        System.out.println(peticionTFN.getAtributos().getIdPeticion());
 
-        // MARSHALLING
-        String xml = marshalPeticion(peticionTFN);
-        System.out.println(xml);
-
-        // UNMARSHALLING
-        Peticion peticion = unmarshalPeticion(xml);
-        System.out.println(peticion.getAtributos().getIdPeticion());
+        PCI3ClientI client = new MTISincronClient();
+        Procesa procesa = new Procesa();
+        procesa.setPeticion(peticionTFN);
+        ProcesaResponse response = client.procesa(Cluster.IOP, procesa);
+        System.out.println(response.getRespuesta().getAtributos().getIdPeticion());
 
     }
 
-    private static String marshalPeticion(Peticion peticion) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Peticion.class, PeticioDadesCompletes.class);
-        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // pretty print
-        StringWriter stringWriter = new StringWriter();
-        jaxbMarshaller.marshal(peticion, stringWriter);
-        return stringWriter.toString();
-    }
-
-    private static Peticion unmarshalPeticion(String xml) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Peticion.class, PeticioDadesCompletes.class);
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return (Peticion) jaxbUnmarshaller.unmarshal(new StringReader(xml));
-    }
 
 }

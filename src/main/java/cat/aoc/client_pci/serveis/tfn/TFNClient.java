@@ -1,8 +1,8 @@
-package cat.aoc.client_pci.tfn;
+package cat.aoc.client_pci.serveis.tfn;
 
-import cat.aoc.client_pci.jaxb.pci.*;
-import cat.aoc.client_pci.jaxb.tfn.PeticioDadesCompletes;
-import cat.aoc.client_pci.jaxb.tfn.TTipusDocumentacio;
+import cat.aoc.tfn.PeticioDadesCompletes;
+import cat.aoc.tfn.TTipusDocumentacio;
+import net.gencat.scsp.esquemes.peticion.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +19,7 @@ public class TFNClient {
     private Atributos buildAtributos(){
         Atributos atributos = new Atributos();
         atributos.setIdPeticion("9821920002-TFN-"+System.currentTimeMillis());
-        atributos.setNumElementos(0);
+        atributos.setNumElementos(1);
         atributos.setTimeStamp(LocalDateTime.now().toString());
         atributos.setCodigoProducto("TFN");
         atributos.setCodigoCertificado("TFN_DADESCOMPLETES");
