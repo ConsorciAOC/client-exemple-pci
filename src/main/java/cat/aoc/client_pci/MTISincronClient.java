@@ -7,10 +7,8 @@ import jakarta.xml.bind.Unmarshaller;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.wss4j.common.crypto.Crypto;
 import org.apache.wss4j.dom.WSConstants;
-import org.apache.wss4j.dom.handler.WSHandlerConstants;
 import org.openuri.Procesa;
 import org.openuri.ProcesaResponse;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.ws.FaultAwareWebServiceMessage;
 import org.springframework.ws.WebServiceMessage;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
@@ -98,22 +96,6 @@ public class MTISincronClient extends WebServiceGatewaySupport implements PCI3Cl
         return (ProcesaResponse) jaxbUnmarshaller.unmarshal(payload);
     }
 
-    public Wss4jSecurityInterceptor wsResponseSignatureInterceptor() throws Exception {
-        System.out.println("INTERCEPTING!");
-        CryptoFactoryBean cryptoFactoryBean = new CryptoFactoryBean();
-        cryptoFactoryBean.setKeyStorePassword("caoc");
-        cryptoFactoryBean.setKeyStoreLocation(new FileSystemResource("C:\\Users\\obernalp\\OneDrive - NTT DATA EMEAL\\code\\work\\aoc\\client-exemple-pci\\src\\main\\resources\\truststore-SIRI-PRE.jks"));
-        cryptoFactoryBean.afterPropertiesSet();
-        Crypto signatureCrypto = cryptoFactoryBean.getObject();
-
-        Wss4jSecurityInterceptor wss4jSecurityInterceptor = new Wss4jSecurityInterceptor();
-        wss4jSecurityInterceptor.setValidateRequest(false);
-        wss4jSecurityInterceptor.setValidateResponse(true);
-        wss4jSecurityInterceptor.setValidationActions(WSHandlerConstants.TIMESTAMP + " " + WSHandlerConstants.SIGNATURE);
-        wss4jSecurityInterceptor.setValidationSignatureCrypto(signatureCrypto);
-        return wss4jSecurityInterceptor;
-    }
-
     public Wss4jSecurityInterceptor securityInterceptor() throws Exception {
         Wss4jSecurityInterceptor securityInterceptor = new Wss4jSecurityInterceptor();
 
@@ -125,7 +107,6 @@ public class MTISincronClient extends WebServiceGatewaySupport implements PCI3Cl
         Crypto object = cryptoFactoryBean().getObject();
         securityInterceptor.setSecurementSignatureCrypto(object);
         securityInterceptor.setSecurementSignatureKeyIdentifier("DirectReference");
-        //securityInterceptor.setValidationActions("NoSecurity");
         securityInterceptor.setSecurementSignatureAlgorithm(WSConstants.RSA_SHA1);
         securityInterceptor.setSecurementSignatureDigestAlgorithm(WSConstants.SHA1);
         securityInterceptor.setSecurementTimeToLive(60);
@@ -137,13 +118,6 @@ public class MTISincronClient extends WebServiceGatewaySupport implements PCI3Cl
         return securityInterceptor;
     }
 
-    public CryptoFactoryBean getCryptoFactoryBean() throws IOException {
-        CryptoFactoryBean cryptoFactoryBean = new CryptoFactoryBean();
-        cryptoFactoryBean.setKeyStorePassword("1234");
-        //.setKeyStoreLocation(new FileSystemResource("C:/Users/obernalp/OneDrive - NTT DATA EMEAL/code/work/aoc/client-exemple-pci/src/main/resources/segellconsorciaoc.jks"));
-        cryptoFactoryBean.setKeyStoreLocation(new FileSystemResource("C:\\Users\\obernalp\\OneDrive - NTT DATA EMEAL\\code\\work\\aoc\\client-exemple-pci\\src\\main\\resources\\segellconsorciaoc.p12"));
-        return cryptoFactoryBean;
-    }
     public CryptoFactoryBean cryptoFactoryBean() throws IOException {
 
         CryptoFactoryBean cryptoFactoryBean = new CryptoFactoryBean();

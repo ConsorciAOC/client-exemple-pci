@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<WL5G3N0:definitions xmlns="" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://www.openuri.org/" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://www.openuri.org/">
+    <WL5G3N0:types>
+        <s:schema xmlns:conv="http://www.openuri.org/2002/04/soap/conversation/" xmlns:cw="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:jms="http://www.openuri.org/2002/04/wsdl/jms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:pet="http://gencat.net/scsp/esquemes/peticion" xmlns:res="http://gencat.net/scsp/esquemes/respuesta" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.openuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.openuri.org/">
+            <s:import namespace="http://gencat.net/scsp/esquemes/peticion" schemaLocation="http://10.120.4.180:80/aoc-pci3-mti/Sincron?xsd=1"/>
+            <s:import namespace="http://gencat.net/scsp/esquemes/respuesta" schemaLocation="http://10.120.4.180:80/aoc-pci3-mti/Sincron?xsd=2"/>
+            <s:element name="procesa">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element ref="pet:Peticion"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="procesaResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element ref="res:Respuesta"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+        </s:schema>
+    </WL5G3N0:types>
+    <WL5G3N0:message name="procesaSoapIn">
+        <WL5G3N0:part element="WL5G3N1:procesa" name="parameters"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="procesaSoapOut">
+        <WL5G3N0:part element="WL5G3N1:procesaResponse" name="parameters"/>
+    </WL5G3N0:message>
+    <WL5G3N0:portType name="SincronSoap">
+        <WL5G3N0:operation name="procesa">
+            <WL5G3N0:input message="WL5G3N1:procesaSoapIn"/>
+            <WL5G3N0:output message="WL5G3N1:procesaSoapOut"/>
+        </WL5G3N0:operation>
+    </WL5G3N0:portType>
+    <WL5G3N0:binding name="SincronSoap" type="WL5G3N1:SincronSoap">
+        <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <WL5G3N0:operation name="procesa">
+            <WL5G3N2:operation soapAction="http://www.openuri.org/procesa" style="document"/>
+            <WL5G3N0:input>
+                <WL5G3N2:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N2:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+    </WL5G3N0:binding>
+    <WL5G3N0:service name="Sincron">
+        <WL5G3N0:port binding="WL5G3N1:SincronSoap" name="SincronSoap">
+            <WL5G3N2:address location="http://10.120.4.180:80/aoc-pci3-mti/Sincron"/>
+        </WL5G3N0:port>
+    </WL5G3N0:service>
+</WL5G3N0:definitions>
