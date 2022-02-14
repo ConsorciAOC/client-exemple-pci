@@ -111,5 +111,6 @@ task jaxb {
     }
 }
 
+compileJava {options.encoding = "ISO-8859-1"}
 compileJava.dependsOn jaxb
 

@@ -1,30 +1,29 @@
-package cat.aoc.client_pci.serveis.tfn;
+package cat.aoc.client_pci;
 
-import cat.aoc.tfn.PeticioDadesCompletes;
-import cat.aoc.tfn.TTipusDocumentacio;
 import net.gencat.scsp.esquemes.peticion.*;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
-public class TFNClient {
+public class PeticionBuilder {
 
-    public Peticion buildPeticion(){
+    public Peticion build(String producto, String modalidad, String finalidad, Object... data){
         Peticion peticion = new Peticion();
-        peticion.setAtributos(buildAtributos());
-        peticion.setSolicitudes(buildSolicitudes());
+        peticion.setAtributos(buildAtributos(producto, modalidad, finalidad));
+        peticion.setSolicitudes(buildSolicitudes(modalidad, finalidad, data));
         return peticion;
     }
 
-    private Atributos buildAtributos(){
+    private Atributos buildAtributos(String producto, String modalidad, String finalidad){
         Atributos atributos = new Atributos();
-        atributos.setIdPeticion("9821920002-TFN-"+System.currentTimeMillis());
+        atributos.setIdPeticion("9821920002-" + producto + "-"+System.currentTimeMillis());
         atributos.setNumElementos(1);
         atributos.setTimeStamp(LocalDateTime.now().toString());
-        atributos.setCodigoProducto("TFN");
-        atributos.setCodigoCertificado("TFN_DADESCOMPLETES");
+        atributos.setCodigoProducto(producto);
+        atributos.setCodigoCertificado(modalidad);
         atributos.setEmisor(buildEmisor());
-        atributos.setDatosAutorizacion(buildDatosAutorizacion());
+        atributos.setDatosAutorizacion(buildDatosAutorizacion(finalidad));
         atributos.setFuncionario(buildFuncionario());
         return atributos;
     }
@@ -36,11 +35,11 @@ public class TFNClient {
         return emisor;
     }
 
-    private DatosAutorizacion buildDatosAutorizacion(){
+    private DatosAutorizacion buildDatosAutorizacion(String finalidad){
         DatosAutorizacion datosAutorizacion = new DatosAutorizacion();
         datosAutorizacion.setIdentificadorSolicitante("9821920002");
         datosAutorizacion.setNombreSolicitante("Ajuntament");
-        datosAutorizacion.setFinalidad("PROVES");
+        datosAutorizacion.setFinalidad(finalidad);
         return datosAutorizacion;
     }
 
@@ -51,59 +50,47 @@ public class TFNClient {
         return funcionario;
     }
 
-    private Solicitudes buildSolicitudes(){
+    private Solicitudes buildSolicitudes(String modalidad, String finalidad, Object... data){
         Solicitudes solicitudes = new Solicitudes();
-        solicitudes.getSolicitudTransmision().add(buildSolicitudTransmision());
+        solicitudes.getSolicitudTransmision().add(buildSolicitudTransmision(modalidad, finalidad, data));
         return solicitudes;
     }
 
-    private SolicitudTransmision buildSolicitudTransmision(){
+    private SolicitudTransmision buildSolicitudTransmision(String modalidad, String finalidad, Object... data){
         SolicitudTransmision solicitudTransmision = new SolicitudTransmision();
-        solicitudTransmision.setDatosGenericos(buildDatosGenericos());
+        solicitudTransmision.setDatosGenericos(buildDatosGenericos(modalidad, finalidad));
         DatosEspecificos datosEspecificos = new DatosEspecificos();
         List<Object> any = datosEspecificos.getAny();
-        any.add(buildPeticioDadesCompletes());
+        any.addAll(Arrays.asList(data));
         solicitudTransmision.setDatosEspecificos(datosEspecificos);
         return solicitudTransmision;
     }
 
-    private DatosGenericos buildDatosGenericos(){
+    private DatosGenericos buildDatosGenericos(String modalidad, String finalidad){
         DatosGenericos datosGenericos = new DatosGenericos();
         datosGenericos.setEmisor(buildEmisor());
-        datosGenericos.setSolicitante(buildSolicitante());
-        datosGenericos.setTransmision(buildTransmision());
+        datosGenericos.setSolicitante(buildSolicitante(finalidad));
+        datosGenericos.setTransmision(buildTransmision(modalidad));
         return datosGenericos;
     }
 
-    private Solicitante buildSolicitante(){
+    private Solicitante buildSolicitante(String finalidad){
         Solicitante solicitante = new Solicitante();
         solicitante.setIdentificadorSolicitante("9821920002");
         solicitante.setNombreSolicitante("Ajuntament");
-        solicitante.setFinalidad("PROVES");
+        solicitante.setFinalidad(finalidad);
         solicitante.setConsentimiento("Ley");
         solicitante.setFuncionario(buildFuncionario());
         return solicitante;
     }
 
-    private Transmision buildTransmision(){
+    private Transmision buildTransmision(String modalidad){
         Transmision transmision = new Transmision();
-        transmision.setCodigoCertificado("TFN_DADESCOMPLETES");
+        transmision.setCodigoCertificado(modalidad);
         transmision.setIdSolicitud("1");
         transmision.setIdTransmision("1");
         return transmision;
     }
 
-    private static PeticioDadesCompletes buildPeticioDadesCompletes(){
-        PeticioDadesCompletes peticioDadesCompletes = new PeticioDadesCompletes();
-        peticioDadesCompletes.setIdentificadorTitular(buildIdentificadorTitular());
-        return peticioDadesCompletes;
-    }
-
-    private static PeticioDadesCompletes.IdentificadorTitular buildIdentificadorTitular(){
-        PeticioDadesCompletes.IdentificadorTitular identificadorTitular = new PeticioDadesCompletes.IdentificadorTitular();
-        identificadorTitular.setDocumentacio("38991311D");
-        identificadorTitular.setTipusDocumentacio(TTipusDocumentacio.NIF);
-        return identificadorTitular;
-    }
 
 }
