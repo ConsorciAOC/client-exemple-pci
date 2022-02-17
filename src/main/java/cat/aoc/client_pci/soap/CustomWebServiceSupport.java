@@ -29,9 +29,10 @@ public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
     protected final JAXBContext jaxbContext;
     protected CustomWebServiceSupport(String... externalPackages) throws Exception {
         jaxbContext = JAXBContext.newInstance(OPENURI_PACKAGE + ":" + String.join(":", externalPackages));
-        setInterceptors(new ClientInterceptor[]{
-                securityInterceptor(),
+        setInterceptors(new SignatureInterceptor[]{
+                new SignatureInterceptor("src\\main\\resources\\keystore.properties"),
         });
+
     }
 
     protected R send(String endpoint, P procesa) {
@@ -74,36 +75,6 @@ public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
         Source payload = response.getPayloadSource();
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         return (R) jaxbUnmarshaller.unmarshal(payload);
-    }
-
-    public Wss4jSecurityInterceptor securityInterceptor() throws Exception {
-        Wss4jSecurityInterceptor securityInterceptor = new Wss4jSecurityInterceptor();
-        securityInterceptor.setSecurementActions("Signature Timestamp");
-        securityInterceptor.setSecurementUsername("segellconsorciaoc");
-        securityInterceptor.setSecurementPassword("1234");
-        securityInterceptor.setSecurementSignatureCrypto(cryptoFactoryBean().getObject());
-        securityInterceptor.setSecurementSignatureKeyIdentifier("DirectReference");
-        securityInterceptor.setSecurementSignatureAlgorithm(WSConstants.RSA_SHA1);
-        securityInterceptor.setSecurementSignatureDigestAlgorithm(WSConstants.SHA1);
-        securityInterceptor.setSecurementTimeToLive(60);
-        securityInterceptor.setTimestampPrecisionInMilliseconds(false);
-        securityInterceptor.setTimestampStrict(false);
-        securityInterceptor.setValidateResponse(false);
-        return securityInterceptor;
-    }
-
-    private CryptoFactoryBean cryptoFactoryBean() throws Exception {
-        CryptoFactoryBean cryptoFactoryBean = new CryptoFactoryBean();
-        Properties properties = new Properties();
-        properties.setProperty("org.apache.ws.security.crypto.provider", "org.apache.wss4j.common.crypto.Merlin");
-        properties.setProperty("org.apache.wss4j.crypto.merlin.keystore.alias", "segellconsorciaoc");
-        properties.setProperty("org.apache.ws.security.crypto.merlin.keystore.type", "PKCS12");
-        properties.setProperty("org.apache.ws.security.crypto.merlin.keystore.password", "1234");
-        properties.setProperty("org.apache.ws.security.crypto.merlin.keystore.file",
-                "src\\main\\resources\\segellconsorciaoc.p12");
-        cryptoFactoryBean.setConfiguration(properties);
-        cryptoFactoryBean.afterPropertiesSet();
-        return cryptoFactoryBean;
     }
 
 }

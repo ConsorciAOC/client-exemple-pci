@@ -1,7 +1,5 @@
 package cat.aoc.client_pci;
 
-import cat.aoc.client_pci.Entorn;
-import cat.aoc.client_pci.PeticionBuilder;
 import cat.aoc.client_pci.soap.Clients;
 import cat.aoc.tfn.*;
 import net.gencat.scsp.esquemes.peticion.Peticion;
