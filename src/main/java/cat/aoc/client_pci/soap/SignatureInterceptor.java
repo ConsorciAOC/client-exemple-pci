@@ -3,8 +3,8 @@ package cat.aoc.client_pci.soap;
 import cat.aoc.client_pci.exceptions.NotFoundException;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.wss4j.common.WSS4JConstants;
 import org.apache.wss4j.common.crypto.Crypto;
-import org.apache.wss4j.dom.WSConstants;
 import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 import org.springframework.ws.soap.security.wss4j2.support.CryptoFactoryBean;
 
@@ -40,8 +40,8 @@ public class SignatureInterceptor extends Wss4jSecurityInterceptor {
         setSecurementPassword("1234");
         setSecurementSignatureCrypto(createCrypto(properties));
         setSecurementSignatureKeyIdentifier("DirectReference");
-        setSecurementSignatureAlgorithm(WSConstants.RSA_SHA1);
-        setSecurementSignatureDigestAlgorithm(WSConstants.SHA1);
+        setSecurementSignatureAlgorithm(WSS4JConstants.RSA_SHA1);
+        setSecurementSignatureDigestAlgorithm(WSS4JConstants.SHA1);
         setSecurementTimeToLive(60);
         setTimestampPrecisionInMilliseconds(false);
         setTimestampStrict(false);

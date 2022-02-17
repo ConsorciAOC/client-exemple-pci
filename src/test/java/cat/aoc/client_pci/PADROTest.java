@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class PADROTest {
+class PADROTest {
     private static final String SERVEI = "PADRO";
     private static final String FINALITAT = "PROVES";
 
@@ -32,7 +32,7 @@ public class PADROTest {
                 .getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(specificResponse);
         assertNotNull(specificResponse.getDocumentacion());
-        assertEquals(specificResponse.getCodigoResultado(), 1); // consta
+        assertEquals(1, specificResponse.getCodigoResultado()); // consta
     }
 
     private static PeticionResidente buildPeticionResidente(){

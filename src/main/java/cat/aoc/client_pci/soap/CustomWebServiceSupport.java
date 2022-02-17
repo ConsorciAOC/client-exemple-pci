@@ -1,5 +1,8 @@
 package cat.aoc.client_pci.soap;
 
+import cat.aoc.client_pci.exceptions.MarshallingException;
+import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -21,18 +24,27 @@ import java.util.Properties;
 @Slf4j
 @Getter
 public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
+    private static final String[] PACKAGES = {
+            "org.openuri",
+            "net.gencat.scsp.esquemes.peticion",
+            "net.gencat.scsp.esquemes.respuesta"
+    };
 
-    private final String OPENURI_PACKAGE = "org.openuri:" +
-            "net.gencat.scsp.esquemes.peticion:" +
-            "net.gencat.scsp.esquemes.respuesta";
+    private static String processPackages(String... externalPackages) {
+            return String.join(":", PACKAGES) + ":" + String.join(":", externalPackages);
+    }
 
     protected final JAXBContext jaxbContext;
-    protected CustomWebServiceSupport(String... externalPackages) throws Exception {
-        jaxbContext = JAXBContext.newInstance(OPENURI_PACKAGE + ":" + String.join(":", externalPackages));
-        setInterceptors(new SignatureInterceptor[]{
-                new SignatureInterceptor("src\\main\\resources\\keystore.properties"),
-        });
 
+    protected CustomWebServiceSupport(String... externalPackages) throws WebServiceSupportException {
+        try {
+            jaxbContext = JAXBContext.newInstance(processPackages(externalPackages));
+            setInterceptors(new SignatureInterceptor[]{
+                    new SignatureInterceptor("src\\main\\resources\\keystore.properties"),
+            });
+        } catch (Exception e) {
+            throw new WebServiceSupportException("Error al configurar el client i el signador");
+        }
     }
 
     protected R send(String endpoint, P procesa) {
@@ -42,14 +54,14 @@ public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
                 request -> {
                     try {
                         requestCallback(procesa, request);
-                    } catch (JAXBException e) {
+                    } catch (MarshallingException e) {
                         e.printStackTrace();
                     }
                 },
                 response -> {
                     try {
                         return responseExtractor(response);
-                    } catch (JAXBException e) {
+                    } catch (MarshallingException e) {
                         e.printStackTrace();
                     }
                     return null;
@@ -57,24 +69,36 @@ public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
         );
     }
 
-    protected void requestCallback(P procesa, WebServiceMessage request) throws JAXBException, IOException {
-        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // pretty print
-        jaxbMarshaller.marshal(procesa, request.getPayloadResult());
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        request.writeTo(bos);
-        System.out.println("Peticion");
-        System.out.println(bos);
+    protected void requestCallback(P procesa, WebServiceMessage request) throws MarshallingException {
+        try {
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // pretty print
+            jaxbMarshaller.marshal(procesa, request.getPayloadResult());
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            request.writeTo(bos);
+            System.out.println("Peticion");
+            System.out.println(bos);
+        } catch (JAXBException e) {
+            throw new MarshallingException("S'ha produit un error al crear el marshaller");
+        } catch (IOException e) {
+            throw new MarshallingException("S'ha produit un error convertir la petició a XML");
+        }
     }
 
-    protected R responseExtractor(WebServiceMessage response) throws IOException, JAXBException {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        response.writeTo(bos);
-        System.out.println("Respuesta");
-        System.out.println(bos);
-        Source payload = response.getPayloadSource();
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return (R) jaxbUnmarshaller.unmarshal(payload);
+    protected R responseExtractor(WebServiceMessage response) throws MarshallingException {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            response.writeTo(bos);
+            System.out.println("Respuesta");
+            System.out.println(bos);
+            Source payload = response.getPayloadSource();
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            return (R) jaxbUnmarshaller.unmarshal(payload);
+        } catch (JAXBException e) {
+            throw new MarshallingException("S'ha produit un error al crear el marshaller");
+        } catch (IOException e) {
+            throw new MarshallingException("S'ha produit un error convertir la petició a XML");
+        }
     }
 
 }

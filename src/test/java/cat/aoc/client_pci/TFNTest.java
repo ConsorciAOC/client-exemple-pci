@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class TFNTest {
+class TFNTest {
     private static final String SERVEI = "TFN";
     private static final String FINALITAT = "PROVES";
 
@@ -31,7 +31,7 @@ public class TFNTest {
                 .getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(specificResponse);
         assertNotNull(specificResponse.getResposta());
-        assertEquals(specificResponse.getResposta().getIndicadorVigencia(), "Si");
+        assertEquals("Si", specificResponse.getResposta().getIndicadorVigencia());
     }
 
     @DisplayName("TFN_DADESCOMPLETES")
@@ -49,11 +49,11 @@ public class TFNTest {
                 .getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(specificResponse);
         assertNotNull(specificResponse.getResposta());
-        assertEquals(specificResponse.getResposta().getNumeroTitol(), "080119372003");
-        assertEquals(specificResponse.getResposta().getNom(), "BBBB");
-        assertEquals(specificResponse.getResposta().getPrimerCognom(), "ZZZZ");
-        assertEquals(specificResponse.getResposta().getSegonCognom(), "HHHH");
-        assertEquals(specificResponse.getResposta().getCodiPostal(), "08921");
+        assertEquals("080119372003", specificResponse.getResposta().getNumeroTitol());
+        assertEquals("BBBB", specificResponse.getResposta().getNom());
+        assertEquals("ZZZZ", specificResponse.getResposta().getPrimerCognom());
+        assertEquals("HHHH", specificResponse.getResposta().getSegonCognom());
+        assertEquals("08921", specificResponse.getResposta().getCodiPostal());
     }
 
     @DisplayName("TFN_DADESCOMPLETES_DIS")
@@ -71,11 +71,11 @@ public class TFNTest {
                 .getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(specificResponse);
         assertNotNull(specificResponse.getResposta());
-        assertEquals(specificResponse.getResposta().getNumeroTitol(), "080119372003");
-        assertEquals(specificResponse.getResposta().getNom(), "BBBB");
-        assertEquals(specificResponse.getResposta().getPrimerCognom(), "ZZZZ");
-        assertEquals(specificResponse.getResposta().getSegonCognom(), "HHHH");
-        assertEquals(specificResponse.getResposta().getCodiPostal(), "08921");
+        assertEquals("080119372003", specificResponse.getResposta().getNumeroTitol());
+        assertEquals("BBBB", specificResponse.getResposta().getNom());
+        assertEquals("ZZZZ", specificResponse.getResposta().getPrimerCognom());
+        assertEquals("HHHH", specificResponse.getResposta().getSegonCognom());
+        assertEquals("08921", specificResponse.getResposta().getCodiPostal());
     }
 
     private static PeticioConsultaVigencia buildPeticioConsultaVigencia(){
