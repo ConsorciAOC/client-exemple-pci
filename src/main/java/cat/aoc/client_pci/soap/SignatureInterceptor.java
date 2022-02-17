@@ -1,6 +1,7 @@
 package cat.aoc.client_pci.soap;
 
 import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.utils.PropertiesReader;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.wss4j.common.WSS4JConstants;
@@ -8,30 +9,17 @@ import org.apache.wss4j.common.crypto.Crypto;
 import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 import org.springframework.ws.soap.security.wss4j2.support.CryptoFactoryBean;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
-
 
 @Slf4j
 @Getter
 public class SignatureInterceptor extends Wss4jSecurityInterceptor {
 
-    private Properties properties;
+    private final Properties properties;
 
     public SignatureInterceptor(String propertiesPath) throws NotFoundException {
-        load(propertiesPath);
+        properties = PropertiesReader.load(propertiesPath);
         createSecurityInterceptor(properties);
-    }
-
-    private void load(String propertiesPath) throws NotFoundException {
-        try (InputStream input = new FileInputStream(propertiesPath)) {
-            properties = new Properties();
-            properties.load(input);
-        } catch (IOException ex) {
-            throw new NotFoundException("Fitxer .properties no trobat: " + propertiesPath);
-        }
     }
 
     public void createSecurityInterceptor(Properties properties) throws NotFoundException {

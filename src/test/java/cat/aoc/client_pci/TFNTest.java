@@ -14,11 +14,10 @@ class TFNTest {
     private static final String SERVEI = "TFN";
     private static final String FINALITAT = "PROVES";
 
-    private final PeticionBuilder builder = new PeticionBuilder();
-
     @DisplayName("TFN_VIGENCIA")
     @Test
     void vigendcia() throws Exception {
+        PeticionBuilder builder = new PeticionBuilderFromProperties("src\\main\\resources\\client.properties");
         Peticion peticion = builder.build(
                 SERVEI,
                 "TFN_VIGENCIA",
@@ -37,6 +36,7 @@ class TFNTest {
     @DisplayName("TFN_DADESCOMPLETES")
     @Test
     void dadescompletes() throws Exception {
+        PeticionBuilder builder = new PeticionBuilderFromProperties("src\\main\\resources\\client.properties");
         Peticion peticion = builder.build(
                 SERVEI,
                 "TFN_DADESCOMPLETES",
@@ -59,6 +59,7 @@ class TFNTest {
     @DisplayName("TFN_DADESCOMPLETES_DIS")
     @Test
     void dadescompletesDis() throws Exception {
+        PeticionBuilder builder = new PeticionBuilderFromProperties("src\\main\\resources\\client.properties");
         Peticion peticion = builder.build(
                 SERVEI,
                 "TFN_DADESCOMPLETES_DIS",

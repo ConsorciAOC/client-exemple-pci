@@ -15,11 +15,10 @@ class PADROTest {
     private static final String SERVEI = "PADRO";
     private static final String FINALITAT = "PROVES";
 
-    private final PeticionBuilder builder = new PeticionBuilder();
-
     @DisplayName("RESIDENT")
     @Test
     void resident() throws Exception {
+        PeticionBuilder builder = new PeticionBuilderFromProperties("src\\main\\resources\\client.properties");
         Peticion peticion = builder.build(
                 SERVEI,
                 "RESIDENT",

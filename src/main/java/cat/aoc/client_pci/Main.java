@@ -7,14 +7,14 @@ import net.gencat.scsp.esquemes.peticion.Peticion;
 
 public class Main {
     public static void main(String[] args) {
-        PeticionBuilder builder = new PeticionBuilder();
-        Peticion peticion = builder.build(
-                "TFN",
-                "TFN_DADESCOMPLETES",
-                "PROVES",
-                buildPeticioDadesCompletes()
-        );
         try {
+            PeticionBuilder builder = new PeticionBuilderFromProperties("src\\main\\resources\\client.properties");
+            Peticion peticion = builder.build(
+                    "TFN",
+                    "TFN_DADESCOMPLETES",
+                    "PROVES",
+                    buildPeticioDadesCompletes()
+            );
              Clients.TFN.getClient(Entorn.PRE).send(peticion);
         } catch (Exception e) {
             e.printStackTrace();
