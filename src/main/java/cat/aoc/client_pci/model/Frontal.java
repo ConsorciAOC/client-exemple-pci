@@ -1,4 +1,4 @@
-package cat.aoc.client_pci;
+package cat.aoc.client_pci.model;
 
 public enum Frontal {
     SINCRON("Sincron"),

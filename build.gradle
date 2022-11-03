@@ -77,8 +77,7 @@ task jaxb {
                             classpath: configurations.jaxb.asPath
                     )
                     ant.jaxbTargetDir = jaxbTargetDir
-					println xsdProject.name
-					println schemaFile.getAbsoluteFile()
+					println xsdProject.name + "-" + schemaFile.getAbsoluteFile()
 
 					// TODO: I DON'T FEEL OK... HOWEVER IT'S LATE, FIND ANOTHER WAY TO AVOID "BINDING" ATTRIBUTE (USING EMPTY VALUE DOESN'T WORK)
 					def bindingFile = ''
@@ -99,7 +98,6 @@ task jaxb {
 							schema: schemaFile.getAbsoluteFile(),
 						)
 					}
-
             })
         })
         // WSDL Compilation
