@@ -24,8 +24,8 @@ public class SignatureInterceptor extends Wss4jSecurityInterceptor {
 
     public void createSecurityInterceptor(Properties properties) throws NotFoundException {
         setSecurementActions("Signature Timestamp");
-        setSecurementUsername("segellconsorciaoc");
-        setSecurementPassword("1234");
+        setSecurementUsername(properties.getProperty("org.apache.wss4j.crypto.merlin.keystore.alias"));
+        setSecurementPassword(properties.getProperty("org.apache.ws.security.crypto.merlin.keystore.password"));
         setSecurementSignatureCrypto(createCrypto(properties));
         setSecurementSignatureKeyIdentifier("DirectReference");
         setSecurementSignatureAlgorithm(WSS4JConstants.RSA_SHA1);
