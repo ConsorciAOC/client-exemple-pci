@@ -4,6 +4,6 @@ import net.gencat.scsp.esquemes.peticion.Peticion;
 
 public interface PeticionBuilder {
 
-    Peticion build(String producto, String modalidad, String finalidad, Object... data);
+    Peticion build(String producto, String modalidad, String finalidad, Object... dadesEspecifiques);
 
 }

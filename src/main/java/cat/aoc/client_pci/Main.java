@@ -1,38 +1,19 @@
 package cat.aoc.client_pci;
 
-import cat.aoc.client_pci.soap.Clients;
-import cat.aoc.tfn.PeticioDadesCompletes;
-import cat.aoc.tfn.TTipusDocumentacio;
-import net.gencat.scsp.esquemes.peticion.Peticion;
+import cat.aoc.client_pci.clients.Clients;
+import cat.aoc.client_pci.clients.tfn.TFNOperacio;
+import cat.aoc.client_pci.model.Entorn;
+import cat.aoc.client_pci.model.Finalitat;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("Hello world!");
         try {
-            PeticionBuilder builder = new PeticionBuilderFromProperties("src\\main\\resources\\client.properties");
-            Peticion peticion = builder.build(
-                    "TFN",
-                    "TFN_DADESCOMPLETES",
-                    "PROVES",
-                    buildPeticioDadesCompletes()
-            );
-             Clients.TFN.getClient(Entorn.PRE).send(peticion);
+            ClientAOC client = Clients.TFN.getClient(Entorn.PRE);
+            client.send(TFNOperacio.TFN_DADESCOMPLETES, Finalitat.PROVES);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-    }
-
-    private static PeticioDadesCompletes buildPeticioDadesCompletes(){
-        PeticioDadesCompletes peticioDadesCompletes = new PeticioDadesCompletes();
-        peticioDadesCompletes.setIdentificadorTitular(buildIdentificadorTitular());
-        return peticioDadesCompletes;
-    }
-
-    private static PeticioDadesCompletes.IdentificadorTitular buildIdentificadorTitular(){
-        PeticioDadesCompletes.IdentificadorTitular identificadorTitular = new PeticioDadesCompletes.IdentificadorTitular();
-        identificadorTitular.setDocumentacio("38991311D");
-        identificadorTitular.setTipusDocumentacio(TTipusDocumentacio.NIF);
-        return identificadorTitular;
     }
 
 }

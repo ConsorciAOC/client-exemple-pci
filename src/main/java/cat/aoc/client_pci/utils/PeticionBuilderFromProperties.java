@@ -1,7 +1,7 @@
-package cat.aoc.client_pci;
+package cat.aoc.client_pci.utils;
 
+import cat.aoc.client_pci.PeticionBuilder;
 import cat.aoc.client_pci.exceptions.NotFoundException;
-import cat.aoc.client_pci.utils.PropertiesReader;
 import net.gencat.scsp.esquemes.peticion.*;
 
 import java.time.LocalDateTime;
@@ -25,11 +25,15 @@ public class PeticionBuilderFromProperties implements PeticionBuilder {
         properties = PropertiesReader.load(propertiesPath);
     }
 
+    public PeticionBuilderFromProperties(Properties properties) {
+        this.properties = properties;
+    }
+
     @Override
-    public Peticion build(String producto, String modalidad, String finalidad, Object... data){
+    public Peticion build(String producto, String modalidad, String finalidad, Object... dadesEspecifiques){
         Peticion peticion = new Peticion();
         peticion.setAtributos(buildAtributos(producto, modalidad, finalidad));
-        peticion.setSolicitudes(buildSolicitudes(modalidad, finalidad, data));
+        peticion.setSolicitudes(buildSolicitudes(modalidad, finalidad, dadesEspecifiques));
         return peticion;
     }
 
@@ -68,18 +72,18 @@ public class PeticionBuilderFromProperties implements PeticionBuilder {
         return funcionario;
     }
 
-    private Solicitudes buildSolicitudes(String modalidad, String finalidad, Object... data){
+    private Solicitudes buildSolicitudes(String modalidad, String finalidad, Object... dadesEspecifiques){
         Solicitudes solicitudes = new Solicitudes();
-        solicitudes.getSolicitudTransmision().add(buildSolicitudTransmision(modalidad, finalidad, data));
+        solicitudes.getSolicitudTransmision().add(buildSolicitudTransmision(modalidad, finalidad, dadesEspecifiques));
         return solicitudes;
     }
 
-    private SolicitudTransmision buildSolicitudTransmision(String modalidad, String finalidad, Object... data){
+    private SolicitudTransmision buildSolicitudTransmision(String modalidad, String finalidad, Object... dadesEspecifiques){
         SolicitudTransmision solicitudTransmision = new SolicitudTransmision();
         solicitudTransmision.setDatosGenericos(buildDatosGenericos(modalidad, finalidad));
         DatosEspecificos datosEspecificos = new DatosEspecificos();
         List<Object> any = datosEspecificos.getAny();
-        any.addAll(Arrays.asList(data));
+        any.addAll(Arrays.asList(dadesEspecifiques));
         solicitudTransmision.setDatosEspecificos(datosEspecificos);
         return solicitudTransmision;
     }
