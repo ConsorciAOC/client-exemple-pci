@@ -25,10 +25,6 @@ public class PeticionBuilderFromProperties implements PeticionBuilder {
         properties = PropertiesReader.load(propertiesPath);
     }
 
-    public PeticionBuilderFromProperties(Properties properties) {
-        this.properties = properties;
-    }
-
     @Override
     public Peticion build(String producto, String modalidad, String finalidad, Object... dadesEspecifiques){
         Peticion peticion = new Peticion();
@@ -81,11 +77,15 @@ public class PeticionBuilderFromProperties implements PeticionBuilder {
     private SolicitudTransmision buildSolicitudTransmision(String modalidad, String finalidad, Object... dadesEspecifiques){
         SolicitudTransmision solicitudTransmision = new SolicitudTransmision();
         solicitudTransmision.setDatosGenericos(buildDatosGenericos(modalidad, finalidad));
+        solicitudTransmision.setDatosEspecificos(buildDatosEspecificos(dadesEspecifiques));
+        return solicitudTransmision;
+    }
+
+    private DatosEspecificos buildDatosEspecificos(Object... dadesEspecifiques){
         DatosEspecificos datosEspecificos = new DatosEspecificos();
         List<Object> any = datosEspecificos.getAny();
         any.addAll(Arrays.asList(dadesEspecifiques));
-        solicitudTransmision.setDatosEspecificos(datosEspecificos);
-        return solicitudTransmision;
+        return datosEspecificos;
     }
 
     private DatosGenericos buildDatosGenericos(String modalidad, String finalidad){

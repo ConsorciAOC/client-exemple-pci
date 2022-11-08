@@ -5,15 +5,14 @@ import cat.aoc.client_pci.PeticionBuilder;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.*;
+import generated.etauler.PeticioConsultarEstatEdicte;
 import net.gencat.scsp.esquemes.peticion.Peticion;
-import cat.aoc.etauler.PeticioConsultarEstatEdicte;
 
 public class ETAULERClient extends ClientAOC {
     private static final String CODI_SERVEI = "ETAULER";
     private static final String CODI_MODALITAT = "ETAULER";
     private static final String[] PACKAGES = {
-            "cat.aoc.etauler",
-            "net.aocat.etauler.pdf"
+            "generated.etauler"
     };
 
     private final PeticionBuilder peticionBuilder;

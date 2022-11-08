@@ -6,20 +6,17 @@ import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.*;
 import net.gencat.scsp.esquemes.peticion.Peticion;
-import net.aocat.padro.PeticionDatosTitular;
+import net.gencat.scsp.esquemes.respuesta.Respuesta;
 
 public class PADROClient extends ClientAOC {
-    private static final String CODI_SERVEI = "PADRO";
-    private static final String[] PACKAGES = {
-            "es.red.padron",
-            "net.aocat.padro"
-    };
 
-    private final PeticionBuilder peticionBuilder;
+    private final PADROEmpadronamientoClient clientEmpadronamiento;
+    private final PADROConvivenciaClient clientConvivencia;
 
     public PADROClient(Entorn entorn, PeticionBuilder peticionBuilder) throws WebServiceSupportException {
-        super(entorn, Cluster.IOP, PACKAGES);
-        this.peticionBuilder = peticionBuilder;
+        super(entorn, Cluster.IOP);
+        this.clientEmpadronamiento = new PADROEmpadronamientoClient(entorn, peticionBuilder);
+        this.clientConvivencia = new PADROConvivenciaClient(entorn, peticionBuilder);
     }
 
     @Override
@@ -46,47 +43,34 @@ public class PADROClient extends ClientAOC {
 
     @Override
     public Peticion getPeticion(Operacio operacio, Finalitat finalitat) {
-        return peticionBuilder.build(
-                CODI_SERVEI,
-                ((PADROOperacio) operacio).name(),
-                finalitat.name(),
-                getDatosEspecificos(operacio)
-        );
-    }
-
-    private Object[] getDatosEspecificos(Operacio operacio) {
         switch ((PADROOperacio) operacio) {
             case TITULAR:
-                return new Object[]{
-                        buildPeticionDatosTitular()
-                };
+                return clientEmpadronamiento.getPeticion(operacio, finalitat);
+            case CONVIVENTS:
             case RESIDENT:
             case MUNICIPI_RESIDENCIA:
             case RESIDENT_MUNICIPI:
             case NUMERO_CONVIVENTS:
             case COMPROVACIO_CONVIVENTS:
             case TITULAR_PROPI:
-            case CONVIVENTS:
             case CONVIVENTS_PROPI:
             case TITULAR_PDF:
             case CONVIVENTS_PDF:
             case TITULAR_IDESCAT:
             case CERCA_TITULAR:
             default:
-                return new Object[]{};
+                return clientConvivencia.getPeticion(operacio, finalitat);
         }
     }
 
-    private static PeticionDatosTitular buildPeticionDatosTitular() {
-        PeticionDatosTitular peticionDatosTitular = new PeticionDatosTitular();
-        peticionDatosTitular.setNumExpediente("prova");
-        peticionDatosTitular.setTipoDocumentacion(1);
-        peticionDatosTitular.setDocumentacion("12345678Z");
-        peticionDatosTitular.setCodigoProvincia("08");
-        peticionDatosTitular.setCodigoMunicipio("001");
-        peticionDatosTitular.setIdescat(0);
-        return peticionDatosTitular;
+    @Override
+    public Respuesta send(Operacio operacio, Finalitat finalitat) throws NotDefinedException {
+        switch ((PADROOperacio) operacio) {
+            case TITULAR:
+                return clientEmpadronamiento.send(operacio, finalitat);
+            default:
+                return clientConvivencia.send(operacio, finalitat);
+        }
     }
-
 
 }

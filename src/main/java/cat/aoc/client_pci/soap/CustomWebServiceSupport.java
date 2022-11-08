@@ -14,6 +14,7 @@ import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import javax.xml.transform.Source;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Getter
@@ -37,7 +38,8 @@ public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
                     new SignatureInterceptor("src\\main\\resources\\keystore.properties"),
             });
         } catch (Exception e) {
-            throw new WebServiceSupportException("Error al configurar el client i el signador");
+            e.printStackTrace();
+            throw new WebServiceSupportException("Error en configurar el client i el signador");
         }
     }
 
@@ -67,6 +69,7 @@ public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
         try {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // pretty print
+            jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, StandardCharsets.ISO_8859_1.name());
             jaxbMarshaller.marshal(procesa, request.getPayloadResult());
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             request.writeTo(bos);
@@ -90,9 +93,9 @@ public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             return (R) jaxbUnmarshaller.unmarshal(payload);
         } catch (JAXBException e) {
-            throw new MarshallingException("S'ha produit un error al crear el marshaller");
+            throw new MarshallingException("S'ha produit un error al crear el unmarshaller");
         } catch (IOException e) {
-            throw new MarshallingException("S'ha produit un error convertir la petició a XML");
+            throw new MarshallingException("S'ha produit un error convertir la resposta a partir de l'XML");
         }
     }
 

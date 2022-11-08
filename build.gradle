@@ -58,50 +58,44 @@ test {
 
 task jaxb {
     description 'Convert XSD\'s to java classes'
+    def srcDir = file("src/main/java/")
+    def xsdParentDir = file("src/main/resources/xsd/")
+    // Restricts access to the protocols specified for external references set by the schemaLocation attribute, import element, and include element.
+    System.setProperty('javax.xml.accessExternalDTD', 'all')
     System.setProperty('javax.xml.accessExternalSchema', 'all')
-    def jaxbTargetDir = file("src/main/java/")
+    ant.taskdef(
+            name: 'xjc',
+            classname: 'com.sun.tools.xjc.XJCTask',
+            classpath: configurations.jaxb.asPath
+    )
+    ant.jaxbTargetDir = srcDir
     doLast {
-        jaxbTargetDir.mkdirs()
-
-        file('src/main/resources/xsd/').eachDir(xsdProject -> {
-            println('Genearating source code from: ' + xsdProject.name)
-
-			file(xsdProject).eachFileMatch(~/.*.xsd$/,schemaFile -> {
-                
-                    def xsd = schemaFile.name.split('.xsd')[0]
-					
-                    ant.taskdef(
-                            name: 'xjc',
-                            classname: 'com.sun.tools.xjc.XJCTask',
-                            classpath: configurations.jaxb.asPath
-                    )
-                    ant.jaxbTargetDir = jaxbTargetDir
-					println xsdProject.name + "-" + schemaFile.getAbsoluteFile()
-
-					// TODO: I DON'T FEEL OK... HOWEVER IT'S LATE, FIND ANOTHER WAY TO AVOID "BINDING" ATTRIBUTE (USING EMPTY VALUE DOESN'T WORK)
-					def bindingFile = ''
-					if(file(schemaFile.getAbsolutePath() - '.xsd' + '.xjb').exists()) {
-						bindingFile = schemaFile.getAbsolutePath() - '.xsd' + '.xjb'
-						
-						ant.xjc(
-							destdir: '${jaxbTargetDir}',
-							//package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
-							schema: schemaFile.getAbsoluteFile(),
-							binding: "${bindingFile}"
-						)
-
-					}else {
-						ant.xjc(
-							destdir: '${jaxbTargetDir}',
-							//package: 'cat.aoc.client_pci.jaxb.' + xsdProject.name,
-							schema: schemaFile.getAbsoluteFile(),
-						)
-					}
-            })
+        xsdParentDir.eachDir(xsdProjectDir -> {
+            def packageName = ('generated.' + xsdProjectDir.name)
+            def projectWithBindings = !fileTree(xsdProjectDir.getAbsolutePath()).filter { file ->
+                file.name.contains('.xjb')
+            }.isEmpty()
+            if (projectWithBindings) {
+                println('Genearating source code from: ' + xsdProjectDir.name + ' (bindings found)')
+                ant.xjc(
+                        destdir: srcDir,
+                        package: packageName){
+                    schema(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xsd")
+                    binding(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xjb")
+                    arg(value: "-extension")
+                }
+            } else {
+                println('Genearating source code from: ' + xsdProjectDir.name)
+                ant.xjc(
+                        destdir: srcDir,
+                        package: packageName){
+                    schema(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xsd")
+                }
+            }
         })
         // WSDL Compilation
         ant.xjc(
-                destdir: '${jaxbTargetDir}',
+                destdir: srcDir,
                 schema: 'src/main/resources/wsdl/sincron.wsdl',
                 language: 'WSDL'
         )

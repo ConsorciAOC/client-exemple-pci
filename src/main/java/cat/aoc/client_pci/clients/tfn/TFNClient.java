@@ -5,14 +5,14 @@ import cat.aoc.client_pci.PeticionBuilder;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.*;
+import generated.tfn.PeticioDadesCompletes;
+import generated.tfn.TTipusDocumentacio;
 import net.gencat.scsp.esquemes.peticion.Peticion;
-import cat.aoc.tfn.PeticioDadesCompletes;
-import cat.aoc.tfn.TTipusDocumentacio;
 
 public class TFNClient extends ClientAOC {
     private static final String CODI_SERVEI = "TFN";
     private static final String[] PACKAGES = {
-            "cat.aoc.tfn"
+            "generated.tfn"
     };
 
     private final PeticionBuilder peticionBuilder;

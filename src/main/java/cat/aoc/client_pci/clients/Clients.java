@@ -15,7 +15,8 @@ public enum Clients {
     TFN,
     PADRO,
     ENOTUM,
-    ETAULER;
+    ETAULER,
+    MUX;
 
     private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
     public ClientAOC getClient(Entorn entorn) throws WebServiceSupportException, NotDefinedException, NotFoundException {

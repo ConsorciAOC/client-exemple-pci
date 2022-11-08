@@ -8,8 +8,8 @@ import cat.aoc.client_pci.clients.Clients;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
-import net.aocat.nt.v3.PeticioProcessarTramesaType;
-import net.aocat.nt.v3.RespostaProcessarTramesaType;
+import generated.enotum.PeticioProcessarTramesa;
+import generated.enotum.RespostaProcessarTramesa;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ class ENOTUMClientTest {
         ClientAOC client = Clients.ENOTUM.getClient(Entorn.PRE);
         Peticion peticion = client.getPeticion(ENOTUMOperacio.PeticioProcessarTramesa, Finalitat.PROVES);
         assertNotNull(peticion.getAtributos().getIdPeticion());
-        PeticioProcessarTramesaType processarTramesa = (PeticioProcessarTramesaType) peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosEspecificos().getAny().get(0);
+        PeticioProcessarTramesa processarTramesa = (PeticioProcessarTramesa) peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(processarTramesa);
         assertNotNull(processarTramesa.getTramesa());
         assertEquals("REF", processarTramesa.getTramesa().getNotificacio().get(0).getReferencia());
@@ -48,7 +48,7 @@ class ENOTUMClientTest {
                 .send(ENOTUMOperacio.PeticioProcessarTramesa, Finalitat.PROVES);
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
-        RespostaProcessarTramesaType processarTramesa = (RespostaProcessarTramesaType) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
+        RespostaProcessarTramesa processarTramesa = (RespostaProcessarTramesa) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(processarTramesa);
         assertNotNull(processarTramesa.getNotificacionsCreades().getIdNotificacio().get(0));
     }
