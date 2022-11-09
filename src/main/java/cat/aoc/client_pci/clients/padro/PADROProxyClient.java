@@ -8,12 +8,12 @@ import cat.aoc.client_pci.model.*;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
 
-public class PADROClient extends ClientAOC {
+public class PADROProxyClient extends ClientAOC {
 
     private final PADROEmpadronamientoClient clientEmpadronamiento;
     private final PADROConvivenciaClient clientConvivencia;
 
-    public PADROClient(Entorn entorn, PeticionBuilder peticionBuilder) throws WebServiceSupportException {
+    public PADROProxyClient(Entorn entorn, PeticionBuilder peticionBuilder) throws WebServiceSupportException {
         super(entorn, Cluster.IOP);
         this.clientEmpadronamiento = new PADROEmpadronamientoClient(entorn, peticionBuilder);
         this.clientConvivencia = new PADROConvivenciaClient(entorn, peticionBuilder);

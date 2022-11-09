@@ -7,7 +7,7 @@ import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.clients.enotum.ENOTUMClient;
 import cat.aoc.client_pci.clients.etauler.ETAULERClient;
-import cat.aoc.client_pci.clients.padro.PADROClient;
+import cat.aoc.client_pci.clients.padro.PADROProxyClient;
 import cat.aoc.client_pci.clients.tfn.TFNClient;
 import cat.aoc.client_pci.utils.PeticionBuilderFromProperties;
 
@@ -24,7 +24,7 @@ public enum Clients {
             case TFN:
                 return new TFNClient(entorn, new PeticionBuilderFromProperties(PROPERTIES_PATH));
             case PADRO:
-                return new PADROClient(entorn, new PeticionBuilderFromProperties(PROPERTIES_PATH));
+                return new PADROProxyClient(entorn, new PeticionBuilderFromProperties(PROPERTIES_PATH));
             case ENOTUM:
                 return new ENOTUMClient(entorn, new PeticionBuilderFromProperties(PROPERTIES_PATH));
             case ETAULER:
