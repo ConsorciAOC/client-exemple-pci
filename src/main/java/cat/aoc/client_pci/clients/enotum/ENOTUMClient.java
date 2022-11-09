@@ -29,14 +29,14 @@ public class ENOTUMClient extends ClientAOC {
     @Override
     public Frontal getFrontal(Operacio operacio) throws NotDefinedException {
         switch ((ENOTUMOperacio) operacio) {
-            case PeticioProcessarTramesa:
-            case PeticioResum:
-            case PeticioEvidencia:
-            case PeticioPracticar:
-            case PeticioRecuperarReport:
-            case PeticioConsulta:
-            case PeticioParaulaPas:
-            case PeticioCerca:
+            case PROCESSAR_TRAMESA:
+            case RESUM:
+            case EVIDENCIA:
+            case PRACTICAR:
+            case RECUPERAR_REPORT:
+            case CONSULTA:
+            case PARAULA_PAS:
+            case CERCA:
                 return Frontal.SINCRON;
             default:
                 throw new NotDefinedException("Operacio no definida: " + operacio);
@@ -55,20 +55,20 @@ public class ENOTUMClient extends ClientAOC {
 
     private Object[] getDatosEspecificos(Operacio operacio) {
         switch ((ENOTUMOperacio) operacio) {
-            case PeticioCerca:
+            case CERCA:
                 return new Object[]{
                         buildPeticioCerca()
                 };
-            case PeticioProcessarTramesa:
+            case PROCESSAR_TRAMESA:
                 return new Object[]{
                         buildPeticioProcessarTramesa()
                 };
-            case PeticioResum:
-            case PeticioEvidencia:
-            case PeticioPracticar:
-            case PeticioRecuperarReport:
-            case PeticioConsulta:
-            case PeticioParaulaPas:
+            case RESUM:
+            case EVIDENCIA:
+            case PRACTICAR:
+            case RECUPERAR_REPORT:
+            case CONSULTA:
+            case PARAULA_PAS:
             default:
                 return new Object[]{};
         }

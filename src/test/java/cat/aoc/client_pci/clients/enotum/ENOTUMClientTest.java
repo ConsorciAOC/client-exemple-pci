@@ -21,20 +21,20 @@ class ENOTUMClientTest {
     @Test
     void getFrontal() throws WebServiceSupportException, NotDefinedException, NotFoundException {
         ClientAOC client = Clients.ENOTUM.getClient(Entorn.PRE);
-        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PeticioCerca));
-        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PeticioConsulta));
-        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PeticioEvidencia));
-        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PeticioPracticar));
-        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PeticioParaulaPas));
-        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PeticioProcessarTramesa));
-        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PeticioRecuperarReport));
-        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PeticioResum));
+        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.CERCA));
+        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.CONSULTA));
+        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.EVIDENCIA));
+        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PRACTICAR));
+        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PARAULA_PAS));
+        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.PROCESSAR_TRAMESA));
+        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.RECUPERAR_REPORT));
+        assertEquals(Frontal.SINCRON, client.getFrontal(ENOTUMOperacio.RESUM));
     }
 
     @Test
     void getPeticion() throws WebServiceSupportException, NotDefinedException, NotFoundException {
         ClientAOC client = Clients.ENOTUM.getClient(Entorn.PRE);
-        Peticion peticion = client.getPeticion(ENOTUMOperacio.PeticioProcessarTramesa, Finalitat.PROVES);
+        Peticion peticion = client.getPeticion(ENOTUMOperacio.PROCESSAR_TRAMESA, Finalitat.PROVES);
         assertNotNull(peticion.getAtributos().getIdPeticion());
         PeticioProcessarTramesa processarTramesa = (PeticioProcessarTramesa) peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(processarTramesa);
@@ -45,7 +45,7 @@ class ENOTUMClientTest {
     @Test
     void send() throws WebServiceSupportException, NotDefinedException, NotFoundException {
         Respuesta respuesta = Clients.ENOTUM.getClient(Entorn.PRE)
-                .send(ENOTUMOperacio.PeticioProcessarTramesa, Finalitat.PROVES);
+                .send(ENOTUMOperacio.PROCESSAR_TRAMESA, Finalitat.PROVES);
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
         RespostaProcessarTramesa processarTramesa = (RespostaProcessarTramesa) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
