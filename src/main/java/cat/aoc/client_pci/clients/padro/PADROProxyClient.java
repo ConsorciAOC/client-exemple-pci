@@ -68,7 +68,18 @@ public class PADROProxyClient extends ClientAOC {
         switch ((PADROOperacio) operacio) {
             case TITULAR:
                 return clientEmpadronamiento.send(operacio, finalitat);
-            default:
+            case CONVIVENTS:
+            case RESIDENT:
+            case MUNICIPI_RESIDENCIA:
+            case RESIDENT_MUNICIPI:
+            case NUMERO_CONVIVENTS:
+            case COMPROVACIO_CONVIVENTS:
+            case TITULAR_PROPI:
+            case CONVIVENTS_PROPI:
+            case TITULAR_PDF:
+            case CONVIVENTS_PDF:
+            case TITULAR_IDESCAT:
+            case CERCA_TITULAR:default:
                 return clientConvivencia.send(operacio, finalitat);
         }
     }
