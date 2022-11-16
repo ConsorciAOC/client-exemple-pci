@@ -9,13 +9,26 @@ import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import org.openuri.Procesa;
 import org.openuri.ProcesaResponse;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public abstract class ClientAOC extends CustomWebServiceSupport<Procesa, ProcesaResponse> {
+    private static final String[] PACKAGES = {
+            "org.openuri",
+            "net.gencat.scsp.esquemes.peticion",
+            "net.gencat.scsp.esquemes.respuesta"
+    };
+
+    private static String[] processPackages(String... externalPackages) {
+        return Stream.concat(Arrays.stream(PACKAGES), Arrays.stream(externalPackages))
+                .toArray(String[]::new);
+    }
 
     private final Entorn entorn;
     private final Cluster cluster;
 
     protected ClientAOC(Entorn entorn, Cluster cluster, String... externalPackages) throws WebServiceSupportException {
-        super(externalPackages);
+        super(processPackages(externalPackages));
         this.entorn = entorn;
         this.cluster = cluster;
     }

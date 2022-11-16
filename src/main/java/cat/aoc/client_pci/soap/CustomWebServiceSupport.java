@@ -19,21 +19,16 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @Getter
 public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
-    private static final String[] PACKAGES = {
-            "org.openuri",
-            "net.gencat.scsp.esquemes.peticion",
-            "net.gencat.scsp.esquemes.respuesta"
-    };
 
-    private static String processPackages(String... externalPackages) {
-            return String.join(":", PACKAGES) + ":" + String.join(":", externalPackages);
+    private static String processPackages(String... packages) {
+            return String.join(":", packages);
     }
 
     protected final JAXBContext jaxbContext;
 
-    protected CustomWebServiceSupport(String... externalPackages) throws WebServiceSupportException {
+    protected CustomWebServiceSupport(String... packages) throws WebServiceSupportException {
         try {
-            jaxbContext = JAXBContext.newInstance(processPackages(externalPackages));
+            jaxbContext = JAXBContext.newInstance(processPackages(packages));
             setInterceptors(new SignatureInterceptor[]{
                     new SignatureInterceptor("src\\main\\resources\\keystore.properties"),
             });
