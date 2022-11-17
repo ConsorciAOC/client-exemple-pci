@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Getter
-public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
+public class SoapWebServiceSupport<P, R> extends WebServiceGatewaySupport {
 
     private static String processPackages(String... packages) {
             return String.join(":", packages);
@@ -26,7 +26,7 @@ public class CustomWebServiceSupport<P, R> extends WebServiceGatewaySupport {
 
     protected final JAXBContext jaxbContext;
 
-    protected CustomWebServiceSupport(String... packages) throws WebServiceSupportException {
+    protected SoapWebServiceSupport(String... packages) throws WebServiceSupportException {
         try {
             jaxbContext = JAXBContext.newInstance(processPackages(packages));
             setInterceptors(new SignatureInterceptor[]{

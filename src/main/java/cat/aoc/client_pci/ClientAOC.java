@@ -3,7 +3,7 @@ package cat.aoc.client_pci;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.*;
-import cat.aoc.client_pci.soap.CustomWebServiceSupport;
+import cat.aoc.client_pci.soap.SoapWebServiceSupport;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import org.openuri.Procesa;
@@ -12,7 +12,7 @@ import org.openuri.ProcesaResponse;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public abstract class ClientAOC extends CustomWebServiceSupport<Procesa, ProcesaResponse> {
+public abstract class ClientAOC extends SoapWebServiceSupport<Procesa, ProcesaResponse> {
     private static final String[] PACKAGES = {
             "org.openuri",
             "net.gencat.scsp.esquemes.peticion",
