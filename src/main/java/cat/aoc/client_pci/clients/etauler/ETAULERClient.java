@@ -9,8 +9,6 @@ import generated.etauler.PeticioConsultarEstatEdicte;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 
 public class ETAULERClient extends ClientAOC {
-    private static final String CODI_SERVEI = "ETAULER";
-    private static final String CODI_MODALITAT = "ETAULER";
     private static final String[] PACKAGES = {
             "generated.etauler"
     };
@@ -40,10 +38,20 @@ public class ETAULERClient extends ClientAOC {
     }
 
     @Override
+    public String getCodiServei() {
+        return "ETAULER";
+    }
+
+    @Override
+    protected String getCodiModalitat(Operacio operacio) {
+        return "ETAULER";
+    }
+
+    @Override
     public Peticion getPeticion(Operacio operacio, Finalitat finalitat) {
         return peticionBuilder.build(
-                CODI_SERVEI,
-                CODI_MODALITAT,
+                getCodiServei(),
+                getCodiModalitat(operacio),
                 finalitat.name(),
                 getDatosEspecificos(operacio)
         );

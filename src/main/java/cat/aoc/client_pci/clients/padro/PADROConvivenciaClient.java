@@ -9,7 +9,6 @@ import generated.padro.PeticionDatosConvivientes;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 
 public class PADROConvivenciaClient extends ClientAOC {
-    private static final String CODI_SERVEI = "PADRO";
     private static final String[] PACKAGES = {
             "generated.padro",
             "generated.padro.convivencia",
@@ -45,10 +44,20 @@ public class PADROConvivenciaClient extends ClientAOC {
     }
 
     @Override
+    public String getCodiServei() {
+        return "PADRO";
+    }
+
+    @Override
+    protected String getCodiModalitat(Operacio operacio) {
+        return ((PADROOperacio) operacio).name();
+    }
+
+    @Override
     public Peticion getPeticion(Operacio operacio, Finalitat finalitat) {
         return peticionBuilder.build(
-                CODI_SERVEI,
-                ((PADROOperacio) operacio).name(),
+                getCodiServei(),
+                getCodiModalitat(operacio),
                 finalitat.name(),
                 getDatosEspecificos(operacio)
         );

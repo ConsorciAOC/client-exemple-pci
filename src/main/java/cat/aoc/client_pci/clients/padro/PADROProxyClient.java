@@ -42,6 +42,16 @@ public class PADROProxyClient extends ClientAOC {
     }
 
     @Override
+    public String getCodiServei() {
+        return "PADRO";
+    }
+
+    @Override
+    protected String getCodiModalitat(Operacio operacio) {
+        return ((PADROOperacio) operacio).name();
+    }
+
+    @Override
     public Peticion getPeticion(Operacio operacio, Finalitat finalitat) {
         switch ((PADROOperacio) operacio) {
             case TITULAR:

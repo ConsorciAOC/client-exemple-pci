@@ -3,7 +3,7 @@ package cat.aoc.client_pci;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.*;
-import cat.aoc.client_pci.soap.SoapWebServiceSupport;
+import cat.aoc.client_pci.soap.SoapMtomClient;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import org.openuri.Procesa;
@@ -12,7 +12,7 @@ import org.openuri.ProcesaResponse;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public abstract class ClientAOC extends SoapWebServiceSupport<Procesa, ProcesaResponse> {
+public abstract class ClientAOC extends SoapMtomClient<Procesa, ProcesaResponse> {
     private static final String[] PACKAGES = {
             "org.openuri",
             "net.gencat.scsp.esquemes.peticion",
@@ -35,7 +35,15 @@ public abstract class ClientAOC extends SoapWebServiceSupport<Procesa, ProcesaRe
 
     public abstract Frontal getFrontal(Operacio operacio) throws NotDefinedException;
 
+    public abstract String getCodiServei();
+
+    protected abstract String getCodiModalitat(Operacio operacio);
+
     public abstract Peticion getPeticion(Operacio operacio, Finalitat finalitat);
+
+    private String getEndpoint(Operacio operacio) throws NotDefinedException {
+        return entorn.getEndpoint(cluster) + "/siri-proxy/services/" + getFrontal(operacio).getValue();
+    }
 
     public Respuesta send(Operacio operacio, Finalitat finalitat) throws NotDefinedException {
         String endpoint = getEndpoint(operacio);
@@ -43,10 +51,6 @@ public abstract class ClientAOC extends SoapWebServiceSupport<Procesa, ProcesaRe
         procesa.setPeticion(getPeticion(operacio, finalitat));
         ProcesaResponse response = this.send(endpoint, procesa);
         return response.getRespuesta();
-    }
-
-    private String getEndpoint(Operacio operacio) throws NotDefinedException {
-        return entorn.getEndpoint(cluster) + "/siri-proxy/services/" + getFrontal(operacio).getValue();
     }
 
 }

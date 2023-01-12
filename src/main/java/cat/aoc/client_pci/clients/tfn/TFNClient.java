@@ -2,6 +2,7 @@ package cat.aoc.client_pci.clients.tfn;
 
 import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.PeticionBuilder;
+import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.*;
@@ -10,7 +11,6 @@ import generated.tfn.TTipusDocumentacio;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 
 public class TFNClient extends ClientAOC {
-    private static final String CODI_SERVEI = "TFN";
     private static final String[] PACKAGES = {
             "generated.tfn"
     };
@@ -19,6 +19,16 @@ public class TFNClient extends ClientAOC {
     public TFNClient(Entorn entorn, PeticionBuilder peticionBuilder) throws WebServiceSupportException {
         super(entorn, Cluster.IOP, PACKAGES);
         this.peticionBuilder = peticionBuilder;
+    }
+
+    @Override
+    public String getCodiServei() {
+        return "TFN";
+    }
+
+    @Override
+    protected String getCodiModalitat(Operacio operacio) {
+        return ((TFNOperacio) operacio).name();
     }
 
     @Override
@@ -36,7 +46,7 @@ public class TFNClient extends ClientAOC {
     @Override
     public Peticion getPeticion(Operacio operacio, Finalitat finalitat) {
         return peticionBuilder.build(
-                CODI_SERVEI,
+                getCodiServei(),
                 ((TFNOperacio) operacio).name(),
                 finalitat.name(),
                 getDatosEspecificos(operacio)
