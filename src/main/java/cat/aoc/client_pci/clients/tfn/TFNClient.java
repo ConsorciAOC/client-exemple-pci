@@ -2,23 +2,27 @@ package cat.aoc.client_pci.clients.tfn;
 
 import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.PeticionBuilder;
-import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
-import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.*;
-import generated.tfn.PeticioDadesCompletes;
-import generated.tfn.TTipusDocumentacio;
-import net.gencat.scsp.esquemes.peticion.Peticion;
 
 public class TFNClient extends ClientAOC {
     private static final String[] PACKAGES = {
             "generated.tfn"
     };
 
-    private final PeticionBuilder peticionBuilder;
-    public TFNClient(Entorn entorn, PeticionBuilder peticionBuilder) throws WebServiceSupportException {
-        super(entorn, Cluster.IOP, PACKAGES);
-        this.peticionBuilder = peticionBuilder;
+    public TFNClient(String keystorePath, Entorn entorn, PeticionBuilder peticionBuilder) {
+        super(keystorePath, entorn, Cluster.IOP, peticionBuilder, PACKAGES);
+    }
+
+    @Override
+    public Frontal getFrontal(Operacio operacio) throws NotDefinedException {
+        try {
+            return switch ((TFNOperacio) operacio) {
+                case TFN_VIGENCIA, TFN_DADESCOMPLETES, TFN_DADESCOMPLETES_DIS -> Frontal.SINCRON;
+            };
+        } catch (Exception e) {
+            throw new NotDefinedException("Modalitat no definida: " + operacio);
+        }
     }
 
     @Override
@@ -27,56 +31,8 @@ public class TFNClient extends ClientAOC {
     }
 
     @Override
-    protected String getCodiModalitat(Operacio operacio) {
+    public String getCodiModalitat(Operacio operacio) {
         return ((TFNOperacio) operacio).name();
-    }
-
-    @Override
-    public Frontal getFrontal(Operacio operacio) throws NotDefinedException {
-        switch ((TFNOperacio) operacio){
-            case TFN_VIGENCIA:
-            case TFN_DADESCOMPLETES:
-            case TFN_DADESCOMPLETES_DIS:
-                return Frontal.SINCRON;
-            default:
-                throw new NotDefinedException("Modalitat no definida: " + operacio);
-        }
-    }
-
-    @Override
-    public Peticion getPeticion(Operacio operacio, Finalitat finalitat) {
-        return peticionBuilder.build(
-                getCodiServei(),
-                ((TFNOperacio) operacio).name(),
-                finalitat.name(),
-                getDatosEspecificos(operacio)
-        );
-    }
-
-    private Object[] getDatosEspecificos(Operacio operacio) {
-        switch ((TFNOperacio) operacio){
-            case TFN_DADESCOMPLETES:
-                return new Object[] {
-                        buildPeticioDadesCompletes()
-                };
-            case TFN_DADESCOMPLETES_DIS:
-            case TFN_VIGENCIA:
-            default:
-                return new Object[]{};
-        }
-    }
-
-    private static PeticioDadesCompletes buildPeticioDadesCompletes(){
-        PeticioDadesCompletes peticioDadesCompletes = new PeticioDadesCompletes();
-        peticioDadesCompletes.setIdentificadorTitular(buildIdentificadorTitular());
-        return peticioDadesCompletes;
-    }
-
-    private static PeticioDadesCompletes.IdentificadorTitular buildIdentificadorTitular(){
-        PeticioDadesCompletes.IdentificadorTitular identificadorTitular = new PeticioDadesCompletes.IdentificadorTitular();
-        identificadorTitular.setDocumentacio("38991311D");
-        identificadorTitular.setTipusDocumentacio(TTipusDocumentacio.NIF);
-        return identificadorTitular;
     }
 
 }

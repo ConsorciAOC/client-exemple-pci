@@ -3,10 +3,7 @@ package cat.aoc.client_pci.clients.padro;
 import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.PeticionBuilder;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
-import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.*;
-import generated.padro.PeticionDatosConvivientes;
-import net.gencat.scsp.esquemes.peticion.Peticion;
 
 public class PADROConvivenciaClient extends ClientAOC {
     private static final String[] PACKAGES = {
@@ -14,32 +11,18 @@ public class PADROConvivenciaClient extends ClientAOC {
             "generated.padro.convivencia",
     };
 
-    private final PeticionBuilder peticionBuilder;
-
-    public PADROConvivenciaClient(Entorn entorn, PeticionBuilder peticionBuilder) throws WebServiceSupportException {
-        super(entorn, Cluster.IOP, PACKAGES);
-        this.peticionBuilder = peticionBuilder;
+    public PADROConvivenciaClient(String keystorePath, Entorn entorn, PeticionBuilder peticionBuilder) {
+        super(keystorePath, entorn, Cluster.IOP, peticionBuilder, PACKAGES);
     }
 
     @Override
     public Frontal getFrontal(Operacio operacio) throws NotDefinedException {
-        switch ((PADROOperacio) operacio) {
-            case RESIDENT:
-            case MUNICIPI_RESIDENCIA:
-            case RESIDENT_MUNICIPI:
-            case NUMERO_CONVIVENTS:
-            case COMPROVACIO_CONVIVENTS:
-            case TITULAR:
-            case TITULAR_PROPI:
-            case CONVIVENTS:
-            case CONVIVENTS_PROPI:
-            case TITULAR_PDF:
-            case CONVIVENTS_PDF:
-            case TITULAR_IDESCAT:
-            case CERCA_TITULAR:
-                return Frontal.SINCRON;
-            default:
-                throw new NotDefinedException("Modalitat no definida: " + operacio);
+        try {
+            return switch ((PADROOperacio) operacio) {
+                case RESIDENT, MUNICIPI_RESIDENCIA, RESIDENT_MUNICIPI, NUMERO_CONVIVENTS, COMPROVACIO_CONVIVENTS, TITULAR, TITULAR_PROPI, CONVIVENTS, CONVIVENTS_PROPI, TITULAR_PDF, CONVIVENTS_PDF, TITULAR_IDESCAT, CERCA_TITULAR -> Frontal.SINCRON;
+            };
+        } catch (Exception e) {
+            throw new NotDefinedException("Modalitat no definida: " + operacio);
         }
     }
 
@@ -49,52 +32,8 @@ public class PADROConvivenciaClient extends ClientAOC {
     }
 
     @Override
-    protected String getCodiModalitat(Operacio operacio) {
+    public String getCodiModalitat(Operacio operacio) {
         return ((PADROOperacio) operacio).name();
-    }
-
-    @Override
-    public Peticion getPeticion(Operacio operacio, Finalitat finalitat) {
-        return peticionBuilder.build(
-                getCodiServei(),
-                getCodiModalitat(operacio),
-                finalitat.name(),
-                getDatosEspecificos(operacio)
-        );
-    }
-
-    private Object[] getDatosEspecificos(Operacio operacio) {
-        switch ((PADROOperacio) operacio) {
-            case CONVIVENTS:
-                return new Object[]{
-                        buildPeticionDatosConvivientes()
-                };
-            case TITULAR:
-            case RESIDENT:
-            case MUNICIPI_RESIDENCIA:
-            case RESIDENT_MUNICIPI:
-            case NUMERO_CONVIVENTS:
-            case COMPROVACIO_CONVIVENTS:
-            case TITULAR_PROPI:
-            case CONVIVENTS_PROPI:
-            case TITULAR_PDF:
-            case CONVIVENTS_PDF:
-            case TITULAR_IDESCAT:
-            case CERCA_TITULAR:
-            default:
-                return new Object[]{};
-        }
-    }
-
-    private static PeticionDatosConvivientes buildPeticionDatosConvivientes() {
-        PeticionDatosConvivientes peticion = new PeticionDatosConvivientes();
-        peticion.setNumExpediente("prova");
-        peticion.setTipoDocumentacion(1);
-        peticion.setDocumentacion("12345678Z");
-        peticion.setCodigoProvincia("08");
-        peticion.setCodigoMunicipio("001");
-        peticion.setIdescat(0);
-        return peticion;
     }
 
 }

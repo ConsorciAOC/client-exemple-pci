@@ -1,7 +1,7 @@
 package cat.aoc.client_pci;
 
 import cat.aoc.client_pci.exceptions.NotDefinedException;
-import cat.aoc.client_pci.exceptions.WebServiceSupportException;
+import cat.aoc.client_pci.exceptions.NotFoundException;
 import cat.aoc.client_pci.model.*;
 import cat.aoc.client_pci.soap.SoapMtomClient;
 import net.gencat.scsp.esquemes.peticion.Peticion;
@@ -26,31 +26,45 @@ public abstract class ClientAOC extends SoapMtomClient<Procesa, ProcesaResponse>
 
     private final Entorn entorn;
     private final Cluster cluster;
+    private final PeticionBuilder peticionBuilder;
 
-    protected ClientAOC(Entorn entorn, Cluster cluster, String... externalPackages) throws WebServiceSupportException {
-        super(processPackages(externalPackages));
+    protected ClientAOC(String keystorePath, Entorn entorn, Cluster cluster, PeticionBuilder peticionBuilder, String... externalPackages) {
+        super(keystorePath, processPackages(externalPackages));
         this.entorn = entorn;
         this.cluster = cluster;
+        this.peticionBuilder = peticionBuilder;
     }
 
     public abstract Frontal getFrontal(Operacio operacio) throws NotDefinedException;
 
     public abstract String getCodiServei();
 
-    protected abstract String getCodiModalitat(Operacio operacio);
+    public abstract String getCodiModalitat(Operacio operacio);
 
-    public abstract Peticion getPeticion(Operacio operacio, Finalitat finalitat);
+    public Respuesta send(Operacio operacio, Finalitat finalitat) throws NotDefinedException, NotFoundException {
+        String endpoint = getEndpoint(operacio);
+        Procesa procesa = buildProcesa(operacio, finalitat);
+        ProcesaResponse response = this.send(endpoint, procesa);
+        return response.getRespuesta();
+    }
 
     private String getEndpoint(Operacio operacio) throws NotDefinedException {
         return entorn.getEndpoint(cluster) + "/siri-proxy/services/" + getFrontal(operacio).getValue();
     }
 
-    public Respuesta send(Operacio operacio, Finalitat finalitat) throws NotDefinedException {
-        String endpoint = getEndpoint(operacio);
+    private Procesa buildProcesa(Operacio operacio, Finalitat finalitat) throws NotDefinedException, NotFoundException {
         Procesa procesa = new Procesa();
-        procesa.setPeticion(getPeticion(operacio, finalitat));
-        ProcesaResponse response = this.send(endpoint, procesa);
-        return response.getRespuesta();
+        procesa.setPeticion(buildPeticion(operacio, finalitat));
+        return procesa;
+    }
+
+    protected Peticion buildPeticion(Operacio operacio, Finalitat finalitat) throws NotDefinedException, NotFoundException {
+        return peticionBuilder.build(
+                getCodiServei(),
+                operacio,
+                getCodiModalitat(operacio),
+                finalitat
+        );
     }
 
 }

@@ -2,15 +2,12 @@ package cat.aoc.client_pci.clients.etauler;
 
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.NotFoundException;
-import cat.aoc.client_pci.exceptions.WebServiceSupportException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Frontal;
 import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.clients.Clients;
 import cat.aoc.client_pci.model.Finalitat;
-import generated.etauler.PeticioConsultarEstatEdicte;
 import generated.etauler.RespostaConsultarEstatEdicte;
-import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ETAULERClientTest {
 
     @Test
-    void getFrontal() throws WebServiceSupportException, NotDefinedException, NotFoundException {
+    void getFrontal() throws NotDefinedException, NotFoundException {
         ClientAOC client = Clients.ETAULER.getClient(Entorn.PRE);
         assertEquals(Frontal.SINCRON, client.getFrontal(ETAULEROperacio.PUBLICAR));
         assertEquals(Frontal.SINCRON, client.getFrontal(ETAULEROperacio.DADES));
@@ -32,18 +29,20 @@ class ETAULERClientTest {
     }
 
     @Test
-    void getPeticion() throws WebServiceSupportException, NotDefinedException, NotFoundException {
+    void getCodiServei() throws NotDefinedException, NotFoundException {
         ClientAOC client = Clients.ETAULER.getClient(Entorn.PRE);
-        Peticion peticion = client.getPeticion(ETAULEROperacio.CONSULTAR, Finalitat.PROVES);
-        assertNotNull(peticion.getAtributos().getIdPeticion());
-        PeticioConsultarEstatEdicte peticioConsultarEstatEdicte = (PeticioConsultarEstatEdicte) peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosEspecificos().getAny().get(0);
-        assertNotNull(peticioConsultarEstatEdicte);
-        assertNotNull(peticioConsultarEstatEdicte.getIdEdicte());
-        assertEquals("ET3-1600672644963", peticioConsultarEstatEdicte.getIdEdicte());
+        assertEquals("ETAULER", client.getCodiServei());
     }
 
     @Test
-    void send() throws WebServiceSupportException, NotDefinedException, NotFoundException {
+    void getCodiModalitat() throws NotDefinedException, NotFoundException {
+        ClientAOC client = Clients.ETAULER.getClient(Entorn.PRE);
+        for (ETAULEROperacio operacio : ETAULEROperacio.values()) {
+            assertEquals("ETAULER", client.getCodiModalitat(operacio));
+        }
+    }
+    @Test
+    void send() throws NotDefinedException, NotFoundException {
         Respuesta respuesta = Clients.ETAULER.getClient(Entorn.PRE)
                 .send(ETAULEROperacio.CONSULTAR, Finalitat.PROVES);
         assertNotNull(respuesta);
