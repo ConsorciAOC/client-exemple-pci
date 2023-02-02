@@ -2,9 +2,13 @@ package cat.aoc.client_pci.clients.enotum;
 
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Operacio;
 import cat.aoc.client_pci.utils.PeticionBuilderImpl;
 import generated.enotum.*;
+import net.gencat.scsp.esquemes.peticion.Fichero;
+import net.gencat.scsp.esquemes.peticion.Ficheros;
+import net.gencat.scsp.esquemes.peticion.Peticion;
 
 import java.math.BigInteger;
 
@@ -22,6 +26,22 @@ public class ENOTUMPeticionBuilder extends PeticionBuilderImpl {
 
     public ENOTUMPeticionBuilder(String propertiesPath) throws NotFoundException {
         super(propertiesPath);
+    }
+
+    @Override
+    public Peticion build(String producte, Operacio operacio, Finalitat finalitat) {
+        Peticion peticion = super.build(producte, operacio, finalitat);
+        Fichero fichero = new Fichero();
+        fichero.setNombreFichero("sample.pdf");
+        fichero.setId("1234");
+        fichero.setVia("Salida");
+        jakarta.activation.DataSource ds = new jakarta.activation.FileDataSource("src\\main\\resources\\examples\\example.pdf");
+        fichero.setContenido(new jakarta.activation.DataHandler(ds));
+        Ficheros ficheros = new Ficheros();
+        ficheros.getFichero().add(fichero);
+        peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosGenericos()
+                .setFicheros(ficheros);
+        return peticion;
     }
 
     @Override

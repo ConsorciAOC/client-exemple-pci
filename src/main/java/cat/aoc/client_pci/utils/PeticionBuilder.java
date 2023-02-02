@@ -1,4 +1,4 @@
-package cat.aoc.client_pci;
+package cat.aoc.client_pci.utils;
 
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.NotFoundException;
@@ -8,6 +8,6 @@ import net.gencat.scsp.esquemes.peticion.Peticion;
 
 public interface PeticionBuilder {
 
-    Peticion build(String producte, Operacio operacio, String modalidad, Finalitat finalitat) throws NotDefinedException, NotFoundException;
+    Peticion build(String producte, Operacio operacio, Finalitat finalitat) throws NotDefinedException, NotFoundException;
 
 }

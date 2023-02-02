@@ -1,7 +1,6 @@
 package cat.aoc.client_pci.clients.padro;
 
-import cat.aoc.client_pci.ClientAOC;
-import cat.aoc.client_pci.PeticionBuilder;
+import cat.aoc.client_pci.clients.ClientAOC;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.*;
 
@@ -11,8 +10,8 @@ public class PADROEmpadronamientoClient extends ClientAOC {
             "generated.padro.empadronamiento",
     };
 
-    public PADROEmpadronamientoClient(String keystorePath, Entorn entorn, PeticionBuilder peticionBuilder) {
-        super(keystorePath, entorn, Cluster.IOP, peticionBuilder, PACKAGES);
+    public PADROEmpadronamientoClient(String keystorePath, Entorn entorn) {
+        super(keystorePath, entorn, Cluster.IOP, PACKAGES);
     }
 
     @Override

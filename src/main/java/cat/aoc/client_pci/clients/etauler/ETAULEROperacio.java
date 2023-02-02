@@ -11,4 +11,9 @@ public enum ETAULEROperacio implements Operacio {
     SINCRONITZAR,
     DESCARREGAR_DOCUMENT,
     CONSULTAR;
+
+    @Override
+    public String getCodiModalitat() {
+        return "ETAULER";
+    }
 }

@@ -1,17 +1,17 @@
 package cat.aoc.client_pci.model;
 
+import lombok.Getter;
+
+@Getter
 public enum Frontal {
     SINCRON("Sincron"),
     ASINCRON("Asincron"),
     ASINCRON_RESPOSTA("AsincronResposta");
 
-    private final String value;
+    private final String name;
 
-    Frontal(String value) {
-        this.value = value;
+    Frontal(String name) {
+        this.name = name;
     }
 
-    public String getValue() {
-        return value;
-    }
 }

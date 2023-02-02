@@ -11,4 +11,10 @@ public enum ENOTUMOperacio implements Operacio {
     CONSULTA,
     PARAULA_PAS,
     CERCA;
+
+    @Override
+    public String getCodiModalitat() {
+        return "ENOTUM";
+    }
+
 }

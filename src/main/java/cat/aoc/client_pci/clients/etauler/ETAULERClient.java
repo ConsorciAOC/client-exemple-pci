@@ -1,7 +1,6 @@
 package cat.aoc.client_pci.clients.etauler;
 
-import cat.aoc.client_pci.ClientAOC;
-import cat.aoc.client_pci.PeticionBuilder;
+import cat.aoc.client_pci.clients.ClientAOC;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.*;
 
@@ -10,8 +9,8 @@ public class ETAULERClient extends ClientAOC {
             "generated.etauler"
     };
 
-    public ETAULERClient(String keystorePath, Entorn entorn, PeticionBuilder peticionBuilder) {
-        super(keystorePath, entorn, Cluster.APP, peticionBuilder, PACKAGES);
+    public ETAULERClient(String keystorePath, Entorn entorn) {
+        super(keystorePath, entorn, Cluster.APP, PACKAGES);
     }
 
     @Override

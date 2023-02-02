@@ -16,4 +16,9 @@ public enum PADROOperacio implements Operacio {
     CONVIVENTS_PDF,
     TITULAR_IDESCAT,
     CERCA_TITULAR;
+
+    @Override
+    public String getCodiModalitat() {
+        return this.name();
+    }
 }

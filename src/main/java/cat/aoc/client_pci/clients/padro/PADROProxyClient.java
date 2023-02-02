@@ -1,9 +1,9 @@
 package cat.aoc.client_pci.clients.padro;
 
-import cat.aoc.client_pci.ClientAOC;
-import cat.aoc.client_pci.PeticionBuilder;
+import cat.aoc.client_pci.clients.ClientAOC;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.*;
+import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
 
 public class PADROProxyClient extends ClientAOC {
@@ -11,10 +11,10 @@ public class PADROProxyClient extends ClientAOC {
     private final PADROEmpadronamientoClient clientEmpadronamiento;
     private final PADROConvivenciaClient clientConvivencia;
 
-    public PADROProxyClient(String keystorePath, Entorn entorn, PeticionBuilder peticionBuilder) {
-        super(keystorePath, entorn, Cluster.IOP, peticionBuilder);
-        this.clientEmpadronamiento = new PADROEmpadronamientoClient(keystorePath, entorn, peticionBuilder);
-        this.clientConvivencia = new PADROConvivenciaClient(keystorePath, entorn, peticionBuilder);
+    public PADROProxyClient(String keystorePath, Entorn entorn) {
+        super(keystorePath, entorn, Cluster.IOP);
+        this.clientEmpadronamiento = new PADROEmpadronamientoClient(keystorePath, entorn);
+        this.clientConvivencia = new PADROConvivenciaClient(keystorePath, entorn);
     }
 
     @Override
@@ -37,14 +37,15 @@ public class PADROProxyClient extends ClientAOC {
     public String getCodiModalitat(Operacio operacio) {
         return ((PADROOperacio) operacio).name();
     }
+
     @Override
-    public Respuesta send(Operacio operacio, Finalitat finalitat) throws NotDefinedException {
+    public Respuesta send(Operacio operacio, Peticion peticion) throws NotDefinedException {
         try {
             return switch ((PADROOperacio) operacio) {
                 case TITULAR, TITULAR_IDESCAT, CERCA_TITULAR, TITULAR_PROPI, TITULAR_PDF,
-                        RESIDENT, MUNICIPI_RESIDENCIA, RESIDENT_MUNICIPI -> clientEmpadronamiento.send(operacio, finalitat);
+                        RESIDENT, MUNICIPI_RESIDENCIA, RESIDENT_MUNICIPI -> clientEmpadronamiento.send(operacio, peticion);
                 case CONVIVENTS, NUMERO_CONVIVENTS, CONVIVENTS_PROPI, CONVIVENTS_PDF,
-                        COMPROVACIO_CONVIVENTS -> clientConvivencia.send(operacio, finalitat);
+                        COMPROVACIO_CONVIVENTS -> clientConvivencia.send(operacio, peticion);
             };
         } catch (Exception e) {
             throw new NotDefinedException("Modalitat no definida: " + operacio);

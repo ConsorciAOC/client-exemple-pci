@@ -1,7 +1,6 @@
 package cat.aoc.client_pci.clients.tfn;
 
-import cat.aoc.client_pci.ClientAOC;
-import cat.aoc.client_pci.PeticionBuilder;
+import cat.aoc.client_pci.clients.ClientAOC;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.*;
 
@@ -10,8 +9,8 @@ public class TFNClient extends ClientAOC {
             "generated.tfn"
     };
 
-    public TFNClient(String keystorePath, Entorn entorn, PeticionBuilder peticionBuilder) {
-        super(keystorePath, entorn, Cluster.IOP, peticionBuilder, PACKAGES);
+    public TFNClient(String keystorePath, Entorn entorn) {
+        super(keystorePath, entorn, Cluster.IOP, PACKAGES);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package cat.aoc.client_pci.utils;
 
-import cat.aoc.client_pci.PeticionBuilder;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.NotFoundException;
 import cat.aoc.client_pci.model.Finalitat;
@@ -29,18 +28,14 @@ public abstract class PeticionBuilderImpl implements PeticionBuilder {
     }
 
     @Override
-    public Peticion build(String producte, Operacio operacio, String modalidad, Finalitat finalitat) {
-        return buildPeticion(producte, operacio, modalidad, finalitat.name());
+    public Peticion build(String producto, Operacio operacio, Finalitat finalidad) {
+        Peticion peticion = new Peticion();
+        peticion.setAtributos(buildAtributos(producto, operacio.getCodiModalitat(), finalidad.name()));
+        peticion.setSolicitudes(buildSolicitudes(operacio.getCodiModalitat(), finalidad.name(), operacio));
+        return peticion;
     }
 
     protected abstract Object[] getDatosEspecificos(Operacio operacio) throws NotDefinedException;
-
-    private Peticion buildPeticion(String producto, Operacio operacio, String modalidad, String finalidad){
-        Peticion peticion = new Peticion();
-        peticion.setAtributos(buildAtributos(producto, modalidad, finalidad));
-        peticion.setSolicitudes(buildSolicitudes(modalidad, finalidad, operacio));
-        return peticion;
-    }
 
     private Atributos buildAtributos(String producto, String modalidad, String finalidad){
         Atributos atributos = new Atributos();

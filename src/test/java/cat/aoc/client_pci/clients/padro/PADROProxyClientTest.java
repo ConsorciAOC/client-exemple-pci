@@ -1,47 +1,44 @@
 package cat.aoc.client_pci.clients.padro;
 
+import cat.aoc.client_pci.clients.etauler.ETAULEROperacio;
 import cat.aoc.client_pci.exceptions.NotDefinedException;
 import cat.aoc.client_pci.exceptions.NotFoundException;
-import cat.aoc.client_pci.ClientAOC;
-import cat.aoc.client_pci.clients.Clients;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
 import generated.padro.RespuestaDatosConvivientes;
 import generated.padro.RespuestaDatosTitular;
+import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PADROProxyClientTest {
+    private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
+    private static final String KEYSTORE_PATH = "src\\main\\resources\\keystore.properties";
 
-    @Test
-    void getFrontal() throws NotDefinedException, NotFoundException {
-        ClientAOC client = Clients.PADRO.getClient(Entorn.PRE);
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.MUNICIPI_RESIDENCIA));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.RESIDENT_MUNICIPI));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.NUMERO_CONVIVENTS));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.COMPROVACIO_CONVIVENTS));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.TITULAR));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.TITULAR_PROPI));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.CONVIVENTS));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.CONVIVENTS_PROPI));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.TITULAR_PDF));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.CONVIVENTS_PDF));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.TITULAR_IDESCAT));
-        assertEquals(Frontal.SINCRON, client.getFrontal(PADROOperacio.CERCA_TITULAR));
+    private PADROProxyClient client;
+    @BeforeEach
+    void setUp() {
+        client = new PADROProxyClient(KEYSTORE_PATH, Entorn.PRE);
     }
 
     @Test
-    void getCodiServei() throws NotDefinedException, NotFoundException {
-        ClientAOC client = Clients.PADRO.getClient(Entorn.PRE);
+    void getFrontal() throws NotDefinedException {
+        for (PADROOperacio operacio : PADROOperacio.values()) {
+            assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
+        }
+    }
+
+    @Test
+    void getCodiServei() {
         assertEquals("PADRO", client.getCodiServei());
     }
 
     @Test
-    void getCodiModalitat() throws NotDefinedException, NotFoundException {
-        ClientAOC client = Clients.PADRO.getClient(Entorn.PRE);
+    void getCodiModalitat() {
         for (PADROOperacio operacio : PADROOperacio.values()) {
             assertEquals(operacio.name(), client.getCodiModalitat(operacio));
         }
@@ -49,8 +46,8 @@ class PADROProxyClientTest {
 
     @Test
     void titular() throws NotDefinedException, NotFoundException {
-        Respuesta respuesta = Clients.PADRO.getClient(Entorn.PRE)
-                .send(PADROOperacio.TITULAR, Finalitat.PROVES);
+        Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build("PADRO", PADROOperacio.TITULAR, Finalitat.PROVES);
+        Respuesta respuesta = client.send(PADROOperacio.TITULAR, peticion);
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
         RespuestaDatosTitular respuestaDatosTitular = (RespuestaDatosTitular) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
@@ -63,8 +60,8 @@ class PADROProxyClientTest {
 
     @Test
     void convivents() throws NotDefinedException, NotFoundException {
-        Respuesta respuesta = Clients.PADRO.getClient(Entorn.PRE)
-                .send(PADROOperacio.CONVIVENTS, Finalitat.PROVES);
+        Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build("PADRO", PADROOperacio.CONVIVENTS, Finalitat.PROVES);
+        Respuesta respuesta = client.send(PADROOperacio.CONVIVENTS, peticion);
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
         RespuestaDatosConvivientes respuestaDatosConvivientes = (RespuestaDatosConvivientes) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
@@ -75,5 +72,4 @@ class PADROProxyClientTest {
         assertEquals("Friedrich", volante.getVolanteEmpadronamientoDatosFirmados().getDatosPersonales().getNombre());
         assertEquals("3", volante.getVolanteEmpadronamientoDatosFirmados().getNumeroAcompanantes().toString());
     }
-
 }
