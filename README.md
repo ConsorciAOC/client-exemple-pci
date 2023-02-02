@@ -3,7 +3,7 @@
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 
-Client d'exemple pels integradors de la PCI.
+> Client d'exemple pels integradors de la PCI.
 
 El següent projecte presenta un client SOAP d'exemple pels integradors que permet consumir els diferents serveis de l'AOC.
 Per més informació sobre la integració podeu consultar la documentació genèrica de la PCI (Plataforma de Col·laboració Interadministrativa):
@@ -18,8 +18,8 @@ https://consorciaoc.github.io/
 Per poder compilar i utilitzar el codi serà necessari utilitzar la JDK 17 (o superior) de java.
 - jdk17: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
 ### Gradle
-El projecte incorpora un wrapper de gradle (gradle/wrapper) i uns fitxers executables
-(./gradlew) per poder fer servir el gestor sense necessitat de tenir-lo instal·lat.
+El projecte incorpora un wrapper de gradle (`gradle/wrapper`) i uns fitxers executables
+(`./gradlew`) per poder fer servir el gestor sense necessitat de tenir-lo instal·lat.
 
 Si es desitja instal·lar gradle en local: https://gradle.org/install/
 
@@ -35,16 +35,16 @@ Amb l'alta se us atorgaran permisos per consumir els serveis demanats i necessit
 
 ## Primeres passes
 ### Configurar el certificat
-Per tal que el client funcioni, necessitareu configurar el vostre certificat de signatura al fitxer src/main/resources/keystore.properties
-- org.apache.ws.security.crypto.provider: Proveïdor usat per crear instàncies criptogràfiques.
-- org.apache.wss4j.crypto.merlin.keystore.alias: Àlies del certificat digital.
-- org.apache.ws.security.crypto.merlin.keystore.type: Format del certificat.
-- org.apache.ws.security.crypto.merlin.keystore.password: Contrasenya del certificat.
-- org.apache.ws.security.crypto.merlin.keystore.file: Ruta del fitxer.
+Per tal que el client funcioni, necessitareu configurar el vostre certificat de signatura al fitxer `src/main/resources/keystore.properties`
+- `org.apache.ws.security.crypto.provider`: Proveïdor usat per crear instàncies criptogràfiques.
+- `org.apache.wss4j.crypto.merlin.keystore.alias`: Àlies del certificat digital.
+- `org.apache.ws.security.crypto.merlin.keystore.type`: Format del certificat.
+- `org.apache.ws.security.crypto.merlin.keystore.password`: Contrasenya del certificat.
+- `org.apache.ws.security.crypto.merlin.keystore.file`: Ruta del fitxer.
 
 ### Generació de codi JAXB
 El projecte incorpora una sèrie d'XSD's tant de la PCI (part genèrica) com dels diferents serveis (part específica) sota el directori:
-src/main/resources/xsd
+`src/main/resources/xsd`
 
 Per tal de convertir els esquemes a classes java es fan servir llibreries de JAXB i s'ha configurat una tasca gradle anomenada jaxb que realitza el procés automàticament.
 Per executar la tasca:
