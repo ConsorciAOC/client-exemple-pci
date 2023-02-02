@@ -26,7 +26,8 @@ Si es desitja instal·lar gradle en local: https://gradle.org/install/
 ### Dades CAOC
 Per consumir els serveis del CAOC necessitareu haver estat donats d'alta als nostres entorns prèviament.
 Podeu sol·licitar l'alta a través del nostre portal: https://www.aoc.cat/serveis/
-Amb l'alta se us atorgaran permisos per consumir els serveis demanats i necessitareu:
+
+Amb l'alta se us assignaran permisos per consumir els serveis demanats i necessitareu:
 - Codi del servei
 - Codi de la modalitat
 - Codi de la finalitat
