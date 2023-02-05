@@ -1,8 +1,7 @@
 package cat.aoc.client_pci.clients.padro;
 
-import cat.aoc.client_pci.clients.etauler.ETAULEROperacio;
-import cat.aoc.client_pci.exceptions.NotDefinedException;
-import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.NotDefinedException;
+import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
@@ -46,7 +45,7 @@ class PADROProxyClientTest {
 
     @Test
     void titular() throws NotDefinedException, NotFoundException {
-        Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build("PADRO", PADROOperacio.TITULAR, Finalitat.PROVES);
+        Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build(PADROOperacio.TITULAR, Finalitat.PROVES);
         Respuesta respuesta = client.send(PADROOperacio.TITULAR, peticion);
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
@@ -60,7 +59,7 @@ class PADROProxyClientTest {
 
     @Test
     void convivents() throws NotDefinedException, NotFoundException {
-        Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build("PADRO", PADROOperacio.CONVIVENTS, Finalitat.PROVES);
+        Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build(PADROOperacio.CONVIVENTS, Finalitat.PROVES);
         Respuesta respuesta = client.send(PADROOperacio.CONVIVENTS, peticion);
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());

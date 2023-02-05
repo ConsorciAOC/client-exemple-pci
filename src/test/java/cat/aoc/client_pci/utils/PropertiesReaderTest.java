@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.utils;
 
-import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Properties;

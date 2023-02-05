@@ -1,6 +1,5 @@
 package cat.aoc.client_pci.model;
 
-import cat.aoc.client_pci.exceptions.NotDefinedException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

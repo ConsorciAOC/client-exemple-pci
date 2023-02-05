@@ -1,7 +1,5 @@
 package cat.aoc.client_pci;
 
-import cat.aoc.client_pci.clients.ClientAOC;
-import cat.aoc.client_pci.clients.Servei;
 import cat.aoc.client_pci.clients.enotum.ENOTUMOperacio;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;

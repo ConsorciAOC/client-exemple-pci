@@ -1,8 +1,7 @@
 package cat.aoc.client_pci.clients.tfn;
 
-import cat.aoc.client_pci.clients.etauler.ETAULEROperacio;
-import cat.aoc.client_pci.exceptions.NotDefinedException;
-import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.NotDefinedException;
+import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
@@ -45,7 +44,7 @@ class TFNClientTest {
 
     @Test
     void send() throws NotDefinedException, NotFoundException {
-        Peticion peticion = new TFNPeticionBuilder(PROPERTIES_PATH).build("TFN", TFNOperacio.TFN_DADESCOMPLETES, Finalitat.PROVES);
+        Peticion peticion = new TFNPeticionBuilder(PROPERTIES_PATH).build(TFNOperacio.TFN_DADESCOMPLETES, Finalitat.PROVES);
         Respuesta respuesta = client.send(TFNOperacio.TFN_DADESCOMPLETES, peticion);
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());

@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.soap;
 
-import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import cat.aoc.client_pci.utils.PropertiesReader;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

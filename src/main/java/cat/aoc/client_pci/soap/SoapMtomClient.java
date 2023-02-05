@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.soap;
 
-import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;

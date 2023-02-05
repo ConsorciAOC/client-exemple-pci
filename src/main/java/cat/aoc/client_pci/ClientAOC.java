@@ -1,6 +1,6 @@
-package cat.aoc.client_pci.clients;
+package cat.aoc.client_pci;
 
-import cat.aoc.client_pci.exceptions.NotDefinedException;
+import cat.aoc.client_pci.model.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.*;
 import cat.aoc.client_pci.soap.SoapMtomClient;
 import net.gencat.scsp.esquemes.peticion.Peticion;

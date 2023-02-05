@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.clients.padro;
 
-import cat.aoc.client_pci.exceptions.NotDefinedException;
+import cat.aoc.client_pci.model.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Frontal;
 import org.junit.jupiter.api.BeforeEach;

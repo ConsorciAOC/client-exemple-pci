@@ -1,5 +1,6 @@
 package cat.aoc.client_pci.clients;
 
+import cat.aoc.client_pci.Servei;
 import cat.aoc.client_pci.clients.enotum.ENOTUMClient;
 import cat.aoc.client_pci.clients.etauler.ETAULERClient;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;

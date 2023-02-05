@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.clients.enotum;
 
-import cat.aoc.client_pci.clients.ClientAOC;
-import cat.aoc.client_pci.exceptions.NotDefinedException;
+import cat.aoc.client_pci.ClientAOC;
+import cat.aoc.client_pci.model.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.*;
 
 public class ENOTUMClient extends ClientAOC {

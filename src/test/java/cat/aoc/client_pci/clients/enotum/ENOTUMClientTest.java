@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.clients.enotum;
 
-import cat.aoc.client_pci.exceptions.NotDefinedException;
-import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.NotDefinedException;
+import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
@@ -43,14 +43,47 @@ class ENOTUMClientTest {
     }
 
     @Test
-    void sendProcessarTramesa() throws NotDefinedException, NotFoundException {
-        Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build("ENOTUM", ENOTUMOperacio.PROCESSAR_TRAMESA, Finalitat.PROVES);
+    void processarTramesa() throws NotDefinedException, NotFoundException {
+        Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.PROCESSAR_TRAMESA, Finalitat.PROVES);
         Respuesta respuesta = client.send(ENOTUMOperacio.PROCESSAR_TRAMESA, peticion);
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
         RespostaProcessarTramesa processarTramesa = (RespostaProcessarTramesa) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(processarTramesa);
         assertNotNull(processarTramesa.getNotificacionsCreades().getIdNotificacio().get(0));
+    }
+
+    @Test
+    void cerca() throws NotDefinedException, NotFoundException {
+        Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.CERCA, Finalitat.PROVES);
+        Respuesta respuesta = client.send(ENOTUMOperacio.CERCA, peticion);
+        assertNotNull(respuesta);
+        assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
+        RespostaCerca respostaCerca = (RespostaCerca) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
+        assertNotNull(respostaCerca);
+        assertEquals(25, respostaCerca.getResultats().getNotificacio().size());
+    }
+
+    @Test
+    void consulta() throws NotDefinedException, NotFoundException {
+        Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.CONSULTA, Finalitat.PROVES);
+        Respuesta respuesta = client.send(ENOTUMOperacio.CONSULTA, peticion);
+        assertNotNull(respuesta);
+        assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
+        RespostaConsulta respostaConsulta = (RespostaConsulta) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
+        assertNotNull(respostaConsulta);
+        assertNotNull(respostaConsulta.getIdNotificacio());
+    }
+
+    @Test
+    void resum() throws NotDefinedException, NotFoundException {
+        Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.RESUM, Finalitat.PROVES);
+        Respuesta respuesta = client.send(ENOTUMOperacio.RESUM, peticion);
+        assertNotNull(respuesta);
+        assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
+        RespostaResum respostaResum = (RespostaResum) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
+        assertNotNull(respostaResum);
+        assertEquals(0, respostaResum.getNotificacionsEntitat().size());
     }
 
 }

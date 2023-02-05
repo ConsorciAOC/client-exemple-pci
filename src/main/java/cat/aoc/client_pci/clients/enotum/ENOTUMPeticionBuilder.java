@@ -1,10 +1,9 @@
 package cat.aoc.client_pci.clients.enotum;
 
-import cat.aoc.client_pci.exceptions.NotDefinedException;
-import cat.aoc.client_pci.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import cat.aoc.client_pci.model.Finalitat;
-import cat.aoc.client_pci.model.Operacio;
-import cat.aoc.client_pci.utils.PeticionBuilderImpl;
+import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
+import cat.aoc.client_pci.utils.PeticionPropertiesBuilder;
 import generated.enotum.*;
 import net.gencat.scsp.esquemes.peticion.Fichero;
 import net.gencat.scsp.esquemes.peticion.Ficheros;
@@ -12,7 +11,8 @@ import net.gencat.scsp.esquemes.peticion.Peticion;
 
 import java.math.BigInteger;
 
-public class ENOTUMPeticionBuilder extends PeticionBuilderImpl {
+public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperacio> {
+    private static final String CODI_SERVEI = "ENOTUM";
     private static final String PLANTILLA = "client.enotum.plantilla";
     private static final String COS_NOTIFICACIO = "client.enotum.cosNotificacio";
     private static final String PEU_RECURS = "client.enotum.peuRecurs";
@@ -25,12 +25,12 @@ public class ENOTUMPeticionBuilder extends PeticionBuilderImpl {
     private static final String SEGON_COGNOM = "client.enotum.segonCognom";
 
     public ENOTUMPeticionBuilder(String propertiesPath) throws NotFoundException {
-        super(propertiesPath);
+        super(CODI_SERVEI, propertiesPath);
     }
 
     @Override
-    public Peticion build(String producte, Operacio operacio, Finalitat finalitat) {
-        Peticion peticion = super.build(producte, operacio, finalitat);
+    public Peticion build(ENOTUMOperacio operacio, Finalitat finalitat) {
+        Peticion peticion = builder.build(CODI_SERVEI, operacio.getCodiModalitat(), finalitat.name(), getDatosEspecificos(operacio));
         Fichero fichero = new Fichero();
         fichero.setNombreFichero("sample.pdf");
         fichero.setId("1234");
@@ -45,27 +45,36 @@ public class ENOTUMPeticionBuilder extends PeticionBuilderImpl {
     }
 
     @Override
-    public Object[] getDatosEspecificos(Operacio operacio) throws NotDefinedException {
-        try {
-            return switch ((ENOTUMOperacio) operacio) {
-                case CERCA -> new Object[]{
-                        buildPeticioCerca()
-                };
-                case PROCESSAR_TRAMESA -> new Object[]{
-                        buildPeticioProcessarTramesa()
-                };
-                case RESUM, EVIDENCIA, PRACTICAR, RECUPERAR_REPORT, CONSULTA, PARAULA_PAS -> new Object[]{};
+    protected Object[] getDatosEspecificos(ENOTUMOperacio operacio) {
+        return switch (operacio) {
+            case CERCA -> new Object[]{
+                    buildPeticioCerca()
             };
-        } catch (Exception e) {
-            throw new NotDefinedException("Operacio no definida: " + operacio);
-        }
+            case PROCESSAR_TRAMESA -> new Object[]{
+                    buildPeticioProcessarTramesa()
+            };
+            case CONSULTA -> new Object[]{
+                    buildPeticioConsulta()
+            };
+            case RESUM -> new Object[]{
+                    buildPeticioResum()
+            };
+            case EVIDENCIA, PRACTICAR, RECUPERAR_REPORT, PARAULA_PAS -> new Object[]{};
+        };
+
     }
 
     private PeticioCerca buildPeticioCerca() {
         PeticioCerca.DadesCerca dadesCerca = new PeticioCerca.DadesCerca();
 
+        PeticioCerca.DadesCerca.Paginacio paginacio = new PeticioCerca.DadesCerca.Paginacio();
+        paginacio.setNumeroPagina(BigInteger.valueOf(1));
+        paginacio.setResultatsPerPagina(25);
+        paginacio.setSentitOrdenacio(SentitOrdenacioType.DESCENDENT);
+        dadesCerca.setPaginacio(paginacio);
+
         IntervalValors valors = new IntervalValors();
-        valors.setValorAbsolut(properties.getProperty(REFERENCIA));
+        valors.setValorAbsolut(builder.getProperties().getProperty(REFERENCIA));
         PeticioCerca.DadesCerca.CriterisNotificacio criteris = new PeticioCerca.DadesCerca.CriterisNotificacio();
         criteris.setReferencia(valors);
         dadesCerca.setCriterisNotificacio(criteris);
@@ -77,18 +86,34 @@ public class ENOTUMPeticionBuilder extends PeticionBuilderImpl {
         return peticio;
     }
 
+    private PeticioConsulta buildPeticioConsulta() {
+        PeticioConsulta peticio = new PeticioConsulta();
+        peticio.setIdNotificacio(BigInteger.valueOf(353336));
+        peticio.setUsuari(buildUsuari());
+        peticio.setEmissor(buildEmissor());
+        return peticio;
+    }
+
+    private PeticioResum buildPeticioResum() {
+        PeticioResum peticio = new PeticioResum();
+        //peticio.setTipusAcces(BigInteger.valueOf(353336));
+        peticio.setUsuari(buildUsuari());
+        peticio.setEmissor(buildEmissor());
+        return peticio;
+    }
+
     private PeticioProcessarTramesa buildPeticioProcessarTramesa() {
         PeticioProcessarTramesa.Tramesa tramesa = new PeticioProcessarTramesa.Tramesa();
         PeticioProcessarTramesa.Tramesa.DadesAvisos dadesAvisos = new PeticioProcessarTramesa.Tramesa.DadesAvisos();
-        dadesAvisos.setPlantilla(properties.getProperty(PLANTILLA));
+        dadesAvisos.setPlantilla(builder.getProperties().getProperty(PLANTILLA));
         tramesa.setDadesAvisos(dadesAvisos);
         PeticioProcessarTramesa.Tramesa.DadesOfici dadesOfici = new PeticioProcessarTramesa.Tramesa.DadesOfici();
-        dadesOfici.setCosNotificacio(properties.getProperty(COS_NOTIFICACIO));
-        dadesOfici.setPeuRecurs(properties.getProperty(PEU_RECURS));
+        dadesOfici.setCosNotificacio(builder.getProperties().getProperty(COS_NOTIFICACIO));
+        dadesOfici.setPeuRecurs(builder.getProperties().getProperty(PEU_RECURS));
         tramesa.setDadesOfici(dadesOfici);
         NotificacioType notificacio = new NotificacioType();
-        notificacio.setTitol(properties.getProperty(TITOL));
-        notificacio.setReferencia(properties.getProperty(REFERENCIA));
+        notificacio.setTitol(builder.getProperties().getProperty(TITOL));
+        notificacio.setReferencia(builder.getProperties().getProperty(REFERENCIA));
         notificacio.setTipusObjecte(TipusObjecteType.NOTIFICACIO);
         notificacio.setTipusAcces(TipusAccesType.PPAS);
         notificacio.setDiesExpiracio(BigInteger.TEN);
@@ -96,14 +121,14 @@ public class ENOTUMPeticionBuilder extends PeticionBuilderImpl {
         DestinatarisType.Destinatari destinatari = new DestinatarisType.Destinatari();
         PersonaFisicaType personaFisica = new PersonaFisicaType();
         BustiesCorreuType bustia = new BustiesCorreuType();
-        bustia.getBustiaCorreu().add(properties.getProperty(BUSTIA));
+        bustia.getBustiaCorreu().add(builder.getProperties().getProperty(BUSTIA));
         personaFisica.setBustiesCorreu(bustia);
         DocumentPersonaFisicaType documentPersonaFisica = new DocumentPersonaFisicaType();
-        documentPersonaFisica.setNIF(properties.getProperty(NIF));
+        documentPersonaFisica.setNIF(builder.getProperties().getProperty(NIF));
         personaFisica.setDocumentIdentificatiu(documentPersonaFisica);
-        personaFisica.setNom(properties.getProperty(NOM));
-        personaFisica.setPrimerCognom(properties.getProperty(PRIMER_COGNOM));
-        personaFisica.setSegonCognom(properties.getProperty(SEGON_COGNOM));
+        personaFisica.setNom(builder.getProperties().getProperty(NOM));
+        personaFisica.setPrimerCognom(builder.getProperties().getProperty(PRIMER_COGNOM));
+        personaFisica.setSegonCognom(builder.getProperties().getProperty(SEGON_COGNOM));
         destinatari.setPersonaFisica(personaFisica);
         destinatari.setIdioma(Idioma.CA);
         destinataris.getDestinatari().add(destinatari);
@@ -130,8 +155,8 @@ public class ENOTUMPeticionBuilder extends PeticionBuilderImpl {
 
     private EmissorType buildEmissor() {
         EmissorType emissor = new EmissorType();
-        emissor.setCodiDepartament(properties.getProperty(CODI_ENS));
-        emissor.setCodiOrganisme(properties.getProperty(CODI_ENS));
+        emissor.setCodiDepartament(builder.getProperties().getProperty(PeticionPropertiesBuilder.CODI_ENS));
+        emissor.setCodiOrganisme(builder.getProperties().getProperty(PeticionPropertiesBuilder.CODI_ENS));
         return emissor;
     }
 
