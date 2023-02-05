@@ -11,6 +11,8 @@ import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ENOTUMClientTest {
@@ -84,6 +86,16 @@ class ENOTUMClientTest {
         RespostaResum respostaResum = (RespostaResum) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(respostaResum);
         assertEquals(0, respostaResum.getNotificacionsEntitat().size());
+    }
+
+    @Test
+    void paraulaPas() throws NotDefinedException, NotFoundException {
+        Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.PARAULA_PAS, Finalitat.PROVES);
+        Respuesta respuesta = client.send(ENOTUMOperacio.PARAULA_PAS, peticion);
+        assertNotNull(respuesta);
+        assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
+        RespostaParaulaPas respostaParaulaPas = (RespostaParaulaPas) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
+        assertNotNull(respostaParaulaPas);
     }
 
 }

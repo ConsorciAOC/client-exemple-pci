@@ -23,6 +23,7 @@ public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperaci
     private static final String NOM = "client.enotum.nom";
     private static final String PRIMER_COGNOM = "client.enotum.primerCognom";
     private static final String SEGON_COGNOM = "client.enotum.segonCognom";
+    private static final String ID_NOTIFICACIO = "client.enotum.idNotificacio";
 
     public ENOTUMPeticionBuilder(String propertiesPath) throws NotFoundException {
         super(CODI_SERVEI, propertiesPath);
@@ -59,9 +60,11 @@ public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperaci
             case RESUM -> new Object[]{
                     buildPeticioResum()
             };
-            case EVIDENCIA, PRACTICAR, RECUPERAR_REPORT, PARAULA_PAS -> new Object[]{};
+            case PARAULA_PAS -> new Object[]{
+                    buildParaulaPas()
+            };
+            case EVIDENCIA, PRACTICAR, RECUPERAR_REPORT -> new Object[]{};
         };
-
     }
 
     private PeticioCerca buildPeticioCerca() {
@@ -88,7 +91,7 @@ public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperaci
 
     private PeticioConsulta buildPeticioConsulta() {
         PeticioConsulta peticio = new PeticioConsulta();
-        peticio.setIdNotificacio(BigInteger.valueOf(353336));
+        peticio.setIdNotificacio(BigInteger.valueOf((Long) builder.getProperties().get(ID_NOTIFICACIO)));
         peticio.setUsuari(buildUsuari());
         peticio.setEmissor(buildEmissor());
         return peticio;
@@ -96,7 +99,16 @@ public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperaci
 
     private PeticioResum buildPeticioResum() {
         PeticioResum peticio = new PeticioResum();
-        //peticio.setTipusAcces(BigInteger.valueOf(353336));
+        peticio.setUsuari(buildUsuari());
+        peticio.setEmissor(buildEmissor());
+        return peticio;
+    }
+
+    private PeticioParaulaPas buildParaulaPas() {
+        PeticioParaulaPas peticio = new PeticioParaulaPas();
+        PeticioParaulaPas.DadesEnviament dades = new PeticioParaulaPas.DadesEnviament();
+        dades.setBustiaCorreu(builder.getProperties().getProperty(BUSTIA));
+        peticio.setDadesEnviament(dades);
         peticio.setUsuari(buildUsuari());
         peticio.setEmissor(buildEmissor());
         return peticio;
