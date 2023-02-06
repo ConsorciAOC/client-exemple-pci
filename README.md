@@ -1,31 +1,31 @@
-# client-exemple-pci
+ï»¿# client-exemple-pci
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 
 > Client d'exemple pels integradors de la PCI.
 
-El següent projecte presenta un client SOAP d'exemple pels integradors que permet consumir els diferents serveis de l'AOC.
-Per més informació sobre la integració podeu consultar la documentació genèrica de la PCI (Plataforma de Col·laboració Interadministrativa):
+El segÃ¼ent projecte presenta un client SOAP d'exemple pels integradors que permet consumir els diferents serveis de l'AOC.
+Per a mÃ©s informaciÃ³ sobre la integraciÃ³ podeu consultar la documentaciÃ³ genÃ¨rica de la PCI (Plataforma de ColÂ·laboraciÃ³ Interadministrativa):
 https://github.com/ConsorciAOC/PCI
 
-Addicionalment, per integrar-se amb els diferents serveis del Consorci, podreu consultar la documentació específica de cada un accedint al projecte concret que trobareu a:
+Addicionalment, per integrar-se amb els diferents serveis del Consorci, podreu consultar la documentaciÃ³ especÃ­fica de cada un accedint al projecte concret que trobareu a:
 https://consorciaoc.github.io/
 
 
 ## Requisits
 ### Java
-Per poder compilar i utilitzar el codi serà necessari utilitzar la JDK 17 (o superior) de java.
+Per poder compilar i utilitzar el codi serÃ  necessari utilitzar la JDK 17 (o superior) de java.
 - jdk17: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
 ### Gradle
 El projecte incorpora un wrapper de gradle (`gradle/wrapper`) i uns fitxers executables
-(`./gradlew`) per poder fer servir el gestor sense necessitat de tenir-lo instal·lat.
+(`./gradlew`) per poder fer servir el gestor sense necessitat de tenir-lo instalÂ·lat.
 
-Si es desitja instal·lar gradle en local: https://gradle.org/install/
+Si es desitja instalÂ·lar gradle en local: https://gradle.org/install/
 
 ### Dades CAOC
-Per consumir els serveis del CAOC necessitareu haver estat donats d'alta als nostres entorns prèviament.
-Podeu sol·licitar l'alta a través del nostre portal: https://www.aoc.cat/serveis/
+Per consumir els serveis del CAOC necessitareu haver estat donats d'alta als nostres entorns prÃ¨viament.
+Podeu solÂ·licitar l'alta a travÃ©s del nostre portal: https://www.aoc.cat/serveis/
 
 Amb l'alta se us assignaran permisos per consumir els serveis demanats i necessitareu:
 - Codi del servei
@@ -37,40 +37,40 @@ Amb l'alta se us assignaran permisos per consumir els serveis demanats i necessi
 ## Primeres passes
 ### Configurar el certificat
 Per tal que el client funcioni, necessitareu configurar el vostre certificat de signatura al fitxer `src/main/resources/keystore.properties`
-- `org.apache.ws.security.crypto.provider`: Proveïdor usat per crear instàncies criptogràfiques.
-- `org.apache.wss4j.crypto.merlin.keystore.alias`: Àlies del certificat digital.
+- `org.apache.ws.security.crypto.provider`: ProveÃ¯dor usat per crear instÃ ncies criptogrÃ fiques.
+- `org.apache.wss4j.crypto.merlin.keystore.alias`: Ã lies del certificat digital.
 - `org.apache.ws.security.crypto.merlin.keystore.type`: Format del certificat.
 - `org.apache.ws.security.crypto.merlin.keystore.password`: Contrasenya del certificat.
 - `org.apache.ws.security.crypto.merlin.keystore.file`: Ruta del fitxer.
 
-### Generació de codi JAXB
-El projecte incorpora una sèrie d'XSD's tant de la PCI (part genèrica) com dels diferents serveis (part específica) sota el directori:
+### GeneraciÃ³ de codi JAXB
+El projecte incorpora una sÃ©rie d'XSD's tant de la PCI (part genÃ¨rica) com dels diferents serveis (part especÃ­fica) sota el directori:
 `src/main/resources/xsd`
 
-Per tal de convertir els esquemes a classes java es fan servir llibreries de JAXB i s'ha configurat una tasca gradle anomenada jaxb que realitza el procés automàticament.
+Per tal de convertir els esquemes a classes java es fan servir llibreries de JAXB i s'ha configurat una tasca gradle anomenada jaxb que realitza el procÃ©s automÃ ticament.
 Per executar la tasca:
 ```bash
 gradlew jaxb
 ```
 
-La compilació del projecte java depèn d'aquesta tasca, per tant, cada cop que es necessiti compilar quelcom s'executarà abans la taca jaxb mencionada.
-Si desitgeu eliminar aquesta dependència per agilitzar les build, podeu comentar la següent línia al fitxer build.gradle:
+La compilaciÃ³ del projecte java depÃ¨n d'aquesta tasca, per tant, cada cop que es necessiti compilar quelcom s'executarÃ  abans la taca jaxb mencionada.
+Si desitgeu eliminar aquesta dependÃ¨ncia per agilitzar les build, podeu comentar la segÃ¼ent lÃ­nia al fitxer build.gradle:
 ```groovy
 compileJava.dependsOn jaxb
 ```
 
 
-### Exemple d'ús
+### Exemple d'Ãºs
 ```java
 // Obtenir el client del servei desitjat
 ClientAOC client = Servei.ENOTUM.getClient(Entorn.PRE);
 
-// Construir una petició d'exemple
+// Construir una peticiÃ³ d'exemple
 Peticion peticion = Servei.ENOTUM.getPeticion(ENOTUMOperacio.CERCA, Finalitat.PROVES);
         
-// Enviar una petició d'exemple
+// Enviar una peticiÃ³ d'exemple
 client.send(ENOTUMOperacio.CERCA, peticion);
 ```
 
-### Més exemples
-Podreu trobar més exemples dels diferents serveis sota l'apartat de test del projecte.
+### MÃ©s exemples
+Podreu trobar mÃ©s exemples dels diferents serveis sota l'apartat de test del projecte.
