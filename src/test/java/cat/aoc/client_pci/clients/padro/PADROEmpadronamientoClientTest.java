@@ -1,6 +1,5 @@
 package cat.aoc.client_pci.clients.padro;
 
-import cat.aoc.client_pci.model.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Frontal;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,7 @@ class PADROEmpadronamientoClientTest {
     }
 
     @Test
-    void getFrontal() throws NotDefinedException {
+    void getFrontal() {
         for (PADROOperacio operacio : PADROOperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
         }

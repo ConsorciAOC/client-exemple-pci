@@ -1,6 +1,5 @@
 package cat.aoc.client_pci.clients.padro;
 
-import cat.aoc.client_pci.model.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
@@ -25,14 +24,14 @@ class PADROProxyClientTest {
     }
 
     @Test
-    void getFrontal() throws NotDefinedException {
+    void getFrontal() {
         for (PADROOperacio operacio : PADROOperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
         }
     }
 
     @Test
-    void titular() throws NotDefinedException, NotFoundException {
+    void titular() throws NotFoundException {
         Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build(PADROOperacio.TITULAR, Finalitat.PROVES);
         Respuesta respuesta = client.send(PADROOperacio.TITULAR, peticion);
         assertNotNull(respuesta);
@@ -46,7 +45,7 @@ class PADROProxyClientTest {
     }
 
     @Test
-    void convivents() throws NotDefinedException, NotFoundException {
+    void convivents() throws NotFoundException {
         Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build(PADROOperacio.CONVIVENTS, Finalitat.PROVES);
         Respuesta respuesta = client.send(PADROOperacio.CONVIVENTS, peticion);
         assertNotNull(respuesta);

@@ -4,10 +4,8 @@ import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.model.Cluster;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Frontal;
-import cat.aoc.client_pci.model.Operacio;
-import cat.aoc.client_pci.model.exceptions.NotDefinedException;
 
-public class DGPClient extends ClientAOC {
+public class DGPClient extends ClientAOC<DGPOperacio> {
     private static final String[] PACKAGES = {
             "generated.dgp",
     };
@@ -17,14 +15,10 @@ public class DGPClient extends ClientAOC {
     }
 
     @Override
-    public Frontal getFrontal(Operacio operacio) throws NotDefinedException {
-        try {
-            return switch ((DGPOperacio) operacio) {
-                case IDENTITAT_DADES, IDENTITAT_VERIFICACIO -> Frontal.SINCRON;
-            };
-        } catch (Exception e) {
-            throw new NotDefinedException("Operacio no definida: " + operacio);
-        }
+    public Frontal getFrontal(DGPOperacio operacio) {
+        return switch (operacio) {
+            case IDENTITAT_DADES, IDENTITAT_VERIFICACIO -> Frontal.SINCRON;
+        };
     }
 
 }

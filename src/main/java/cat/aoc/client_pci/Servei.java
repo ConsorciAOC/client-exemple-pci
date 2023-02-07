@@ -1,6 +1,8 @@
 package cat.aoc.client_pci;
 
 import cat.aoc.client_pci.clients.dgp.DGPClient;
+import cat.aoc.client_pci.clients.dgp.DGPOperacio;
+import cat.aoc.client_pci.clients.dgp.DGPPeticionBuilder;
 import cat.aoc.client_pci.clients.enotum.ENOTUMClient;
 import cat.aoc.client_pci.clients.enotum.ENOTUMOperacio;
 import cat.aoc.client_pci.clients.enotum.ENOTUMPeticionBuilder;
@@ -8,13 +10,14 @@ import cat.aoc.client_pci.clients.etauler.ETAULERClient;
 import cat.aoc.client_pci.clients.etauler.ETAULEROperacio;
 import cat.aoc.client_pci.clients.etauler.ETAULERPeticionBuilder;
 import cat.aoc.client_pci.clients.over.OVERClient;
+import cat.aoc.client_pci.clients.over.OVEROperacio;
+import cat.aoc.client_pci.clients.over.OVERPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.clients.padro.PADROPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;
 import cat.aoc.client_pci.clients.tfn.TFNClient;
 import cat.aoc.client_pci.clients.tfn.TFNOperacio;
 import cat.aoc.client_pci.clients.tfn.TFNPeticionBuilder;
-import cat.aoc.client_pci.model.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import cat.aoc.client_pci.model.Cluster;
 import cat.aoc.client_pci.model.Entorn;
@@ -54,13 +57,14 @@ public enum Servei {
         };
     }
 
-    public Peticion getPeticion(Operacio operacio, Finalitat finalidad) throws NotDefinedException, NotFoundException {
+    public Peticion getPeticion(Operacio operacio, Finalitat finalidad) throws NotFoundException {
         return switch (this) {
             case ENOTUM -> new ENOTUMPeticionBuilder(PROPERTIES_PATH).build((ENOTUMOperacio) operacio, finalidad);
             case ETAULER -> new ETAULERPeticionBuilder(PROPERTIES_PATH).build((ETAULEROperacio) operacio, finalidad);
-            case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
+            case OVER -> new OVERPeticionBuilder(PROPERTIES_PATH).build((OVEROperacio) operacio, finalidad);
             case TFN -> new TFNPeticionBuilder(PROPERTIES_PATH).build((TFNOperacio) operacio, finalidad);
-            default -> throw new NotDefinedException("Servei no definit: " + this.name());
+            case DGP -> new DGPPeticionBuilder(PROPERTIES_PATH).build((DGPOperacio) operacio, finalidad);
+            case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
     }
 

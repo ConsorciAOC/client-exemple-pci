@@ -3,7 +3,6 @@ package cat.aoc.client_pci.clients.over;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
-import cat.aoc.client_pci.model.exceptions.NotDefinedException;
 import cat.aoc.client_pci.model.exceptions.NotFoundException;
 import generated.over.RespostaDocumentacioTramit;
 import net.gencat.scsp.esquemes.peticion.Peticion;
@@ -24,14 +23,14 @@ class OVERClientTest {
     }
 
     @Test
-    void getFrontal() throws NotDefinedException {
+    void getFrontal() {
         for (OVEROperacio operacio : OVEROperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
         }
     }
 
     @Test
-    void send() throws NotDefinedException, NotFoundException {
+    void send() throws NotFoundException {
         Peticion peticion = new OVERPeticionBuilder(PROPERTIES_PATH).build(OVEROperacio.OVER_DOCUMENTACIO, Finalitat.PROVES);
         Respuesta respuesta = client.send(OVEROperacio.OVER_DOCUMENTACIO, peticion);
         assertNotNull(respuesta);
