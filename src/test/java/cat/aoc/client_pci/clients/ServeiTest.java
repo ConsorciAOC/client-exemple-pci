@@ -2,13 +2,20 @@ package cat.aoc.client_pci.clients;
 
 import cat.aoc.client_pci.Servei;
 import cat.aoc.client_pci.clients.dgp.DGPClient;
+import cat.aoc.client_pci.clients.dgp.DGPOperacio;
 import cat.aoc.client_pci.clients.enotum.ENOTUMClient;
+import cat.aoc.client_pci.clients.enotum.ENOTUMOperacio;
 import cat.aoc.client_pci.clients.etauler.ETAULERClient;
+import cat.aoc.client_pci.clients.etauler.ETAULEROperacio;
 import cat.aoc.client_pci.clients.over.OVERClient;
+import cat.aoc.client_pci.clients.over.OVEROperacio;
+import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;
 import cat.aoc.client_pci.clients.tfn.TFNClient;
+import cat.aoc.client_pci.clients.tfn.TFNOperacio;
 import cat.aoc.client_pci.model.Cluster;
 import cat.aoc.client_pci.model.Entorn;
+import cat.aoc.client_pci.model.Finalitat;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +38,16 @@ class ServeiTest {
 
     @Test
     void getPeticion() {
+        assertDoesNotThrow(
+                () -> {
+                    assertNotNull(Servei.ENOTUM.getPeticion(ENOTUMOperacio.PARAULA_PAS, Finalitat.PROVES));
+                    assertNotNull(Servei.ETAULER.getPeticion(ETAULEROperacio.AMPLIAR_TERMINI, Finalitat.PROVES));
+                    assertNotNull(Servei.OVER.getPeticion(OVEROperacio.OVER_DOCUMENTACIO, Finalitat.PROVES));
+                    assertNotNull(Servei.TFN.getPeticion(TFNOperacio.TFN_DADESCOMPLETES, Finalitat.PROVES));
+                    assertNotNull(Servei.DGP.getPeticion(DGPOperacio.IDENTITAT_DADES, Finalitat.PROVES));
+                    assertNotNull(Servei.PADRO.getPeticion(PADROOperacio.CONVIVENTS, Finalitat.PROVES));
+                }
+        );
     }
 
     @Test
