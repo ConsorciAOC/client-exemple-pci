@@ -15,6 +15,7 @@ public class DGPClient extends ClientAOC {
     public DGPClient(String keystorePath, Entorn entorn) {
         super(keystorePath, entorn, Cluster.IOP, PACKAGES);
     }
+
     @Override
     public Frontal getFrontal(Operacio operacio) throws NotDefinedException {
         try {
@@ -24,16 +25,6 @@ public class DGPClient extends ClientAOC {
         } catch (Exception e) {
             throw new NotDefinedException("Operacio no definida: " + operacio);
         }
-    }
-
-    @Override
-    public String getCodiServei() {
-        return "DGP_IDENTITAT";
-    }
-
-    @Override
-    public String getCodiModalitat(Operacio operacio) {
-        return ((DGPOperacio) operacio).name();
     }
 
 }

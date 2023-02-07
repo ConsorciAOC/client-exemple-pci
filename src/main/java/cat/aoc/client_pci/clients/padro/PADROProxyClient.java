@@ -29,16 +29,6 @@ public class PADROProxyClient extends ClientAOC {
     }
 
     @Override
-    public String getCodiServei() {
-        return "PADRO";
-    }
-
-    @Override
-    public String getCodiModalitat(Operacio operacio) {
-        return ((PADROOperacio) operacio).name();
-    }
-
-    @Override
     public Respuesta send(Operacio operacio, Peticion peticion) throws NotDefinedException {
         try {
             return switch ((PADROOperacio) operacio) {

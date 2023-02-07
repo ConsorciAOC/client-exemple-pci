@@ -1,5 +1,6 @@
 package cat.aoc.client_pci;
 
+import cat.aoc.client_pci.clients.dgp.DGPClient;
 import cat.aoc.client_pci.clients.enotum.ENOTUMClient;
 import cat.aoc.client_pci.clients.enotum.ENOTUMOperacio;
 import cat.aoc.client_pci.clients.enotum.ENOTUMPeticionBuilder;
@@ -28,6 +29,7 @@ public enum Servei {
     ETAULER(Cluster.APP, "ETAULER"),
     OVER(Cluster.APP, "OVER"),
     TFN (Cluster.IOP, "TFN"),
+    DGP (Cluster.IOP, "DGP_IDENTITAT"),
     PADRO(Cluster.IOP, "PADRO");
 
     private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
@@ -41,14 +43,14 @@ public enum Servei {
         this.codi = codi;
     }
 
-    public ClientAOC getClient(Entorn entorn) throws NotDefinedException {
+    public ClientAOC getClient(Entorn entorn) {
         return switch (this) {
             case ENOTUM -> new ENOTUMClient(KEYSTORE_PATH, entorn);
             case ETAULER -> new ETAULERClient(KEYSTORE_PATH, entorn);
             case OVER -> new OVERClient(KEYSTORE_PATH, entorn);
             case TFN -> new TFNClient(KEYSTORE_PATH, entorn);
+            case DGP -> new DGPClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
-            default -> throw new NotDefinedException("Servei no definit: " + this.name());
         };
     }
 

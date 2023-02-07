@@ -24,14 +24,4 @@ public class ETAULERClient extends ClientAOC {
         }
     }
 
-    @Override
-    public String getCodiServei() {
-        return "ETAULER";
-    }
-
-    @Override
-    public String getCodiModalitat(Operacio operacio) {
-        return "ETAULER";
-    }
-
 }

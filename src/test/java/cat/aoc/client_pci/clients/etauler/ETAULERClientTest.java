@@ -31,18 +31,6 @@ class ETAULERClientTest {
     }
 
     @Test
-    void getCodiServei() {
-        assertEquals("ETAULER", client.getCodiServei());
-    }
-
-    @Test
-    void getCodiModalitat() {
-        for (ETAULEROperacio operacio : ETAULEROperacio.values()) {
-            assertEquals("ETAULER", client.getCodiModalitat(operacio));
-        }
-    }
-
-    @Test
     void send() throws NotDefinedException, NotFoundException {
         Peticion peticion = new ETAULERPeticionBuilder(PROPERTIES_PATH).build(ETAULEROperacio.CONSULTAR, Finalitat.PROVES);
         Respuesta respuesta = client.send(ETAULEROperacio.CONSULTAR, peticion);

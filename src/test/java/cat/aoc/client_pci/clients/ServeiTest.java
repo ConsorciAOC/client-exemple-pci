@@ -1,8 +1,10 @@
 package cat.aoc.client_pci.clients;
 
 import cat.aoc.client_pci.Servei;
+import cat.aoc.client_pci.clients.dgp.DGPClient;
 import cat.aoc.client_pci.clients.enotum.ENOTUMClient;
 import cat.aoc.client_pci.clients.etauler.ETAULERClient;
+import cat.aoc.client_pci.clients.over.OVERClient;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;
 import cat.aoc.client_pci.clients.tfn.TFNClient;
 import cat.aoc.client_pci.model.Cluster;
@@ -19,8 +21,10 @@ class ServeiTest {
                 () -> {
                     assertTrue(Servei.ENOTUM.getClient(Entorn.PRE) instanceof ENOTUMClient);
                     assertTrue(Servei.ETAULER.getClient(Entorn.PRE) instanceof ETAULERClient);
-                    assertTrue(Servei.PADRO.getClient(Entorn.PRE) instanceof PADROProxyClient);
+                    assertTrue(Servei.OVER.getClient(Entorn.PRE) instanceof OVERClient);
                     assertTrue(Servei.TFN.getClient(Entorn.PRE) instanceof TFNClient);
+                    assertTrue(Servei.DGP.getClient(Entorn.PRE) instanceof DGPClient);
+                    assertTrue(Servei.PADRO.getClient(Entorn.PRE) instanceof PADROProxyClient);
                 }
         );
     }
@@ -33,16 +37,20 @@ class ServeiTest {
     void getCluster() {
         assertEquals(Cluster.NT, Servei.ENOTUM.getCluster());
         assertEquals(Cluster.APP, Servei.ETAULER.getCluster());
-        assertEquals(Cluster.IOP, Servei.PADRO.getCluster());
+        assertEquals(Cluster.APP, Servei.OVER.getCluster());
         assertEquals(Cluster.IOP, Servei.TFN.getCluster());
+        assertEquals(Cluster.IOP, Servei.DGP.getCluster());
+        assertEquals(Cluster.IOP, Servei.PADRO.getCluster());
     }
 
     @Test
     void getCodi() {
         assertEquals("ENOTUM", Servei.ENOTUM.getCodi());
         assertEquals("ETAULER", Servei.ETAULER.getCodi());
-        assertEquals("PADRO", Servei.PADRO.getCodi());
+        assertEquals("OVER", Servei.OVER.getCodi());
         assertEquals("TFN", Servei.TFN.getCodi());
+        assertEquals("DGP_IDENTITAT", Servei.DGP.getCodi());
+        assertEquals("PADRO", Servei.PADRO.getCodi());
     }
 
 }

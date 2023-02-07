@@ -31,18 +31,6 @@ class TFNClientTest {
     }
 
     @Test
-    void getCodiServei() {
-        assertEquals("TFN", client.getCodiServei());
-    }
-
-    @Test
-    void getCodiModalitat() {
-        for (TFNOperacio operacio : TFNOperacio.values()) {
-            assertEquals(operacio.name(), client.getCodiModalitat(operacio));
-        }
-    }
-
-    @Test
     void send() throws NotDefinedException, NotFoundException {
         Peticion peticion = new TFNPeticionBuilder(PROPERTIES_PATH).build(TFNOperacio.TFN_DADESCOMPLETES, Finalitat.PROVES);
         Respuesta respuesta = client.send(TFNOperacio.TFN_DADESCOMPLETES, peticion);

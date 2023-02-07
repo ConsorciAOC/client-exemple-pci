@@ -31,18 +31,6 @@ class DGPClientTest {
     }
 
     @Test
-    void getCodiServei() {
-        assertEquals("DGP_IDENTITAT", client.getCodiServei());
-    }
-
-    @Test
-    void getCodiModalitat() {
-        for (DGPOperacio operacio : DGPOperacio.values()) {
-            assertEquals(operacio.name(), client.getCodiModalitat(operacio));
-        }
-    }
-
-    @Test
     void send() throws NotDefinedException, NotFoundException {
         Peticion peticion = new DGPPeticionBuilder(PROPERTIES_PATH).build(DGPOperacio.IDENTITAT_DADES, Finalitat.PROVES);
         Titular titular = new Titular();

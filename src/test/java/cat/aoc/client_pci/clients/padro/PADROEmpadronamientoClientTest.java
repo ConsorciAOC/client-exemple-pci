@@ -25,15 +25,4 @@ class PADROEmpadronamientoClientTest {
         }
     }
 
-    @Test
-    void getCodiServei() {
-        assertEquals("PADRO", client.getCodiServei());
-    }
-
-    @Test
-    void getCodiModalitat() {
-        for (PADROOperacio operacio : PADROOperacio.values()) {
-            assertEquals(operacio.name(), client.getCodiModalitat(operacio));
-        }
-    }
 }

@@ -24,14 +24,4 @@ public class ENOTUMClient extends ClientAOC {
         }
     }
 
-    @Override
-    public String getCodiServei() {
-        return "ENOTUM";
-    }
-
-    @Override
-    public String getCodiModalitat(Operacio operacio) {
-        return "ENOTUM";
-    }
-
 }

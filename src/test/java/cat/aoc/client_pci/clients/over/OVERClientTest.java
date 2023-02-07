@@ -31,18 +31,6 @@ class OVERClientTest {
     }
 
     @Test
-    void getCodiServei() {
-        assertEquals("OVER", client.getCodiServei());
-    }
-
-    @Test
-    void getCodiModalitat() {
-        for (OVEROperacio operacio : OVEROperacio.values()) {
-            assertEquals(operacio.name(), client.getCodiModalitat(operacio));
-        }
-    }
-
-    @Test
     void send() throws NotDefinedException, NotFoundException {
         Peticion peticion = new OVERPeticionBuilder(PROPERTIES_PATH).build(OVEROperacio.OVER_DOCUMENTACIO, Finalitat.PROVES);
         Respuesta respuesta = client.send(OVEROperacio.OVER_DOCUMENTACIO, peticion);

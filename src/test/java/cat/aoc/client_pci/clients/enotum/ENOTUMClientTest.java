@@ -11,8 +11,6 @@ import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ENOTUMClientTest {
@@ -29,18 +27,6 @@ class ENOTUMClientTest {
     void getFrontal() throws NotDefinedException {
         for (ENOTUMOperacio operacio : ENOTUMOperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
-        }
-    }
-
-    @Test
-    void getCodiServei() {
-        assertEquals("ENOTUM", client.getCodiServei());
-    }
-
-    @Test
-    void getCodiModalitat() {
-        for (ENOTUMOperacio operacio : ENOTUMOperacio.values()) {
-            assertEquals("ENOTUM", client.getCodiModalitat(operacio));
         }
     }
 

@@ -34,10 +34,6 @@ public abstract class ClientAOC extends SoapMtomClient<Procesa, ProcesaResponse>
 
     public abstract Frontal getFrontal(Operacio operacio) throws NotDefinedException;
 
-    public abstract String getCodiServei();
-
-    public abstract String getCodiModalitat(Operacio operacio);
-
     public Respuesta send(Operacio operacio, Peticion peticion) throws NotDefinedException {
         Procesa procesa = new Procesa();
         procesa.setPeticion(peticion);

@@ -20,14 +20,4 @@ public class OVERClient extends ClientAOC {
         return Frontal.SINCRON;
     }
 
-    @Override
-    public String getCodiServei() {
-        return "OVER";
-    }
-
-    @Override
-    public String getCodiModalitat(Operacio operacio) {
-        return ((OVEROperacio) operacio).name();
-    }
-
 }

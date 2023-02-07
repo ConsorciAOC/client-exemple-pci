@@ -25,14 +25,4 @@ public class PADROConvivenciaClient extends ClientAOC {
         }
     }
 
-    @Override
-    public String getCodiServei() {
-        return "PADRO";
-    }
-
-    @Override
-    public String getCodiModalitat(Operacio operacio) {
-        return ((PADROOperacio) operacio).name();
-    }
-
 }

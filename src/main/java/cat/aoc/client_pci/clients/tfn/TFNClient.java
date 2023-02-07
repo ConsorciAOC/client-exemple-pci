@@ -24,14 +24,4 @@ public class TFNClient extends ClientAOC {
         }
     }
 
-    @Override
-    public String getCodiServei() {
-        return "TFN";
-    }
-
-    @Override
-    public String getCodiModalitat(Operacio operacio) {
-        return ((TFNOperacio) operacio).name();
-    }
-
 }

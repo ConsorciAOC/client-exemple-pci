@@ -32,18 +32,6 @@ class PADROProxyClientTest {
     }
 
     @Test
-    void getCodiServei() {
-        assertEquals("PADRO", client.getCodiServei());
-    }
-
-    @Test
-    void getCodiModalitat() {
-        for (PADROOperacio operacio : PADROOperacio.values()) {
-            assertEquals(operacio.name(), client.getCodiModalitat(operacio));
-        }
-    }
-
-    @Test
     void titular() throws NotDefinedException, NotFoundException {
         Peticion peticion = new PADROPeticionBuilder(PROPERTIES_PATH).build(PADROOperacio.TITULAR, Finalitat.PROVES);
         Respuesta respuesta = client.send(PADROOperacio.TITULAR, peticion);
@@ -71,4 +59,5 @@ class PADROProxyClientTest {
         assertEquals("Friedrich", volante.getVolanteEmpadronamientoDatosFirmados().getDatosPersonales().getNombre());
         assertEquals("3", volante.getVolanteEmpadronamientoDatosFirmados().getNumeroAcompanantes().toString());
     }
+
 }
