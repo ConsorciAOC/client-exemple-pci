@@ -9,7 +9,7 @@ public class TFNPeticionBuilder extends AbstractPeticionBuilder<TFNOperacio> {
     private static final String DOCUMENTACIO = "client.tfn.documentacio";
 
     public TFNPeticionBuilder(String propertiesPath) throws NotFoundException {
-        super("TFN", propertiesPath);
+        super(propertiesPath);
     }
 
     @Override

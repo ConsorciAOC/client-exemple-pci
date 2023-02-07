@@ -13,6 +13,11 @@ public enum ETAULEROperacio implements Operacio {
     CONSULTAR;
 
     @Override
+    public String getCodiProducte() {
+        return "ETAULER";
+    }
+
+    @Override
     public String getCodiModalitat() {
         return "ETAULER";
     }

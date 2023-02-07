@@ -13,10 +13,10 @@ public class PADROPeticionBuilder extends AbstractPeticionBuilder<PADROOperacio>
     private static final String MUNICIPI = "client.padro.municipi";
     private static final String IDESCAT = "client.padro.idescat";
 
-
     public PADROPeticionBuilder(String propertiesPath) throws NotFoundException {
-        super("PADRO", propertiesPath);
+        super(propertiesPath);
     }
+
     @Override
     protected Object[] getDatosEspecificos(PADROOperacio operacio) {
         return switch (operacio) {

@@ -35,7 +35,6 @@ class ServeiTest {
         assertEquals(Cluster.APP, Servei.ETAULER.getCluster());
         assertEquals(Cluster.IOP, Servei.PADRO.getCluster());
         assertEquals(Cluster.IOP, Servei.TFN.getCluster());
-        assertEquals(Cluster.IOP, Servei.MUX.getCluster());
     }
 
     @Test
@@ -44,6 +43,6 @@ class ServeiTest {
         assertEquals("ETAULER", Servei.ETAULER.getCodi());
         assertEquals("PADRO", Servei.PADRO.getCodi());
         assertEquals("TFN", Servei.TFN.getCodi());
-        assertEquals("MUX", Servei.MUX.getCodi());
     }
+
 }

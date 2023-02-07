@@ -8,7 +8,7 @@ public class ETAULERPeticionBuilder extends AbstractPeticionBuilder<ETAULEROpera
     private static final String ID_EDICTE = "client.etauler.id_edicte";
 
     public ETAULERPeticionBuilder(String propertiesPath) throws NotFoundException {
-        super("ETAULER", propertiesPath);
+        super(propertiesPath);
     }
 
     @Override

@@ -12,7 +12,6 @@ import net.gencat.scsp.esquemes.peticion.Peticion;
 import java.math.BigInteger;
 
 public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperacio> {
-    private static final String CODI_SERVEI = "ENOTUM";
     private static final String PLANTILLA = "client.enotum.plantilla";
     private static final String COS_NOTIFICACIO = "client.enotum.cosNotificacio";
     private static final String PEU_RECURS = "client.enotum.peuRecurs";
@@ -26,12 +25,12 @@ public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperaci
     private static final String ID_NOTIFICACIO = "client.enotum.idNotificacio";
 
     public ENOTUMPeticionBuilder(String propertiesPath) throws NotFoundException {
-        super(CODI_SERVEI, propertiesPath);
+        super(propertiesPath);
     }
 
     @Override
     public Peticion build(ENOTUMOperacio operacio, Finalitat finalitat) {
-        Peticion peticion = builder.build(CODI_SERVEI, operacio.getCodiModalitat(), finalitat.name(), getDatosEspecificos(operacio));
+        Peticion peticion = builder.build(operacio.getCodiProducte(), operacio.getCodiModalitat(), finalitat.name(), getDatosEspecificos(operacio));
         Fichero fichero = new Fichero();
         fichero.setNombreFichero("sample.pdf");
         fichero.setId("1234");
@@ -91,7 +90,7 @@ public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperaci
 
     private PeticioConsulta buildPeticioConsulta() {
         PeticioConsulta peticio = new PeticioConsulta();
-        peticio.setIdNotificacio(BigInteger.valueOf((Long) builder.getProperties().get(ID_NOTIFICACIO)));
+        peticio.setIdNotificacio(new BigInteger(builder.getProperties().getProperty(ID_NOTIFICACIO)));
         peticio.setUsuari(buildUsuari());
         peticio.setEmissor(buildEmissor());
         return peticio;

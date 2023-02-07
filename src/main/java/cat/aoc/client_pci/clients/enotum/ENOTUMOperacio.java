@@ -13,6 +13,11 @@ public enum ENOTUMOperacio implements Operacio {
     CERCA;
 
     @Override
+    public String getCodiProducte() {
+        return "ENOTUM";
+    }
+
+    @Override
     public String getCodiModalitat() {
         return "ENOTUM";
     }

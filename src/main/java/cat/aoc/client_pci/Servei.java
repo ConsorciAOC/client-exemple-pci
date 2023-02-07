@@ -6,6 +6,7 @@ import cat.aoc.client_pci.clients.enotum.ENOTUMPeticionBuilder;
 import cat.aoc.client_pci.clients.etauler.ETAULERClient;
 import cat.aoc.client_pci.clients.etauler.ETAULEROperacio;
 import cat.aoc.client_pci.clients.etauler.ETAULERPeticionBuilder;
+import cat.aoc.client_pci.clients.over.OVERClient;
 import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.clients.padro.PADROPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;
@@ -25,7 +26,7 @@ import net.gencat.scsp.esquemes.peticion.Peticion;
 public enum Servei {
     ENOTUM(Cluster.NT, "ENOTUM"),
     ETAULER(Cluster.APP, "ETAULER"),
-    MUX(Cluster.IOP, "MUX"),
+    OVER(Cluster.APP, "OVER"),
     TFN (Cluster.IOP, "TFN"),
     PADRO(Cluster.IOP, "PADRO");
 
@@ -42,10 +43,11 @@ public enum Servei {
 
     public ClientAOC getClient(Entorn entorn) throws NotDefinedException {
         return switch (this) {
-            case TFN -> new TFNClient(KEYSTORE_PATH, entorn);
-            case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
             case ENOTUM -> new ENOTUMClient(KEYSTORE_PATH, entorn);
             case ETAULER -> new ETAULERClient(KEYSTORE_PATH, entorn);
+            case OVER -> new OVERClient(KEYSTORE_PATH, entorn);
+            case TFN -> new TFNClient(KEYSTORE_PATH, entorn);
+            case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
             default -> throw new NotDefinedException("Servei no definit: " + this.name());
         };
     }

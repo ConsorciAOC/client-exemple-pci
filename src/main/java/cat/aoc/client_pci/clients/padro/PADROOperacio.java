@@ -18,7 +18,13 @@ public enum PADROOperacio implements Operacio {
     CERCA_TITULAR;
 
     @Override
+    public String getCodiProducte() {
+        return "PADRO";
+    }
+
+    @Override
     public String getCodiModalitat() {
         return this.name();
     }
+
 }
