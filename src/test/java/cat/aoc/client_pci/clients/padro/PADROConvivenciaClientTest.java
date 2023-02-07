@@ -2,6 +2,7 @@ package cat.aoc.client_pci.clients.padro;
 
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Frontal;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class PADROConvivenciaClientTest {
     }
 
     @Test
-    void getFrontal() {
+    void getFrontal() throws ClientException {
         for (PADROOperacio operacio : PADROOperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
         }

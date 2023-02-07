@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.clients.etauler;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
@@ -23,14 +23,14 @@ class ETAULERClientTest {
     }
 
     @Test
-    void getFrontal() {
+    void getFrontal() throws ClientException {
         for (ETAULEROperacio operacio : ETAULEROperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
         }
     }
 
     @Test
-    void send() throws NotFoundException {
+    void send() throws ClientException {
         Peticion peticion = new ETAULERPeticionBuilder(PROPERTIES_PATH).build(ETAULEROperacio.CONSULTAR, Finalitat.PROVES);
         Respuesta respuesta = client.send(ETAULEROperacio.CONSULTAR, peticion);
         assertNotNull(respuesta);

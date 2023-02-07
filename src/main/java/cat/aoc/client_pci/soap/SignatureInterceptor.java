@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.soap;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.utils.PropertiesReader;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +17,12 @@ public class SignatureInterceptor extends Wss4jSecurityInterceptor {
 
     private final Properties properties;
 
-    public SignatureInterceptor(String propertiesPath) throws NotFoundException {
+    public SignatureInterceptor(String propertiesPath) throws ClientException {
         properties = PropertiesReader.load(propertiesPath);
         createSecurityInterceptor(properties);
     }
 
-    public void createSecurityInterceptor(Properties properties) throws NotFoundException {
+    public void createSecurityInterceptor(Properties properties) throws ClientException {
         setSecurementActions("Signature Timestamp");
         setSecurementUsername(properties.getProperty("org.apache.wss4j.crypto.merlin.keystore.alias"));
         setSecurementPassword(properties.getProperty("org.apache.ws.security.crypto.merlin.keystore.password"));
@@ -36,14 +36,14 @@ public class SignatureInterceptor extends Wss4jSecurityInterceptor {
         setValidateResponse(false);
     }
 
-    private Crypto createCrypto(Properties properties) throws NotFoundException {
+    private Crypto createCrypto(Properties properties) throws ClientException {
         try {
             CryptoFactoryBean cryptoFactoryBean = new CryptoFactoryBean();
             cryptoFactoryBean.setConfiguration(properties);
             cryptoFactoryBean.afterPropertiesSet();
             return cryptoFactoryBean.getObject();
         } catch (Exception e) {
-            throw new NotFoundException("No s'han pogut carregar el magatzem");
+            throw new ClientException("No s'han pogut carregar el magatzem");
         }
     }
 

@@ -3,7 +3,7 @@ package cat.aoc.client_pci.clients.dgp;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import generated.dgp.RespostaConsultaDadesIdentitat;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.peticion.Titular;
@@ -18,19 +18,21 @@ class DGPClientTest {
     private static final String KEYSTORE_PATH = "src\\main\\resources\\keystore.properties";
 
     private DGPClient client;
+
     @BeforeEach
     void setUp() {
         client = new DGPClient(KEYSTORE_PATH, Entorn.PRE);
     }
+
     @Test
-    void getFrontal() {
+    void getFrontal() throws ClientException {
         for (DGPOperacio operacio : DGPOperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
         }
     }
 
     @Test
-    void send() throws NotFoundException {
+    void send() throws ClientException {
         Peticion peticion = new DGPPeticionBuilder(PROPERTIES_PATH).build(DGPOperacio.IDENTITAT_DADES, Finalitat.PROVES);
         Titular titular = new Titular();
         titular.setTipoDocumentacion("DNI");

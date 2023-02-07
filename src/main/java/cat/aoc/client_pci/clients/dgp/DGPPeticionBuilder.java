@@ -1,11 +1,11 @@
 package cat.aoc.client_pci.clients.dgp;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
 import generated.dgp.PeticioConsultaDadesIdentitat;
 
 public class DGPPeticionBuilder extends AbstractPeticionBuilder<DGPOperacio> {
-    public DGPPeticionBuilder(String propertiesPath) throws NotFoundException {
+    public DGPPeticionBuilder(String propertiesPath) throws ClientException {
         super(propertiesPath);
     }
 

@@ -1,11 +1,11 @@
 package cat.aoc.client_pci.clients.over;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
 import generated.over.PeticioDocumentacioTramit;
 
 public class OVERPeticionBuilder extends AbstractPeticionBuilder<OVEROperacio> {
-    public OVERPeticionBuilder(String propertiesPath) throws NotFoundException {
+    public OVERPeticionBuilder(String propertiesPath) throws ClientException {
         super(propertiesPath);
     }
 

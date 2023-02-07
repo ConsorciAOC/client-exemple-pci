@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.clients.enotum;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
@@ -23,14 +23,14 @@ class ENOTUMClientTest {
     }
 
     @Test
-    void getFrontal() {
+    void getFrontal() throws ClientException {
         for (ENOTUMOperacio operacio : ENOTUMOperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
         }
     }
 
     @Test
-    void processarTramesa() throws NotFoundException {
+    void processarTramesa() throws ClientException {
         Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.PROCESSAR_TRAMESA, Finalitat.PROVES);
         Respuesta respuesta = client.send(ENOTUMOperacio.PROCESSAR_TRAMESA, peticion);
         assertNotNull(respuesta);
@@ -41,7 +41,7 @@ class ENOTUMClientTest {
     }
 
     @Test
-    void cerca() throws NotFoundException {
+    void cerca() throws ClientException {
         Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.CERCA, Finalitat.PROVES);
         Respuesta respuesta = client.send(ENOTUMOperacio.CERCA, peticion);
         assertNotNull(respuesta);
@@ -52,7 +52,7 @@ class ENOTUMClientTest {
     }
 
     @Test
-    void consulta() throws NotFoundException {
+    void consulta() throws ClientException {
         Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.CONSULTA, Finalitat.PROVES);
         Respuesta respuesta = client.send(ENOTUMOperacio.CONSULTA, peticion);
         assertNotNull(respuesta);
@@ -63,7 +63,7 @@ class ENOTUMClientTest {
     }
 
     @Test
-    void resum() throws NotFoundException {
+    void resum() throws ClientException {
         Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.RESUM, Finalitat.PROVES);
         Respuesta respuesta = client.send(ENOTUMOperacio.RESUM, peticion);
         assertNotNull(respuesta);
@@ -74,7 +74,7 @@ class ENOTUMClientTest {
     }
 
     @Test
-    void paraulaPas() throws NotFoundException {
+    void paraulaPas() throws ClientException {
         Peticion peticion = new ENOTUMPeticionBuilder(PROPERTIES_PATH).build(ENOTUMOperacio.PARAULA_PAS, Finalitat.PROVES);
         Respuesta respuesta = client.send(ENOTUMOperacio.PARAULA_PAS, peticion);
         assertNotNull(respuesta);

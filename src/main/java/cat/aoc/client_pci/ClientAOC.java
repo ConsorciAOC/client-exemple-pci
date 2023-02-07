@@ -1,6 +1,7 @@
 package cat.aoc.client_pci;
 
 import cat.aoc.client_pci.model.*;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.soap.SoapMtomClient;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
@@ -10,7 +11,7 @@ import org.openuri.ProcesaResponse;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public abstract class ClientAOC<O extends Operacio> extends SoapMtomClient<Procesa, ProcesaResponse> {
+public abstract class ClientAOC extends SoapMtomClient<Procesa, ProcesaResponse> {
     private static final String[] PACKAGES = {
             "org.openuri",
             "net.gencat.scsp.esquemes.peticion",
@@ -31,17 +32,25 @@ public abstract class ClientAOC<O extends Operacio> extends SoapMtomClient<Proce
         this.cluster = cluster;
     }
 
-    public abstract Frontal getFrontal(O operacio);
+    public abstract Frontal getFrontal(Operacio operacio) throws ClientException;
 
-    public Respuesta send(O operacio, Peticion peticion) {
+    public Respuesta send(Operacio operacio, Peticion peticion) throws ClientException {
         Procesa procesa = new Procesa();
         procesa.setPeticion(peticion);
         ProcesaResponse response = this.send(getEndpoint(operacio), procesa);
         return response.getRespuesta();
     }
 
-    private String getEndpoint(O operacio) {
+    private String getEndpoint(Operacio operacio) throws ClientException {
         return entorn.getEndpoint(cluster) + "/siri-proxy/services/" + getFrontal(operacio).getName();
+    }
+
+    protected static <T> void checkOperacio(Operacio operacio, Class<T> clazz) throws ClientException {
+        try {
+            clazz.cast(operacio);
+        } catch(ClassCastException e) {
+            throw new ClientException("Operacio no definida: " + operacio);
+        }
     }
 
 }

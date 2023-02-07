@@ -18,7 +18,7 @@ import cat.aoc.client_pci.clients.padro.PADROProxyClient;
 import cat.aoc.client_pci.clients.tfn.TFNClient;
 import cat.aoc.client_pci.clients.tfn.TFNOperacio;
 import cat.aoc.client_pci.clients.tfn.TFNPeticionBuilder;
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.model.Cluster;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
@@ -57,7 +57,7 @@ public enum Servei {
         };
     }
 
-    public Peticion getPeticion(Operacio operacio, Finalitat finalidad) throws NotFoundException {
+    public Peticion getPeticion(Operacio operacio, Finalitat finalidad) throws ClientException {
         return switch (this) {
             case ENOTUM -> new ENOTUMPeticionBuilder(PROPERTIES_PATH).build((ENOTUMOperacio) operacio, finalidad);
             case ETAULER -> new ETAULERPeticionBuilder(PROPERTIES_PATH).build((ETAULEROperacio) operacio, finalidad);

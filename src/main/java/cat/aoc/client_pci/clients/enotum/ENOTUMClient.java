@@ -2,8 +2,9 @@ package cat.aoc.client_pci.clients.enotum;
 
 import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.model.*;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 
-public class ENOTUMClient extends ClientAOC<ENOTUMOperacio> {
+public class ENOTUMClient extends ClientAOC {
     private static final String[] PACKAGES = {
             "generated.enotum",
     };
@@ -13,9 +14,17 @@ public class ENOTUMClient extends ClientAOC<ENOTUMOperacio> {
     }
 
     @Override
-    public Frontal getFrontal(ENOTUMOperacio operacio) {
-        return switch (operacio) {
-            case PROCESSAR_TRAMESA, RESUM, EVIDENCIA, PRACTICAR, RECUPERAR_REPORT, CONSULTA, PARAULA_PAS, CERCA -> Frontal.SINCRON;
+    public Frontal getFrontal(Operacio operacio) throws ClientException {
+        checkOperacio(operacio, ENOTUMOperacio.class);
+        return switch ((ENOTUMOperacio) operacio) {
+            case PROCESSAR_TRAMESA,
+                    RESUM,
+                    EVIDENCIA,
+                    PRACTICAR,
+                    RECUPERAR_REPORT,
+                    CONSULTA,
+                    PARAULA_PAS,
+                    CERCA -> Frontal.SINCRON;
         };
     }
 

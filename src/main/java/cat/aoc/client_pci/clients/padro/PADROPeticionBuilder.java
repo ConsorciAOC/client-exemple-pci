@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.clients.padro;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
 import generated.padro.PeticionDatosConvivientes;
 import generated.padro.PeticionDatosTitular;
@@ -13,7 +13,7 @@ public class PADROPeticionBuilder extends AbstractPeticionBuilder<PADROOperacio>
     private static final String MUNICIPI = "client.padro.municipi";
     private static final String IDESCAT = "client.padro.idescat";
 
-    public PADROPeticionBuilder(String propertiesPath) throws NotFoundException {
+    public PADROPeticionBuilder(String propertiesPath) throws ClientException {
         super(propertiesPath);
     }
 

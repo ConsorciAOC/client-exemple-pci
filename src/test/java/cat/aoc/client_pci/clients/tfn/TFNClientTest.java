@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.clients.tfn;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
@@ -23,14 +23,14 @@ class TFNClientTest {
     }
 
     @Test
-    void getFrontal() {
+    void getFrontal() throws ClientException {
         for (TFNOperacio operacio : TFNOperacio.values()) {
             assertEquals(Frontal.SINCRON, client.getFrontal(operacio));
         }
     }
 
     @Test
-    void send() throws NotFoundException {
+    void send() throws ClientException {
         Peticion peticion = new TFNPeticionBuilder(PROPERTIES_PATH).build(TFNOperacio.TFN_DADESCOMPLETES, Finalitat.PROVES);
         Respuesta respuesta = client.send(TFNOperacio.TFN_DADESCOMPLETES, peticion);
         assertNotNull(respuesta);

@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.clients.enotum;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
 import cat.aoc.client_pci.utils.PeticionPropertiesBuilder;
@@ -24,7 +24,7 @@ public class ENOTUMPeticionBuilder extends AbstractPeticionBuilder<ENOTUMOperaci
     private static final String SEGON_COGNOM = "client.enotum.segonCognom";
     private static final String ID_NOTIFICACIO = "client.enotum.idNotificacio";
 
-    public ENOTUMPeticionBuilder(String propertiesPath) throws NotFoundException {
+    public ENOTUMPeticionBuilder(String propertiesPath) throws ClientException {
         super(propertiesPath);
     }
 

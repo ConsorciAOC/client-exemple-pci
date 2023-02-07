@@ -1,13 +1,13 @@
 package cat.aoc.client_pci.clients.etauler;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
 import generated.etauler.PeticioConsultarEstatEdicte;
 
 public class ETAULERPeticionBuilder extends AbstractPeticionBuilder<ETAULEROperacio> {
     private static final String ID_EDICTE = "client.etauler.id_edicte";
 
-    public ETAULERPeticionBuilder(String propertiesPath) throws NotFoundException {
+    public ETAULERPeticionBuilder(String propertiesPath) throws ClientException {
         super(propertiesPath);
     }
 

@@ -2,8 +2,9 @@ package cat.aoc.client_pci.clients.padro;
 
 import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.model.*;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 
-public class PADROEmpadronamientoClient extends ClientAOC<PADROOperacio> {
+public class PADROEmpadronamientoClient extends ClientAOC {
     private static final String[] PACKAGES = {
             "generated.padro",
             "generated.padro.empadronamiento",
@@ -14,8 +15,9 @@ public class PADROEmpadronamientoClient extends ClientAOC<PADROOperacio> {
     }
 
     @Override
-    public Frontal getFrontal(PADROOperacio operacio)  {
-        return switch (operacio) {
+    public Frontal getFrontal(Operacio operacio) throws ClientException {
+        checkOperacio(operacio, PADROOperacio.class);
+        return switch ((PADROOperacio) operacio) {
             case RESIDENT,
                     MUNICIPI_RESIDENCIA,
                     RESIDENT_MUNICIPI,

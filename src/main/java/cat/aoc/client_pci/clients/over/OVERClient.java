@@ -4,8 +4,10 @@ import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.model.Cluster;
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Frontal;
+import cat.aoc.client_pci.model.Operacio;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 
-public class OVERClient extends ClientAOC<OVEROperacio> {
+public class OVERClient extends ClientAOC {
     private static final String[] PACKAGES = {
             "generated.over",
     };
@@ -15,8 +17,9 @@ public class OVERClient extends ClientAOC<OVEROperacio> {
     }
 
     @Override
-    public Frontal getFrontal(OVEROperacio operacio) {
-        return switch (operacio) {
+    public Frontal getFrontal(Operacio operacio) throws ClientException {
+        checkOperacio(operacio, OVEROperacio.class);
+        return switch ((OVEROperacio) operacio) {
             case OVER_DOCUMENTACIO,
                     OVER_FORMULARI,
                     OVER_CONTEXT,

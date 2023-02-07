@@ -2,10 +2,11 @@ package cat.aoc.client_pci.clients.padro;
 
 import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.model.*;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
 
-public class PADROProxyClient extends ClientAOC<PADROOperacio> {
+public class PADROProxyClient extends ClientAOC {
 
     private final PADROEmpadronamientoClient clientEmpadronamiento;
     private final PADROConvivenciaClient clientConvivencia;
@@ -17,8 +18,9 @@ public class PADROProxyClient extends ClientAOC<PADROOperacio> {
     }
 
     @Override
-    public Frontal getFrontal(PADROOperacio operacio) {
-        return switch (operacio) {
+    public Frontal getFrontal(Operacio operacio) throws ClientException {
+        checkOperacio(operacio, PADROOperacio.class);
+        return switch ((PADROOperacio) operacio) {
             case TITULAR,
                     TITULAR_IDESCAT,
                     CERCA_TITULAR,
@@ -36,8 +38,9 @@ public class PADROProxyClient extends ClientAOC<PADROOperacio> {
     }
 
     @Override
-    public Respuesta send(PADROOperacio operacio, Peticion peticion) {
-        return switch (operacio) {
+    public Respuesta send(Operacio operacio, Peticion peticion) throws ClientException {
+        checkOperacio(operacio, PADROOperacio.class);
+        return switch ((PADROOperacio) operacio) {
             case TITULAR,
                     TITULAR_IDESCAT,
                     CERCA_TITULAR,

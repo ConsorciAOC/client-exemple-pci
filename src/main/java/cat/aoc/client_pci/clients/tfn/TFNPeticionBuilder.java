@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.clients.tfn;
 
-import cat.aoc.client_pci.model.exceptions.NotFoundException;
+import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
 import generated.tfn.PeticioDadesCompletes;
 import generated.tfn.TTipusDocumentacio;
@@ -8,7 +8,7 @@ import generated.tfn.TTipusDocumentacio;
 public class TFNPeticionBuilder extends AbstractPeticionBuilder<TFNOperacio> {
     private static final String DOCUMENTACIO = "client.tfn.documentacio";
 
-    public TFNPeticionBuilder(String propertiesPath) throws NotFoundException {
+    public TFNPeticionBuilder(String propertiesPath) throws ClientException {
         super(propertiesPath);
     }
 
