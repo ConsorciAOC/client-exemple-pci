@@ -1,0 +1,6 @@
+theme: jekyll-theme-cayman
+title: Client exemple pci
+description: En aquesta plana trobarem un Client d'exemple pels integradors de la PCI.
+markdown: GFM
+plugins:
+  - jemoji
