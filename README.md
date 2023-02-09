@@ -38,13 +38,13 @@ Amb l'alta se us assignaran permisos per consumir els serveis demanats i necessi
 ### Configurar el certificat
 Per tal que el client funcioni, necessitareu configurar el vostre certificat de signatura al fitxer `src/main/resources/keystore.properties`
 - `org.apache.ws.security.crypto.provider`: Proveïdor usat per crear instàncies criptogràfiques.
-- `org.apache.wss4j.crypto.merlin.keystore.alias`: àlies del certificat digital.
+- `org.apache.wss4j.crypto.merlin.keystore.alias`: Àlies del certificat digital.
 - `org.apache.ws.security.crypto.merlin.keystore.type`: Format del certificat.
 - `org.apache.ws.security.crypto.merlin.keystore.password`: Contrasenya del certificat.
 - `org.apache.ws.security.crypto.merlin.keystore.file`: Ruta del fitxer.
 
 ### Generació de codi JAXB
-El projecte incorpora una série d'XSD's tant de la PCI (part genèrica) com dels diferents serveis (part específica) sota el directori:
+El projecte incorpora una sèrie d'XSD's tant de la PCI (part genèrica) com dels diferents serveis (part específica) sota el directori:
 `src/main/resources/xsd`
 
 Per tal de convertir els esquemes a classes java es fan servir llibreries de JAXB i s'ha configurat una tasca gradle anomenada jaxb que realitza el procés automàticament.
