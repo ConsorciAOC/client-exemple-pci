@@ -47,7 +47,7 @@ Per tal que el client funcioni, necessitareu configurar el vostre certificat de 
 El projecte incorpora una sèrie d'XSD's tant de la PCI (part genèrica) com dels diferents serveis (part específica) sota el directori:
 `src/main/resources/xsd`
 
-Per tal de convertir els esquemes a classes java es fan servir llibreries de JAXB i s'ha configurat una tasca gradle anomenada jaxb que realitza el procés automàticament.
+Per tal de convertir els esquemes a classes java es fan servir llibreries de JAXB i s'ha configurat una tasca gradle anomenada `jaxb` que realitza el procés automàticament.
 Per executar la tasca:
 ```bash
 gradlew jaxb
