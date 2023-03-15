@@ -43,27 +43,25 @@ import net.gencat.scsp.esquemes.peticion.Peticion;
 
 @Getter
 public enum Servei {
-    ENOTUM(Cluster.NT, "ENOTUM"),
-    ETAULER(Cluster.APP, "ETAULER"),
-    OVER(Cluster.APP, "OVER"),
-    TFN (Cluster.IOP, "TFN"),
-    TFM (Cluster.IOP, "TFM"),
-    DGP (Cluster.IOP, "DGP_IDENTITAT"),
-    DGT (Cluster.IOP, "DGT"),
-    SOC (Cluster.IOP, "SOC"),
-    RCA (Cluster.IOP, "RCA"),
-    GRAU_DISCAPACITAT (Cluster.IOP, "GRAU_DISCAPACITAT"),
-    PADRO(Cluster.IOP, "PADRO");
+    ENOTUM(Cluster.NT),
+    ETAULER(Cluster.APP),
+    OVER(Cluster.APP),
+    TFN (Cluster.IOP),
+    TFM (Cluster.IOP),
+    DGP (Cluster.IOP),
+    DGT (Cluster.IOP),
+    SOC (Cluster.IOP),
+    RCA (Cluster.IOP),
+    GRAU_DISCAPACITAT (Cluster.IOP),
+    PADRO(Cluster.IOP);
 
     private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
     private static final String KEYSTORE_PATH = "src\\main\\resources\\keystore.properties";
 
     private final Cluster cluster;
-    private final String codi;
 
-    Servei(Cluster cluster, String codi) {
+    Servei(Cluster cluster) {
         this.cluster = cluster;
-        this.codi = codi;
     }
 
     public ClientAOC getClient(Entorn entorn) {

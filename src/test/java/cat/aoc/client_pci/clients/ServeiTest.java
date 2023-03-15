@@ -60,14 +60,4 @@ class ServeiTest {
         assertEquals(Cluster.IOP, Servei.PADRO.getCluster());
     }
 
-    @Test
-    void getCodi() {
-        assertEquals("ENOTUM", Servei.ENOTUM.getCodi());
-        assertEquals("ETAULER", Servei.ETAULER.getCodi());
-        assertEquals("OVER", Servei.OVER.getCodi());
-        assertEquals("TFN", Servei.TFN.getCodi());
-        assertEquals("DGP_IDENTITAT", Servei.DGP.getCodi());
-        assertEquals("PADRO", Servei.PADRO.getCodi());
-    }
-
 }
