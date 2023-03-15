@@ -43,8 +43,6 @@ class DGPClientTest {
         titular.setNombreCompleto("OLGA MIGUEL CHAO");
         peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosGenericos().setTitular(titular);
         Respuesta respuesta = client.send(DGPOperacio.IDENTITAT_DADES, peticion);
-        assertNotNull(respuesta);
-        assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
         RespostaConsultaDadesIdentitat resposta = (RespostaConsultaDadesIdentitat) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(resposta);
         assertNotNull(resposta.getDadesTitular());

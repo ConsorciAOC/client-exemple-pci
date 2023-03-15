@@ -15,6 +15,9 @@ import cat.aoc.client_pci.clients.over.OVERPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.clients.padro.PADROPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;
+import cat.aoc.client_pci.clients.tfm.TFMClient;
+import cat.aoc.client_pci.clients.tfm.TFMOperacio;
+import cat.aoc.client_pci.clients.tfm.TFMPeticionBuilder;
 import cat.aoc.client_pci.clients.tfn.TFNClient;
 import cat.aoc.client_pci.clients.tfn.TFNOperacio;
 import cat.aoc.client_pci.clients.tfn.TFNPeticionBuilder;
@@ -32,6 +35,7 @@ public enum Servei {
     ETAULER(Cluster.APP, "ETAULER"),
     OVER(Cluster.APP, "OVER"),
     TFN (Cluster.IOP, "TFN"),
+    TFM (Cluster.IOP, "TFM"),
     DGP (Cluster.IOP, "DGP_IDENTITAT"),
     PADRO(Cluster.IOP, "PADRO");
 
@@ -52,6 +56,7 @@ public enum Servei {
             case ETAULER -> new ETAULERClient(KEYSTORE_PATH, entorn);
             case OVER -> new OVERClient(KEYSTORE_PATH, entorn);
             case TFN -> new TFNClient(KEYSTORE_PATH, entorn);
+            case TFM -> new TFMClient(KEYSTORE_PATH, entorn);
             case DGP -> new DGPClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
@@ -63,6 +68,7 @@ public enum Servei {
             case ETAULER -> new ETAULERPeticionBuilder(PROPERTIES_PATH).build((ETAULEROperacio) operacio, finalidad);
             case OVER -> new OVERPeticionBuilder(PROPERTIES_PATH).build((OVEROperacio) operacio, finalidad);
             case TFN -> new TFNPeticionBuilder(PROPERTIES_PATH).build((TFNOperacio) operacio, finalidad);
+            case TFM -> new TFMPeticionBuilder(PROPERTIES_PATH).build((TFMOperacio) operacio, finalidad);
             case DGP -> new DGPPeticionBuilder(PROPERTIES_PATH).build((DGPOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
