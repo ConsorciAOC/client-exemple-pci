@@ -54,7 +54,7 @@ gradlew jaxb
 ```
 
 La compilació del projecte java depèn d'aquesta tasca, per tant, cada cop que es necessiti compilar quelcom s'executarà abans la taca jaxb mencionada.
-Si desitgeu eliminar aquesta dependència per agilitzar les build, podeu comentar la següent línia al fitxer build.gradle:
+Si desitgeu eliminar aquesta dependència per agilitzar les builds, podeu comentar la següent línia al fitxer build.gradle:
 ```groovy
 compileJava.dependsOn jaxb
 ```
