@@ -18,6 +18,9 @@ import cat.aoc.client_pci.clients.over.OVERPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.clients.padro.PADROPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;
+import cat.aoc.client_pci.clients.rca.RCAClient;
+import cat.aoc.client_pci.clients.rca.RCAOperacio;
+import cat.aoc.client_pci.clients.rca.RCAPeticionBuilder;
 import cat.aoc.client_pci.clients.soc.SOCClient;
 import cat.aoc.client_pci.clients.soc.SOCOperacio;
 import cat.aoc.client_pci.clients.soc.SOCPeticionBuilder;
@@ -45,6 +48,7 @@ public enum Servei {
     DGP (Cluster.IOP, "DGP_IDENTITAT"),
     DGT (Cluster.IOP, "DGT"),
     SOC (Cluster.IOP, "SOC"),
+    RCA (Cluster.IOP, "RCA"),
     PADRO(Cluster.IOP, "PADRO");
 
     private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
@@ -68,6 +72,7 @@ public enum Servei {
             case DGP -> new DGPClient(KEYSTORE_PATH, entorn);
             case DGT -> new DGTClient(KEYSTORE_PATH, entorn);
             case SOC -> new SOCClient(KEYSTORE_PATH, entorn);
+            case RCA -> new RCAClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
     }
@@ -82,6 +87,7 @@ public enum Servei {
             case DGP -> new DGPPeticionBuilder(PROPERTIES_PATH).build((DGPOperacio) operacio, finalidad);
             case DGT -> new DGTPeticionBuilder(PROPERTIES_PATH).build((DGTOperacio) operacio, finalidad);
             case SOC -> new SOCPeticionBuilder(PROPERTIES_PATH).build((SOCOperacio) operacio, finalidad);
+            case RCA -> new RCAPeticionBuilder(PROPERTIES_PATH).build((RCAOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
     }
