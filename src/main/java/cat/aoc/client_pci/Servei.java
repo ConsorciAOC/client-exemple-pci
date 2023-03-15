@@ -6,6 +6,9 @@ import cat.aoc.client_pci.clients.dgp.DGPPeticionBuilder;
 import cat.aoc.client_pci.clients.dgt.DGTClient;
 import cat.aoc.client_pci.clients.dgt.DGTOperacio;
 import cat.aoc.client_pci.clients.dgt.DGTPeticionBuilder;
+import cat.aoc.client_pci.clients.discapacitat.DISCAPACITATClient;
+import cat.aoc.client_pci.clients.discapacitat.DISCAPACITATOperacio;
+import cat.aoc.client_pci.clients.discapacitat.DISCAPACITATPeticionBuilder;
 import cat.aoc.client_pci.clients.enotum.ENOTUMClient;
 import cat.aoc.client_pci.clients.enotum.ENOTUMOperacio;
 import cat.aoc.client_pci.clients.enotum.ENOTUMPeticionBuilder;
@@ -49,6 +52,7 @@ public enum Servei {
     DGT (Cluster.IOP, "DGT"),
     SOC (Cluster.IOP, "SOC"),
     RCA (Cluster.IOP, "RCA"),
+    GRAU_DISCAPACITAT (Cluster.IOP, "GRAU_DISCAPACITAT"),
     PADRO(Cluster.IOP, "PADRO");
 
     private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
@@ -73,6 +77,7 @@ public enum Servei {
             case DGT -> new DGTClient(KEYSTORE_PATH, entorn);
             case SOC -> new SOCClient(KEYSTORE_PATH, entorn);
             case RCA -> new RCAClient(KEYSTORE_PATH, entorn);
+            case GRAU_DISCAPACITAT -> new DISCAPACITATClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
     }
@@ -88,6 +93,7 @@ public enum Servei {
             case DGT -> new DGTPeticionBuilder(PROPERTIES_PATH).build((DGTOperacio) operacio, finalidad);
             case SOC -> new SOCPeticionBuilder(PROPERTIES_PATH).build((SOCOperacio) operacio, finalidad);
             case RCA -> new RCAPeticionBuilder(PROPERTIES_PATH).build((RCAOperacio) operacio, finalidad);
+            case GRAU_DISCAPACITAT -> new DISCAPACITATPeticionBuilder(PROPERTIES_PATH).build((DISCAPACITATOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
     }
