@@ -3,6 +3,9 @@ package cat.aoc.client_pci;
 import cat.aoc.client_pci.clients.dgp.DGPClient;
 import cat.aoc.client_pci.clients.dgp.DGPOperacio;
 import cat.aoc.client_pci.clients.dgp.DGPPeticionBuilder;
+import cat.aoc.client_pci.clients.dgt.DGTClient;
+import cat.aoc.client_pci.clients.dgt.DGTOperacio;
+import cat.aoc.client_pci.clients.dgt.DGTPeticionBuilder;
 import cat.aoc.client_pci.clients.enotum.ENOTUMClient;
 import cat.aoc.client_pci.clients.enotum.ENOTUMOperacio;
 import cat.aoc.client_pci.clients.enotum.ENOTUMPeticionBuilder;
@@ -15,6 +18,9 @@ import cat.aoc.client_pci.clients.over.OVERPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.clients.padro.PADROPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;
+import cat.aoc.client_pci.clients.soc.SOCClient;
+import cat.aoc.client_pci.clients.soc.SOCOperacio;
+import cat.aoc.client_pci.clients.soc.SOCPeticionBuilder;
 import cat.aoc.client_pci.clients.tfm.TFMClient;
 import cat.aoc.client_pci.clients.tfm.TFMOperacio;
 import cat.aoc.client_pci.clients.tfm.TFMPeticionBuilder;
@@ -37,6 +43,8 @@ public enum Servei {
     TFN (Cluster.IOP, "TFN"),
     TFM (Cluster.IOP, "TFM"),
     DGP (Cluster.IOP, "DGP_IDENTITAT"),
+    DGT (Cluster.IOP, "DGT"),
+    SOC (Cluster.IOP, "SOC"),
     PADRO(Cluster.IOP, "PADRO");
 
     private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
@@ -58,6 +66,8 @@ public enum Servei {
             case TFN -> new TFNClient(KEYSTORE_PATH, entorn);
             case TFM -> new TFMClient(KEYSTORE_PATH, entorn);
             case DGP -> new DGPClient(KEYSTORE_PATH, entorn);
+            case DGT -> new DGTClient(KEYSTORE_PATH, entorn);
+            case SOC -> new SOCClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
     }
@@ -70,6 +80,8 @@ public enum Servei {
             case TFN -> new TFNPeticionBuilder(PROPERTIES_PATH).build((TFNOperacio) operacio, finalidad);
             case TFM -> new TFMPeticionBuilder(PROPERTIES_PATH).build((TFMOperacio) operacio, finalidad);
             case DGP -> new DGPPeticionBuilder(PROPERTIES_PATH).build((DGPOperacio) operacio, finalidad);
+            case DGT -> new DGTPeticionBuilder(PROPERTIES_PATH).build((DGTOperacio) operacio, finalidad);
+            case SOC -> new SOCPeticionBuilder(PROPERTIES_PATH).build((SOCOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
     }
