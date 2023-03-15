@@ -1,4 +1,4 @@
-package cat.aoc.client_pci.clients.discapacitat;
+package cat.aoc.client_pci.clients.grau_discapacitat;
 
 import cat.aoc.client_pci.ClientAOC;
 import cat.aoc.client_pci.model.Cluster;
@@ -9,7 +9,7 @@ import cat.aoc.client_pci.model.exceptions.ClientException;
 
 public class DISCAPACITATClient extends ClientAOC {
     private static final String[] PACKAGES = {
-            "generated.discapacitat",
+            "generated.grau_discapacitat",
     };
 
     public DISCAPACITATClient(String keystorePath, Entorn entorn) {

@@ -1,4 +1,4 @@
-package cat.aoc.client_pci.clients.discapacitat;
+package cat.aoc.client_pci.clients.grau_discapacitat;
 
 import cat.aoc.client_pci.model.Operacio;
 

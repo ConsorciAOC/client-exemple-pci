@@ -1,10 +1,10 @@
-package cat.aoc.client_pci.clients.discapacitat;
+package cat.aoc.client_pci.clients.grau_discapacitat;
 
 import cat.aoc.client_pci.model.Entorn;
 import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
 import cat.aoc.client_pci.model.exceptions.ClientException;
-import generated.discapacitat.RespostaConsultaDiscapacitatSimple;
+import generated.grau_discapacitat.RespostaConsultaDiscapacitatSimple;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import org.junit.jupiter.api.BeforeEach;

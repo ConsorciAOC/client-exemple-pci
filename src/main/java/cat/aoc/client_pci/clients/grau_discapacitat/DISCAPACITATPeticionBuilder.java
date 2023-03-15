@@ -1,9 +1,9 @@
-package cat.aoc.client_pci.clients.discapacitat;
+package cat.aoc.client_pci.clients.grau_discapacitat;
 
 import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
-import generated.discapacitat.DadesPersona;
-import generated.discapacitat.PeticioConsultaDiscapacitatSimple;
+import generated.grau_discapacitat.DadesPersona;
+import generated.grau_discapacitat.PeticioConsultaDiscapacitatSimple;
 
 public class DISCAPACITATPeticionBuilder extends AbstractPeticionBuilder<DISCAPACITATOperacio> {
     public DISCAPACITATPeticionBuilder(String propertiesPath) throws ClientException {
