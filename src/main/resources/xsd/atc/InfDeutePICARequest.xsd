@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by  () -->
+<xs:schema xmlns="http://pica.gencat.net/atc/schemes/InfDeutePICARequest" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://pica.gencat.net/atc/schemes/InfDeutePICARequest" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="InfDeutePICARequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Idioma" type="xs:string" nillable="true"/>
+                <xs:element name="Nom" type="xs:string" nillable="true"/>
+                <xs:element name="NomComplet" type="xs:string" nillable="true"/>
+                <xs:element name="Cognom1" type="xs:string" nillable="true"/>
+                <xs:element name="Cognom2" type="xs:string" nillable="true"/>
+                <xs:element name="NumeroDocument" type="xs:string" nillable="true"/>
+                <xs:element name="TipusDocumentacio" type="xs:string" nillable="true"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
