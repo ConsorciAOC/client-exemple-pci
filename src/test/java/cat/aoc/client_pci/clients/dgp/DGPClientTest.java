@@ -5,6 +5,7 @@ import cat.aoc.client_pci.model.Finalitat;
 import cat.aoc.client_pci.model.Frontal;
 import cat.aoc.client_pci.model.exceptions.ClientException;
 import generated.dgp.RespostaConsultaDadesIdentitat;
+import generated.dgp.RespostaVerificacioDadesIdentitat;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.peticion.Titular;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
@@ -32,7 +33,7 @@ class DGPClientTest {
     }
 
     @Test
-    void send() throws ClientException {
+    void identitatDades() throws ClientException {
         Peticion peticion = new DGPPeticionBuilder(PROPERTIES_PATH).build(DGPOperacio.IDENTITAT_DADES, Finalitat.PROVES);
         Titular titular = new Titular();
         titular.setTipoDocumentacion("DNI");
@@ -46,6 +47,22 @@ class DGPClientTest {
         RespostaConsultaDadesIdentitat resposta = (RespostaConsultaDadesIdentitat) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
         assertNotNull(resposta);
         assertNotNull(resposta.getDadesTitular());
+    }
+
+    @Test
+    void identitatVerificacio() throws ClientException {
+        Peticion peticion = new DGPPeticionBuilder(PROPERTIES_PATH).build(DGPOperacio.IDENTITAT_VERIFICACIO, Finalitat.PROVES);
+        Titular titular = new Titular();
+        titular.setTipoDocumentacion("DNI");
+        titular.setDocumentacion("10000949C");
+        titular.setNombre("OLGA");
+        titular.setApellido1("MIGUEL");
+        titular.setApellido2("CHAO");
+        titular.setNombreCompleto("OLGA MIGUEL CHAO");
+        peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosGenericos().setTitular(titular);
+        Respuesta respuesta = client.send(DGPOperacio.IDENTITAT_VERIFICACIO, peticion);
+        RespostaVerificacioDadesIdentitat resposta = (RespostaVerificacioDadesIdentitat) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
+        assertNotNull(resposta);
     }
 
 }

@@ -3,6 +3,7 @@ package cat.aoc.client_pci.clients.dgp;
 import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.utils.AbstractPeticionBuilder;
 import generated.dgp.PeticioConsultaDadesIdentitat;
+import generated.dgp.PeticioVerificacioDadesIdentitat;
 
 public class DGPPeticionBuilder extends AbstractPeticionBuilder<DGPOperacio> {
     public DGPPeticionBuilder(String propertiesPath) throws ClientException {
@@ -15,7 +16,9 @@ public class DGPPeticionBuilder extends AbstractPeticionBuilder<DGPOperacio> {
             case IDENTITAT_DADES -> new Object[]{
                     buildPeticioConsultaDadesIdentitat()
             };
-            case IDENTITAT_VERIFICACIO -> new Object[]{};
+            case IDENTITAT_VERIFICACIO -> new Object[]{
+                    buildPeticioVerificacioDadesIdentitat()
+            };
         };
     }
 
@@ -23,4 +26,7 @@ public class DGPPeticionBuilder extends AbstractPeticionBuilder<DGPOperacio> {
         return new PeticioConsultaDadesIdentitat();
     }
 
+    private PeticioVerificacioDadesIdentitat buildPeticioVerificacioDadesIdentitat() {
+        return new PeticioVerificacioDadesIdentitat();
+    }
 }
