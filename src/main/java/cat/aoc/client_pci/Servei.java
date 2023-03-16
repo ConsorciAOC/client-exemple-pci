@@ -24,6 +24,9 @@ import cat.aoc.client_pci.clients.over.OVERPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROOperacio;
 import cat.aoc.client_pci.clients.padro.PADROPeticionBuilder;
 import cat.aoc.client_pci.clients.padro.PADROProxyClient;
+import cat.aoc.client_pci.clients.padro_historic.PADRO_HISTORICClient;
+import cat.aoc.client_pci.clients.padro_historic.PADRO_HISTORICOperacio;
+import cat.aoc.client_pci.clients.padro_historic.PADRO_HISTORICPeticionBuilder;
 import cat.aoc.client_pci.clients.rca.RCAClient;
 import cat.aoc.client_pci.clients.rca.RCAOperacio;
 import cat.aoc.client_pci.clients.rca.RCAPeticionBuilder;
@@ -57,6 +60,7 @@ public enum Servei {
     RCA (Cluster.IOP),
     GRAU_DISCAPACITAT (Cluster.IOP),
     ATC (Cluster.IOP),
+    PADRO_HISTORIC (Cluster.IOP),
     PADRO(Cluster.IOP);
 
     private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
@@ -81,6 +85,7 @@ public enum Servei {
             case RCA -> new RCAClient(KEYSTORE_PATH, entorn);
             case GRAU_DISCAPACITAT -> new DISCAPACITATClient(KEYSTORE_PATH, entorn);
             case ATC -> new ATCClient(KEYSTORE_PATH, entorn);
+            case PADRO_HISTORIC -> new PADRO_HISTORICClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
     }
@@ -98,6 +103,7 @@ public enum Servei {
             case RCA -> new RCAPeticionBuilder(PROPERTIES_PATH).build((RCAOperacio) operacio, finalidad);
             case GRAU_DISCAPACITAT -> new DISCAPACITATPeticionBuilder(PROPERTIES_PATH).build((DISCAPACITATOperacio) operacio, finalidad);
             case ATC -> new ATCPeticionBuilder(PROPERTIES_PATH).build((ATCOperacio) operacio, finalidad);
+            case PADRO_HISTORIC -> new PADRO_HISTORICPeticionBuilder(PROPERTIES_PATH).build((PADRO_HISTORICOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
     }
