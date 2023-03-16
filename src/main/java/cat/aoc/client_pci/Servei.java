@@ -36,6 +36,9 @@ import cat.aoc.client_pci.clients.registre_entitats.REPeticionBuilder;
 import cat.aoc.client_pci.clients.rgc.RGCClient;
 import cat.aoc.client_pci.clients.rgc.RGCOperacio;
 import cat.aoc.client_pci.clients.rgc.RGCPeticionBuilder;
+import cat.aoc.client_pci.clients.rpe.RPEClient;
+import cat.aoc.client_pci.clients.rpe.RPEOperacio;
+import cat.aoc.client_pci.clients.rpe.RPEPeticionBuilder;
 import cat.aoc.client_pci.clients.soc.SOCClient;
 import cat.aoc.client_pci.clients.soc.SOCOperacio;
 import cat.aoc.client_pci.clients.soc.SOCPeticionBuilder;
@@ -68,6 +71,7 @@ public enum Servei {
     ATC (Cluster.IOP),
     REGISTRE_ENTITATS (Cluster.IOP),
     RGC (Cluster.IOP),
+    RPE (Cluster.IOP),
     PADRO_HISTORIC (Cluster.IOP),
     PADRO(Cluster.IOP);
 
@@ -95,6 +99,7 @@ public enum Servei {
             case ATC -> new ATCClient(KEYSTORE_PATH, entorn);
             case REGISTRE_ENTITATS -> new REClient(KEYSTORE_PATH, entorn);
             case RGC -> new RGCClient(KEYSTORE_PATH, entorn);
+            case RPE -> new RPEClient(KEYSTORE_PATH, entorn);
             case PADRO_HISTORIC -> new PADRO_HISTORICClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
@@ -115,6 +120,7 @@ public enum Servei {
             case ATC -> new ATCPeticionBuilder(PROPERTIES_PATH).build((ATCOperacio) operacio, finalidad);
             case REGISTRE_ENTITATS -> new REPeticionBuilder(PROPERTIES_PATH).build((REOperacio) operacio, finalidad);
             case RGC -> new RGCPeticionBuilder(PROPERTIES_PATH).build((RGCOperacio) operacio, finalidad);
+            case RPE -> new RPEPeticionBuilder(PROPERTIES_PATH).build((RPEOperacio) operacio, finalidad);
             case PADRO_HISTORIC -> new PADRO_HISTORICPeticionBuilder(PROPERTIES_PATH).build((PADRO_HISTORICOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
