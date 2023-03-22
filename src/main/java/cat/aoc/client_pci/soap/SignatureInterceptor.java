@@ -1,8 +1,6 @@
 package cat.aoc.client_pci.soap;
 
 import cat.aoc.client_pci.model.exceptions.ClientException;
-import cat.aoc.client_pci.utils.PropertiesReader;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.wss4j.common.WSS4JConstants;
 import org.apache.wss4j.common.crypto.Crypto;
@@ -12,24 +10,25 @@ import org.springframework.ws.soap.security.wss4j2.support.CryptoFactoryBean;
 import java.util.Properties;
 
 @Slf4j
-@Getter
 public class SignatureInterceptor extends Wss4jSecurityInterceptor {
+    private static final String SECURITY_ACTIONS = "Signature Timestamp";
+    private static final String KEY_IDENTIFIER = "DirectReference";
+    private static final String SIGNATURE_ALGORITHM = WSS4JConstants.RSA_SHA1;
+    private static final String DIGEST_ALGORITHM = WSS4JConstants.SHA1;
 
-    private final Properties properties;
 
-    public SignatureInterceptor(String propertiesPath) throws ClientException {
-        properties = PropertiesReader.load(propertiesPath);
+    public SignatureInterceptor(Properties properties) throws ClientException {
         createSecurityInterceptor(properties);
     }
 
     public void createSecurityInterceptor(Properties properties) throws ClientException {
-        setSecurementActions("Signature Timestamp");
-        setSecurementUsername(properties.getProperty("org.apache.wss4j.crypto.merlin.keystore.alias"));
+        setSecurementActions(SECURITY_ACTIONS);
+        setSecurementUsername(properties.getProperty("org.apache.ws.security.crypto.merlin.keystore.alias"));
         setSecurementPassword(properties.getProperty("org.apache.ws.security.crypto.merlin.keystore.password"));
         setSecurementSignatureCrypto(createCrypto(properties));
-        setSecurementSignatureKeyIdentifier("DirectReference");
-        setSecurementSignatureAlgorithm(WSS4JConstants.RSA_SHA1);
-        setSecurementSignatureDigestAlgorithm(WSS4JConstants.SHA1);
+        setSecurementSignatureKeyIdentifier(KEY_IDENTIFIER);
+        setSecurementSignatureAlgorithm(SIGNATURE_ALGORITHM);
+        setSecurementSignatureDigestAlgorithm(DIGEST_ALGORITHM);
         setSecurementTimeToLive(60);
         setTimestampPrecisionInMilliseconds(false);
         setTimestampStrict(false);
@@ -43,7 +42,7 @@ public class SignatureInterceptor extends Wss4jSecurityInterceptor {
             cryptoFactoryBean.afterPropertiesSet();
             return cryptoFactoryBean.getObject();
         } catch (Exception e) {
-            throw new ClientException("No s'han pogut carregar el magatzem");
+            throw new ClientException("Could not load the keystore", e);
         }
     }
 

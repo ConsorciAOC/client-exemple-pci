@@ -38,7 +38,7 @@ Amb l'alta se us assignaran permisos per consumir els serveis demanats i necessi
 ### Configurar el certificat
 Per tal que el client funcioni, necessitareu configurar el vostre certificat de signatura al fitxer `src/main/resources/keystore.properties`
 - `org.apache.ws.security.crypto.provider`: Proveïdor usat per crear instàncies criptogràfiques.
-- `org.apache.wss4j.crypto.merlin.keystore.alias`: Àlies del certificat digital.
+- `org.apache.ws.security.crypto.merlin.keystore.alias`: Àlies del certificat digital.
 - `org.apache.ws.security.crypto.merlin.keystore.type`: Format del certificat.
 - `org.apache.ws.security.crypto.merlin.keystore.password`: Contrasenya del certificat.
 - `org.apache.ws.security.crypto.merlin.keystore.file`: Ruta del fitxer.

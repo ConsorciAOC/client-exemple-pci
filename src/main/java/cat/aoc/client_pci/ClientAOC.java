@@ -5,6 +5,7 @@ import cat.aoc.client_pci.model.exceptions.ClientException;
 import cat.aoc.client_pci.soap.LoggerInterceptor;
 import cat.aoc.client_pci.soap.SignatureInterceptor;
 import cat.aoc.client_pci.soap.SoapMtomClient;
+import cat.aoc.client_pci.utils.PropertiesReader;
 import lombok.extern.slf4j.Slf4j;
 import net.gencat.scsp.esquemes.peticion.Peticion;
 import net.gencat.scsp.esquemes.respuesta.Respuesta;
@@ -13,6 +14,7 @@ import org.openuri.ProcesaResponse;
 import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -36,8 +38,9 @@ public abstract class ClientAOC extends SoapMtomClient<Procesa, ProcesaResponse>
         this.entorn = entorn;
         this.cluster = cluster;
         try {
+            Properties properties = PropertiesReader.load(keystorePath);
             setInterceptors(new ClientInterceptor[]{
-                    new SignatureInterceptor(keystorePath),
+                    new SignatureInterceptor(properties),
                     new LoggerInterceptor(getUnmarshaller())
             });
         } catch (ClientException e) {
