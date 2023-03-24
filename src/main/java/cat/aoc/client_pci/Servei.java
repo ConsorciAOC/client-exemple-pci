@@ -3,6 +3,9 @@ package cat.aoc.client_pci;
 import cat.aoc.client_pci.clients.vo.estat.cadastre.CADASTREClient;
 import cat.aoc.client_pci.clients.vo.estat.cadastre.CADASTREOperacio;
 import cat.aoc.client_pci.clients.vo.estat.cadastre.CADASTREPeticionBuilder;
+import cat.aoc.client_pci.clients.vo.estat.dependencia.DEPENDENCIAClient;
+import cat.aoc.client_pci.clients.vo.estat.dependencia.DEPENDENCIAOperacio;
+import cat.aoc.client_pci.clients.vo.estat.dependencia.DEPENDENCIAPeticionBuilder;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCClient;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCOperacio;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCPeticionBuilder;
@@ -76,6 +79,7 @@ public enum Servei {
     RGC (Cluster.IOP),
     RPE (Cluster.IOP),
     CADASTRE (Cluster.IOP),
+    DEPENDENCIA (Cluster.IOP),
     PADRO_HISTORIC (Cluster.IOP),
     PADRO(Cluster.IOP);
 
@@ -105,6 +109,7 @@ public enum Servei {
             case RGC -> new RGCClient(KEYSTORE_PATH, entorn);
             case RPE -> new RPEClient(KEYSTORE_PATH, entorn);
             case CADASTRE -> new CADASTREClient(KEYSTORE_PATH, entorn);
+            case DEPENDENCIA -> new DEPENDENCIAClient(KEYSTORE_PATH, entorn);
             case PADRO_HISTORIC -> new PADRO_HISTORICClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
@@ -127,6 +132,7 @@ public enum Servei {
             case RGC -> new RGCPeticionBuilder(PROPERTIES_PATH).build((RGCOperacio) operacio, finalidad);
             case RPE -> new RPEPeticionBuilder(PROPERTIES_PATH).build((RPEOperacio) operacio, finalidad);
             case CADASTRE -> new CADASTREPeticionBuilder(PROPERTIES_PATH).build((CADASTREOperacio) operacio, finalidad);
+            case DEPENDENCIA -> new DEPENDENCIAPeticionBuilder(PROPERTIES_PATH).build((DEPENDENCIAOperacio) operacio, finalidad);
             case PADRO_HISTORIC -> new PADRO_HISTORICPeticionBuilder(PROPERTIES_PATH).build((PADRO_HISTORICOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
