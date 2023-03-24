@@ -15,6 +15,9 @@ import cat.aoc.client_pci.clients.vo.estat.inss.INSSPeticionBuilder;
 import cat.aoc.client_pci.clients.vo.estat.notaris.NOTARISClient;
 import cat.aoc.client_pci.clients.vo.estat.notaris.NOTARISOperacio;
 import cat.aoc.client_pci.clients.vo.estat.notaris.NOTARISPeticionBuilder;
+import cat.aoc.client_pci.clients.vo.estat.registre_civil.REGISTRECIVILClient;
+import cat.aoc.client_pci.clients.vo.estat.registre_civil.REGISTRECIVILOperacio;
+import cat.aoc.client_pci.clients.vo.estat.registre_civil.REGISTRECIVILPeticionBuilder;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCClient;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCOperacio;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCPeticionBuilder;
@@ -92,6 +95,7 @@ public enum Servei {
     ESTRANGERIA (Cluster.IOP),
     INSS (Cluster.IOP),
     NOTARIS (Cluster.IOP),
+    REGISTRE_CIVIL (Cluster.IOP),
     PADRO_HISTORIC (Cluster.IOP),
     PADRO(Cluster.IOP);
 
@@ -125,6 +129,7 @@ public enum Servei {
             case ESTRANGERIA -> new ESTRANGERIAClient(KEYSTORE_PATH, entorn);
             case INSS -> new INSSClient(KEYSTORE_PATH, entorn);
             case NOTARIS -> new NOTARISClient(KEYSTORE_PATH, entorn);
+            case REGISTRE_CIVIL -> new REGISTRECIVILClient(KEYSTORE_PATH, entorn);
             case PADRO_HISTORIC -> new PADRO_HISTORICClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
@@ -151,6 +156,7 @@ public enum Servei {
             case ESTRANGERIA -> new ESTRANGERIAPeticionBuilder(PROPERTIES_PATH).build((ESTRANGERIAOperacio) operacio, finalidad);
             case INSS -> new INSSPeticionBuilder(PROPERTIES_PATH).build((INSSOperacio) operacio, finalidad);
             case NOTARIS -> new NOTARISPeticionBuilder(PROPERTIES_PATH).build((NOTARISOperacio) operacio, finalidad);
+            case REGISTRE_CIVIL -> new REGISTRECIVILPeticionBuilder(PROPERTIES_PATH).build((REGISTRECIVILOperacio) operacio, finalidad);
             case PADRO_HISTORIC -> new PADRO_HISTORICPeticionBuilder(PROPERTIES_PATH).build((PADRO_HISTORICOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
