@@ -9,6 +9,9 @@ import cat.aoc.client_pci.clients.vo.estat.dependencia.DEPENDENCIAPeticionBuilde
 import cat.aoc.client_pci.clients.vo.estat.estrangeria.ESTRANGERIAClient;
 import cat.aoc.client_pci.clients.vo.estat.estrangeria.ESTRANGERIAOperacio;
 import cat.aoc.client_pci.clients.vo.estat.estrangeria.ESTRANGERIAPeticionBuilder;
+import cat.aoc.client_pci.clients.vo.estat.inss.INSSClient;
+import cat.aoc.client_pci.clients.vo.estat.inss.INSSOperacio;
+import cat.aoc.client_pci.clients.vo.estat.inss.INSSPeticionBuilder;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCClient;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCOperacio;
 import cat.aoc.client_pci.clients.vo.generalitat.atc.ATCPeticionBuilder;
@@ -84,6 +87,7 @@ public enum Servei {
     CADASTRE (Cluster.IOP),
     DEPENDENCIA (Cluster.IOP),
     ESTRANGERIA (Cluster.IOP),
+    INSS (Cluster.IOP),
     PADRO_HISTORIC (Cluster.IOP),
     PADRO(Cluster.IOP);
 
@@ -115,6 +119,7 @@ public enum Servei {
             case CADASTRE -> new CADASTREClient(KEYSTORE_PATH, entorn);
             case DEPENDENCIA -> new DEPENDENCIAClient(KEYSTORE_PATH, entorn);
             case ESTRANGERIA -> new ESTRANGERIAClient(KEYSTORE_PATH, entorn);
+            case INSS -> new INSSClient(KEYSTORE_PATH, entorn);
             case PADRO_HISTORIC -> new PADRO_HISTORICClient(KEYSTORE_PATH, entorn);
             case PADRO -> new PADROProxyClient(KEYSTORE_PATH, entorn);
         };
@@ -139,6 +144,7 @@ public enum Servei {
             case CADASTRE -> new CADASTREPeticionBuilder(PROPERTIES_PATH).build((CADASTREOperacio) operacio, finalidad);
             case DEPENDENCIA -> new DEPENDENCIAPeticionBuilder(PROPERTIES_PATH).build((DEPENDENCIAOperacio) operacio, finalidad);
             case ESTRANGERIA -> new ESTRANGERIAPeticionBuilder(PROPERTIES_PATH).build((ESTRANGERIAOperacio) operacio, finalidad);
+            case INSS -> new INSSPeticionBuilder(PROPERTIES_PATH).build((INSSOperacio) operacio, finalidad);
             case PADRO_HISTORIC -> new PADRO_HISTORICPeticionBuilder(PROPERTIES_PATH).build((PADRO_HISTORICOperacio) operacio, finalidad);
             case PADRO -> new PADROPeticionBuilder(PROPERTIES_PATH).build((PADROOperacio) operacio, finalidad);
         };
