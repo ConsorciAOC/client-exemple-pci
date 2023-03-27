@@ -1,8 +1,8 @@
 package cat.aoc.client_pci.utils;
 
-import cat.aoc.client_pci.model.exceptions.ClientException;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +22,7 @@ class PropertiesReaderTest {
     @Test
     void notFoundProperties() {
         assertThrows(
-                ClientException.class,
+                IOException.class,
                 () -> PropertiesReader.load("iDontExist.properties")
         );
     }
