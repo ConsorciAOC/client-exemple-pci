@@ -1,4 +1,4 @@
-package cat.aoc.client_pci.api.proxy;
+package cat.aoc.client_pci.api.clients.proxy;
 
 import cat.aoc.client_pci.api.ClientPCI;
 import cat.aoc.client_pci.api.exceptions.ClientException;

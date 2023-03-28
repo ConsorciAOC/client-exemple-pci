@@ -5,7 +5,7 @@ import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
-import cat.aoc.client_pci.api.Serveis;
+import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.estat.registre_civil.OperacioRegistreCivil;
 import cat.aoc.client_pci.samples.serveis.vo.estat.registre_civil.PeticionBuilderRegistreCivil;
 import generated.registre_civil.RespostaConsultaRegistreCivil;

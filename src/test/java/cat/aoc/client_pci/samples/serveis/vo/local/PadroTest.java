@@ -5,7 +5,7 @@ import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
-import cat.aoc.client_pci.api.Serveis;
+import cat.aoc.client_pci.api.clients.Serveis;
 import generated.padro.RespuestaDatosConvivientes;
 import generated.padro.RespuestaDatosTitular;
 import org.junit.jupiter.api.DisplayName;

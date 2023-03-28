@@ -4,7 +4,7 @@ import cat.aoc.client_pci.api.ClientPCI;
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.api.model.Entorn;
-import cat.aoc.client_pci.api.Serveis;
+import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.enotum.OperacioEnotum;
 import cat.aoc.client_pci.samples.serveis.enotum.PeticionBuilderEnotum;
 import cat.aoc.client_pci.utils.PropertiesReader;
