@@ -24,6 +24,7 @@ public enum Serveis {
     DGP(Cluster.IOP, "generated.dgp"),
     DGT(Cluster.IOP, "generated.dgt"),
     ESTRANGERIA(Cluster.IOP, "generated.estrangeria"),
+    IGAE(Cluster.IOP, "generated.igae"),
     INSS(Cluster.IOP, "generated.inss", "generated.inss_historic"),
     NOTARIS(Cluster.IOP, "generated.notaris"),
     REGISTRE_CIVIL(Cluster.IOP, "generated.registre_civil"),
