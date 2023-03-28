@@ -7,9 +7,11 @@ import org.openuri.Procesa;
 import org.springframework.ws.client.WebServiceClientException;
 import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 import org.springframework.ws.context.MessageContext;
+import org.springframework.ws.transport.context.TransportContextHolder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
@@ -29,14 +31,16 @@ public class LoggerInterceptor implements ClientInterceptor {
                 String payload = buffer.toString(StandardCharsets.UTF_8);
                 log.info("Request:");
                 log.info(payload);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new ClientException("Error handling request", e);
             }
         });
         return true;
     }
 
-    private void logRequest(MessageContext messageContext) throws IOException {
+    private void logRequest(MessageContext messageContext) throws IOException, URISyntaxException {
+        String endpointAddress = TransportContextHolder.getTransportContext().getConnection().getUri().toString();
+        log.info("Endpoint: " + endpointAddress);
         Procesa procesa = (Procesa) unmarshaller.unmarshal(messageContext.getRequest().getPayloadSource());
         log.info("ID: " + procesa.getPeticion().getAtributos().getIdPeticion());
         log.info("Timestamp: " + procesa.getPeticion().getAtributos().getTimeStamp());
