@@ -63,13 +63,14 @@ compileJava.dependsOn jaxb
 ### Exemple d'ús
 ```java
 // Obtenir el client del servei desitjat
-ClientAOC client = Servei.ENOTUM.getClient(Entorn.PRE);
+ClientPCI client = Serveis.ENOTUM.getClient(Entorn.PRE, Frontal.SINCRON);
 
 // Construir una petició d'exemple
-Peticion peticion = Servei.ENOTUM.getPeticion(ENOTUMOperacio.CERCA, Finalitat.PROVES);
-        
+Properties clientProperties = PropertiesReader.load("src/main/resources/client.properties");
+Peticion peticion = new PeticionBuilderEnotum(clientProperties).build(OperacioEnotum.CERCA, Finalitat.PROVES);
+  
 // Enviar una petició d'exemple
-client.send(ENOTUMOperacio.CERCA, peticion);
+client.send(peticion);
 ```
 
 ### Més exemples
