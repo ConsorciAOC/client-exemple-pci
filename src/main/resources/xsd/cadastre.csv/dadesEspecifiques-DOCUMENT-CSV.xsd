@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.aocat.net/cadastre" targetNamespace="http://www.aocat.net/cadastre" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <!-- ======================================================= -->
+    <!-- DocumentCSV                          					 -->
+    <!-- ======================================================= -->
+    <xs:element name="peticioDocumentCSV">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="csv">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="16"/>
+                            <xs:maxLength value="16"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="respostaDocumentCSV">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="peticioDocumentCSV" minOccurs="0"/>
+                <xs:element name="pdf" type="xs:string" minOccurs="0"/>
+                <xs:element ref="resultat"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ======================================================= -->
+    <!-- Resultat                                                -->
+    <!-- ======================================================= -->
+    <xs:element name="resultat">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codiResultat" type="xs:string"/>
+                <xs:element name="descripcio" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

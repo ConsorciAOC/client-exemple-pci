@@ -11,14 +11,23 @@ import net.gencat.scsp.esquemes.respuesta.Respuesta;
 import java.util.Properties;
 
 public class ProxyClientPadro extends ClientPCI {
+    private static final String[] EMPADRONAMIENTO_PACKAGES = {
+            "generated.padro",
+            "generated.padro.empadronamiento",
+    };
 
-    private final ClientPadroEmpadronamiento clientEmpadronamiento;
-    private final ClientPadroConvivencia clientConvivencia;
+    private static final String[] CONVIVENVIA_PACKAGES = {
+            "generated.padro",
+            "generated.padro.convivencia",
+    };
+
+    private final ClientPCI clientEmpadronamiento;
+    private final ClientPCI clientConvivencia;
 
     public ProxyClientPadro(Entorn entorn, Frontal frontal, Properties properties) {
         super(entorn, Cluster.IOP, frontal, new String[]{}, properties);
-        this.clientEmpadronamiento = new ClientPadroEmpadronamiento(entorn, frontal, properties);
-        this.clientConvivencia = new ClientPadroConvivencia(entorn, frontal, properties);
+        this.clientEmpadronamiento = new ClientPCI(entorn, Cluster.IOP, frontal, EMPADRONAMIENTO_PACKAGES, properties);
+        this.clientConvivencia = new ClientPCI(entorn, Cluster.IOP, frontal, CONVIVENVIA_PACKAGES, properties);
     }
 
     @Override

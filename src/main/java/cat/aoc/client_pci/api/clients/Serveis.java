@@ -1,6 +1,7 @@
 package cat.aoc.client_pci.api.clients;
 
 import cat.aoc.client_pci.api.ClientPCI;
+import cat.aoc.client_pci.api.clients.proxy.ProxyClientCadastre;
 import cat.aoc.client_pci.api.model.Cluster;
 import cat.aoc.client_pci.api.model.Entorn;
 import cat.aoc.client_pci.api.model.Frontal;
@@ -18,7 +19,7 @@ public enum Serveis {
     OVER(Cluster.APP, "generated.over"),
 
     // VO - ESTAT
-    CADASTRE(Cluster.IOP, "generated.cadastre.certificacio"),
+    CADASTRE(Cluster.IOP, "generated.cadastre.certificacio", "generated.cadastre.dades", "generated.cadastre.grafica", "generated.cadastre.csv"),
     DEPENDENCIA(Cluster.IOP, "generated.dependencia"),
     DGP(Cluster.IOP, "generated.dgp"),
     DGT(Cluster.IOP, "generated.dgt"),
@@ -56,8 +57,11 @@ public enum Serveis {
 
     public ClientPCI getClient(Entorn entorn, Frontal frontal) throws IOException {
         Properties properties = PropertiesReader.load(KEYSTORE_PATH);
-        if(this == PADRO) return new ProxyClientPadro(entorn, frontal, properties);
-        return new ClientPCI(entorn, this.cluster, frontal, this.packages, properties);
+        return switch (this) {
+            case PADRO -> new ProxyClientPadro(entorn, frontal, properties);
+            case CADASTRE -> new ProxyClientCadastre(entorn, frontal, properties);
+            default -> new ClientPCI(entorn, this.cluster, frontal, this.packages, properties);
+        };
     }
 
 }
