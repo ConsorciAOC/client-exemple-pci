@@ -6,5 +6,6 @@ import net.gencat.scsp.esquemes.peticion.Peticion;
 public interface PeticionBuilder<O extends Operacio> {
 
     Peticion build(O operacio, Finalitat finalitat);
+    Peticion build(O operacio, String procedimiento);
 
 }

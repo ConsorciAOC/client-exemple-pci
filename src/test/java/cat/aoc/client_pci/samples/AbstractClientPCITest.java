@@ -31,8 +31,16 @@ public abstract class AbstractClientPCITest<O extends Operacio> {
     }
 
     @Test
-    public <T> T send(O operacio, Finalitat finalitat) {
+    protected <T> T send(O operacio, Finalitat finalitat) {
         Respuesta respuesta = client.send(builder.build(operacio, finalitat));
+        assertNotNull(respuesta);
+        assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
+        return (T) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
+    }
+
+    @Test
+    protected <T> T send(O operacio, String procedimiento) {
+        Respuesta respuesta = client.send(builder.build(operacio, procedimiento));
         assertNotNull(respuesta);
         assertNotNull(respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos());
         return (T) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);

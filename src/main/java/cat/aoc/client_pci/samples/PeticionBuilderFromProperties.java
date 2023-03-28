@@ -25,6 +25,14 @@ public abstract class PeticionBuilderFromProperties<O extends Operacio> implemen
         return peticion;
     }
 
+    @Override
+    public Peticion build(O operacio, String procedimiento) {
+        Peticion peticion = new Peticion();
+        peticion.setAtributos(buildAtributos(operacio, procedimiento));
+        peticion.setSolicitudes(buildSolicitudes(operacio.getCodiModalitat(), procedimiento, getDatosEspecificos(operacio)));
+        return peticion;
+    }
+
     protected abstract Object[] getDatosEspecificos(O operacio);
 
     private Atributos buildAtributos(Operacio operacio, String finalitat) {
