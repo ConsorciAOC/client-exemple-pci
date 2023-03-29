@@ -26,6 +26,7 @@ public enum Serveis {
     ESTRANGERIA(Cluster.IOP, "generated.estrangeria"),
     IGAE(Cluster.IOP, "generated.igae"),
     INSS(Cluster.IOP, "generated.inss", "generated.inss_historic"),
+    MEPSYD(Cluster.IOP, "generated.mepsyd"),
     NOTARIS(Cluster.IOP, "generated.notaris"),
     REGISTRE_CIVIL(Cluster.IOP, "generated.registre_civil"),
     SEPE(Cluster.IOP, "generated.sepe"),
