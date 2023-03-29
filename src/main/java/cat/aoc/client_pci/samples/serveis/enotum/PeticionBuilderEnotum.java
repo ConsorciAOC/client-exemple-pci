@@ -25,8 +25,10 @@ public class PeticionBuilderEnotum extends PeticionBuilderFromProperties<Operaci
     @Override
     public Peticion build(OperacioEnotum operacio, Finalitat finalitat) {
         Peticion peticion =  super.build(operacio, finalitat);
-        peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosGenericos()
-                .setFicheros(getFicheros());
+        if(operacio==OperacioEnotum.PROCESSAR_TRAMESA){
+            peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosGenericos()
+                    .setFicheros(getFicheros());
+        }
         return peticion;
     }
 
