@@ -9,6 +9,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.over.OperacioOver;
 import cat.aoc.client_pci.samples.serveis.over.PeticionBuilderOver;
 import generated.over.RespostaDocumentacioTramit;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ class OverTest extends AbstractClientPCITest<OperacioOver> {
                 new PeticionBuilderOver(PROPERTIES));
     }
     @Test
+    @DisplayName("OVER_DOCUMENTACIO")
     void documentacio() throws ClientException {
         RespostaDocumentacioTramit resposta = this.send(OperacioOver.OVER_DOCUMENTACIO, Finalitat.PROVES);
         assertNotNull(resposta);

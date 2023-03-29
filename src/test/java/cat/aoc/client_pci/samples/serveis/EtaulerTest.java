@@ -9,6 +9,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.etauler.OperacioEtauler;
 import cat.aoc.client_pci.samples.serveis.etauler.PeticionBuilderEtauler;
 import generated.etauler.RespostaConsultarEstatEdicte;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ class EtaulerTest extends AbstractClientPCITest<OperacioEtauler> {
     }
 
     @Test
+    @DisplayName("CONSULTAR")
     void consultar() throws ClientException {
         RespostaConsultarEstatEdicte resposta = this.send(OperacioEtauler.CONSULTAR, Finalitat.PROVES);
         assertNotNull(resposta);

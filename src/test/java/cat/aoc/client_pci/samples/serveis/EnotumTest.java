@@ -9,6 +9,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.enotum.OperacioEnotum;
 import cat.aoc.client_pci.samples.serveis.enotum.PeticionBuilderEnotum;
 import generated.enotum.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ class EnotumTest extends AbstractClientPCITest<OperacioEnotum> {
     }
 
     @Test
+    @DisplayName("PROCESSAR_TRAMESA")
     void processarTramesa() throws ClientException {
         RespostaProcessarTramesa resposta = this.send(OperacioEnotum.PROCESSAR_TRAMESA, Finalitat.PROVES);
         assertNotNull(resposta);
@@ -31,6 +33,7 @@ class EnotumTest extends AbstractClientPCITest<OperacioEnotum> {
     }
 
     @Test
+    @DisplayName("CERCA")
     void cerca() throws ClientException {
         RespostaCerca resposta = this.send(OperacioEnotum.CERCA, Finalitat.PROVES);
         assertNotNull(resposta);
@@ -38,6 +41,7 @@ class EnotumTest extends AbstractClientPCITest<OperacioEnotum> {
     }
 
     @Test
+    @DisplayName("CONSULTA")
     void consulta() throws ClientException {
         RespostaConsulta resposta = this.send(OperacioEnotum.CONSULTA, Finalitat.PROVES);
         assertNotNull(resposta);
@@ -45,6 +49,7 @@ class EnotumTest extends AbstractClientPCITest<OperacioEnotum> {
     }
 
     @Test
+    @DisplayName("RESUM")
     void resum() throws ClientException {
         RespostaResum resposta = this.send(OperacioEnotum.RESUM, Finalitat.PROVES);
         assertNotNull(resposta);
@@ -52,6 +57,7 @@ class EnotumTest extends AbstractClientPCITest<OperacioEnotum> {
     }
 
     @Test
+    @DisplayName("PARAULA_PAS")
     void paraulaPas() throws ClientException {
         RespostaParaulaPas resposta = this.send(OperacioEnotum.PARAULA_PAS, Finalitat.PROVES);
         assertNotNull(resposta);
