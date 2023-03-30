@@ -15,6 +15,7 @@ import java.util.Properties;
 @Getter
 public enum Serveis {
     BOE(Cluster.APP, "generated.boe"),
+    EACAT(Cluster.APP, "generated.eacat"),
     ENOTUM(Cluster.NT, "generated.enotum"),
     ETAULER(Cluster.APP, "generated.etauler"),
     OVER(Cluster.APP, "generated.over"),
@@ -32,7 +33,6 @@ public enum Serveis {
     NOTARIS(Cluster.IOP, "generated.notaris"),
     REGISTRE_CIVIL(Cluster.IOP, "generated.registre_civil"),
     SEPE(Cluster.IOP, "generated.sepe"),
-    TGSS(Cluster.IOP, "generated.tgss.Q2827003ATGSS006"),
 
     // VO - GENERALITAT
     TFN(Cluster.IOP, "generated.tfn"),
