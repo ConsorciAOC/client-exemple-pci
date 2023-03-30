@@ -20,7 +20,7 @@ public class PeticionBuilderEtauler extends PeticionBuilderFromProperties<Operac
         return switch (operacio) {
             case CONSULTAR -> buildPeticioConsultarEstatEdicte();
             case PUBLICAR, DADES, AMPLIAR_TERMINI, CANCELAR, DESPENJAR, SINCRONITZAR, DESCARREGAR_DOCUMENT ->
-                    new Object();
+                    null;
         };
     }
 

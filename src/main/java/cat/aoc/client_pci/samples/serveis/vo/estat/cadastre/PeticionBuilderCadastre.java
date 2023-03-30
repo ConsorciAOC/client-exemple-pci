@@ -21,8 +21,7 @@ public class PeticionBuilderCadastre extends PeticionBuilderFromProperties<Opera
             };
             case DADES_CADASTRALS,
                     DESCRIPTIVA_GRAFICA,
-                    DOCUMENT_CSV -> new Object[]{
-            };
+                    DOCUMENT_CSV -> new Object[]{};
         };
     }
 

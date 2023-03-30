@@ -24,8 +24,8 @@ public class PeticionBuilderEnotum extends PeticionBuilderFromProperties<Operaci
 
     @Override
     public Peticion build(OperacioEnotum operacio, Finalitat finalitat) {
-        Peticion peticion =  super.build(operacio, finalitat);
-        if(operacio==OperacioEnotum.PROCESSAR_TRAMESA){
+        Peticion peticion = super.build(operacio, finalitat);
+        if (operacio == OperacioEnotum.PROCESSAR_TRAMESA) {
             peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosGenericos()
                     .setFicheros(getFicheros());
         }
@@ -34,7 +34,7 @@ public class PeticionBuilderEnotum extends PeticionBuilderFromProperties<Operaci
 
     @Override
     protected Object[] getDatosEspecificos(OperacioEnotum operacio) {
-        return new Object[]{ getDatoEspecifico(operacio) };
+        return new Object[]{getDatoEspecifico(operacio)};
     }
 
     private static Ficheros getFicheros() {
@@ -56,9 +56,9 @@ public class PeticionBuilderEnotum extends PeticionBuilderFromProperties<Operaci
             case CONSULTA -> buildPeticioConsulta(buildEmissor(), buildUsuari());
             case RESUM -> buildPeticioResum(buildEmissor(), buildUsuari());
             case PARAULA_PAS -> buildPeticioParaulaPas(buildEmissor(), buildUsuari());
-            case EVIDENCIA -> new Object();
-            case PRACTICAR -> new Object();
-            case RECUPERAR_REPORT -> new Object();
+            case EVIDENCIA,
+                    PRACTICAR,
+                    RECUPERAR_REPORT -> null;
         };
     }
 

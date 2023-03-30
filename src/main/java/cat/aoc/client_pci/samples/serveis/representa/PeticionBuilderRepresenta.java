@@ -29,7 +29,7 @@ public class PeticionBuilderRepresenta extends PeticionBuilderFromProperties<Ope
                     CONSULTA_TRAMITS,
                     CONSULTA_ADMINISTRACIO,
                     CONSULTA_ADMINISTRACIONS,
-                    DESCARREGA -> new Object();
+                    DESCARREGA -> null;
         };
     }
 

@@ -29,7 +29,7 @@ public class PeticionBuilderOver extends PeticionBuilderFromProperties<OperacioO
                     OVER_CONSULTA_EXPEDIENT,
                     OVER_LLISTA_SERVEIS,
                     OVER_LLISTA_TRAMITS,
-                    OVER_INTEGRACIO -> new Object();
+                    OVER_INTEGRACIO -> null;
         };
     }
 
