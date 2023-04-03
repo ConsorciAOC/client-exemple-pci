@@ -21,6 +21,7 @@ public enum Serveis {
     OVER(Cluster.APP, "generated.over"),
     REPRESENTA(Cluster.APP, "generated.representa"),
     SCT_DEV(Cluster.APP, "generated.sct_dev"),
+    SIR2(Cluster.APP, "generated.sir2"),
 
     // VO - ESTAT
     CADASTRE(Cluster.IOP, "generated.cadastre.certificacio", "generated.cadastre.dades", "generated.cadastre.grafica", "generated.cadastre.csv"),

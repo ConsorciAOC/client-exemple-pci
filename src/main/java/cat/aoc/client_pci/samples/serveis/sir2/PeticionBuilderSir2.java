@@ -1,0 +1,61 @@
+package cat.aoc.client_pci.samples.serveis.sir2;
+
+import cat.aoc.client_pci.api.model.Finalitat;
+import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
+import net.gencat.scsp.esquemes.peticion.Fichero;
+import net.gencat.scsp.esquemes.peticion.Ficheros;
+import net.gencat.scsp.esquemes.peticion.Peticion;
+
+import java.util.Properties;
+
+import static cat.aoc.client_pci.samples.serveis.sir2.PeticionBuilderSir2Confirmar.buildPeticioConfirmacioAssentament;
+import static cat.aoc.client_pci.samples.serveis.sir2.PeticionBuilderSir2Consultar.buildPeticioConsultaAssentament;
+import static cat.aoc.client_pci.samples.serveis.sir2.PeticionBuilderSir2Enviar.buildPeticioEnviamentAssentament;
+import static cat.aoc.client_pci.samples.serveis.sir2.PeticionBuilderSir2Rebutjar.buildPeticioRebuigAssentament;
+import static cat.aoc.client_pci.samples.serveis.sir2.PeticionBuilderSir2Reenviar.buildPeticioReenviamentAssentament;
+
+public class PeticionBuilderSir2 extends PeticionBuilderFromProperties<OperacioSir2> {
+
+    public PeticionBuilderSir2(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    public Peticion build(OperacioSir2 operacio, Finalitat finalitat) {
+        Peticion peticion = super.build(operacio, finalitat);
+        if (operacio == OperacioSir2.ENVIAR) {
+            peticion.getSolicitudes().getSolicitudTransmision().get(0).getDatosGenericos()
+                    .setFicheros(getFicheros());
+        }
+        return peticion;
+    }
+
+    private static Ficheros getFicheros() {
+        Fichero fichero = new Fichero();
+        fichero.setNombreFichero("sample.pdf");
+        fichero.setId("1234");
+        fichero.setVia("Salida");
+        jakarta.activation.DataSource ds = new jakarta.activation.FileDataSource("src\\main\\resources\\examples\\example.pdf");
+        fichero.setContenido(new jakarta.activation.DataHandler(ds));
+        Ficheros ficheros = new Ficheros();
+        ficheros.getFichero().add(fichero);
+        return ficheros;
+    }
+
+    @Override
+    protected Object[] getDatosEspecificos(OperacioSir2 operacio) {
+        return new Object[]{getDatoEspecifico(operacio)};
+    }
+
+    private Object getDatoEspecifico(OperacioSir2 operacio) {
+        return switch (operacio) {
+            case ENVIAR -> buildPeticioEnviamentAssentament();
+            case CONFIRMAR -> buildPeticioConfirmacioAssentament();
+            case REBUTJAR -> buildPeticioRebuigAssentament();
+            case REENVIAR -> buildPeticioReenviamentAssentament();
+            case CONSULTAR -> buildPeticioConsultaAssentament();
+            case SINCRONITZAR -> null;
+        };
+    }
+
+}
