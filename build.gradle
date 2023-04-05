@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library'
     id 'org.springframework.boot' version '3.0.2'
     id 'io.spring.dependency-management' version '1.1.0'
 }
@@ -105,3 +105,10 @@ def jaxb = tasks.register("jaxb") {
 compileJava {options.encoding = "ISO-8859-1"}
 compileJava.dependsOn jaxb
 
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
