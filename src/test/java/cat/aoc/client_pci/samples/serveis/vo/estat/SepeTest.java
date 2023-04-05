@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.estat.sepe.OperacioSepe;
 import cat.aoc.client_pci.samples.serveis.vo.estat.sepe.PeticionBuilderSepe;
-import generated.sepe.RespostaVerificacioDadesAtur;
+import generated.serveis.sepe.RespostaVerificacioDadesAtur;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

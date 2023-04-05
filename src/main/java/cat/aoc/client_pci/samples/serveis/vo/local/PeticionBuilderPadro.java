@@ -1,8 +1,8 @@
 package cat.aoc.client_pci.samples.serveis.vo.local;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.padro.PeticionDatosConvivientes;
-import generated.padro.PeticionDatosTitular;
+import generated.serveis.padro.PeticionDatosConvivientes;
+import generated.serveis.padro.PeticionDatosTitular;
 
 import java.util.Properties;
 

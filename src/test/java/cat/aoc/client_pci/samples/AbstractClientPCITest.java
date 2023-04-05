@@ -3,7 +3,7 @@ package cat.aoc.client_pci.samples;
 import cat.aoc.client_pci.api.ClientPCI;
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.utils.PropertiesReader;
-import net.gencat.scsp.esquemes.respuesta.Respuesta;
+import generated.pci.respuesta.Respuesta;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

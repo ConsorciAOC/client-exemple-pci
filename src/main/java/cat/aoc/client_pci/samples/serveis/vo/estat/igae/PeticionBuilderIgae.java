@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.samples.serveis.vo.estat.igae;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.igae.PeticioConsultaInhabilitacions;
+import generated.serveis.igae.PeticioConsultaInhabilitacions;
 
 import java.util.Properties;
 

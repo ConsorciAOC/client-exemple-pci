@@ -8,7 +8,7 @@ import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.over.OperacioOver;
 import cat.aoc.client_pci.samples.serveis.over.PeticionBuilderOver;
-import generated.over.RespostaDocumentacioTramit;
+import generated.serveis.over.RespostaDocumentacioTramit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

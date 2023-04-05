@@ -8,7 +8,7 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.boe.OperacioBoe;
 import cat.aoc.client_pci.samples.serveis.boe.PeticionBuilderBoe;
-import generated.boe.RespostaEnviamentAnunci;
+import generated.serveis.boe.RespostaEnviamentAnunci;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

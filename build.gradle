@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'cat.aoc.client_pci'
-version '1.0-SNAPSHOT'
+version 'BETA-1.0.0'
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
@@ -51,8 +51,10 @@ test {
 
 def jaxb = tasks.register("jaxb") {
     description 'Convert XSD\'s to java classes'
-    def srcDir = file("src/main/java/")
-    def xsdParentDir = file("src/main/resources/xsd/")
+
+    def srcDir = file("src/main/java")
+    project.delete(files("${srcDir}/generated"))
+
     // Restricts access to the protocols specified for external references set by the schemaLocation attribute, import element, and include element.
     System.setProperty('javax.xml.accessExternalDTD', 'all')
     System.setProperty('javax.xml.accessExternalSchema', 'all')
@@ -62,16 +64,28 @@ def jaxb = tasks.register("jaxb") {
             classpath: configurations.jaxb.asPath
     )
     ant.jaxbTargetDir = srcDir
+    def xsdParentDir = file("src/main/resources/xsd")
     doLast {
-        xsdParentDir.eachDir(xsdProjectDir -> {
-            def packageName = ('generated.' + xsdProjectDir.name)
+        // Convert PCI (generic) XSD's
+        def xsdPCIDir = file("${xsdParentDir}/pci")
+        xsdPCIDir.eachDir(xsdProjectDir -> {
+            def packageName = ('generated.pci.' + xsdProjectDir.name)
+            println('Genearating source code from: ' + xsdProjectDir.name)
+            ant.xjc(destdir: srcDir,
+                    package: packageName){
+                schema(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xsd")
+            }
+        })
+        // Convert SERVICES (specific) XSD's
+        def xsdServicesDir = file("${xsdParentDir}/serveis")
+        xsdServicesDir.eachDir(xsdProjectDir -> {
+            def packageName = ('generated.serveis.' + xsdProjectDir.name)
             def projectWithBindings = !fileTree(xsdProjectDir.getAbsolutePath()).filter { file ->
                 file.name.contains('.xjb')
             }.isEmpty()
             if (projectWithBindings) {
                 println('Genearating source code from: ' + xsdProjectDir.name + ' (bindings found)')
-                ant.xjc(
-                        destdir: srcDir,
+                ant.xjc(destdir: srcDir,
                         package: packageName){
                     schema(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xsd")
                     binding(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xjb")
@@ -79,19 +93,12 @@ def jaxb = tasks.register("jaxb") {
                 }
             } else {
                 println('Genearating source code from: ' + xsdProjectDir.name)
-                ant.xjc(
-                        destdir: srcDir,
+                ant.xjc(destdir: srcDir,
                         package: packageName){
                     schema(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xsd")
                 }
             }
         })
-        // WSDL Compilation
-        ant.xjc(
-                destdir: srcDir,
-                schema: 'src/main/resources/wsdl/sincron.wsdl',
-                language: 'WSDL'
-        )
     }
 }
 

@@ -8,7 +8,7 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.sct_dev.OperacioSctDev;
 import cat.aoc.client_pci.samples.serveis.sct_dev.PeticionBuilderSctDev;
-import generated.sct_dev.RespostaConsultaCredencials;
+import generated.serveis.sct_dev.RespostaConsultaCredencials;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
 package cat.aoc.client_pci.samples.serveis.enotum;
 
-import generated.enotum.EmissorType;
-import generated.enotum.PeticioResum;
-import generated.enotum.UsuariType;
+import generated.serveis.enotum.EmissorType;
+import generated.serveis.enotum.PeticioResum;
+import generated.serveis.enotum.UsuariType;
 
 interface PeticionBuilderEnotumResum {
     static PeticioResum buildPeticioResum(EmissorType emissor, UsuariType usuari) {

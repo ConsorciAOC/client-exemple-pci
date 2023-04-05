@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.samples.serveis.enotum;
 
-import generated.enotum.*;
+import generated.serveis.enotum.*;
 
 import java.math.BigInteger;
 

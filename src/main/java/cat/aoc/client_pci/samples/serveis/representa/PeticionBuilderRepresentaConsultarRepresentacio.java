@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.samples.serveis.representa;
 
-import generated.representa.*;
+import generated.serveis.representa.*;
 
 interface PeticionBuilderRepresentaConsultarRepresentacio {
     static ConsultarRepresentacio buildConsultarRepresentacio() {

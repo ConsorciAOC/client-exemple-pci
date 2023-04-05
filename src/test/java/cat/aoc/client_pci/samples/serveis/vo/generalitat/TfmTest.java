@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.tfm.OperacioTfm;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.tfm.PeticionBuilderTfm;
-import generated.tfm.RespostaDadesCompletes;
+import generated.serveis.tfm.RespostaDadesCompletes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

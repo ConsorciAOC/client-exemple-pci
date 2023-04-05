@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.samples.serveis.vo.generalitat.rca;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.rca.PeticioVerificacioAssegurat;
+import generated.serveis.rca.PeticioVerificacioAssegurat;
 
 import java.util.Properties;
 

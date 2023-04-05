@@ -1,9 +1,9 @@
 package cat.aoc.client_pci.samples.serveis.vo.generalitat.padro_historic;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.padro_historic.DocumentacionTitular;
-import generated.padro_historic.PeticionDatosConvivientesHistorico;
-import generated.padro_historic.PeticionDatosTitularHistorico;
+import generated.serveis.padro_historic.DocumentacionTitular;
+import generated.serveis.padro_historic.PeticionDatosConvivientesHistorico;
+import generated.serveis.padro_historic.PeticionDatosTitularHistorico;
 
 import java.util.Properties;
 

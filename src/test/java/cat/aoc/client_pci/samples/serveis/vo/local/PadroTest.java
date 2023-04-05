@@ -6,8 +6,8 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
-import generated.padro.RespuestaDatosConvivientes;
-import generated.padro.RespuestaDatosTitular;
+import generated.serveis.padro.RespuestaDatosConvivientes;
+import generated.serveis.padro.RespuestaDatosTitular;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ class PadroTest extends AbstractClientPCITest<OperacioPadro> {
         assertNotNull(resposta);
         assertEquals("12345678Z", resposta.getDocumentacion());
         assertEquals(1, resposta.getCodigoResultado());
-        generated.padro.empadronamiento.VolanteEmpadronamiento volante = (generated.padro.empadronamiento.VolanteEmpadronamiento) resposta.getAny();
+        generated.serveis.padro.empadronamiento.VolanteEmpadronamiento volante = (generated.serveis.padro.empadronamiento.VolanteEmpadronamiento) resposta.getAny();
         assertEquals("Friedrich", volante.getVolanteEmpadronamientoDatosFirmados().getDatosPersonales().getNombre());
     }
 
@@ -41,7 +41,7 @@ class PadroTest extends AbstractClientPCITest<OperacioPadro> {
         assertNotNull(resposta);
         assertEquals("12345678Z", resposta.getDocumentacion());
         assertEquals(1, resposta.getCodigoResultado());
-        generated.padro.convivencia.VolanteEmpadronamiento volante = (generated.padro.convivencia.VolanteEmpadronamiento) resposta.getAny();
+        generated.serveis.padro.convivencia.VolanteEmpadronamiento volante = (generated.serveis.padro.convivencia.VolanteEmpadronamiento) resposta.getAny();
         assertEquals("Friedrich", volante.getVolanteEmpadronamientoDatosFirmados().getDatosPersonales().getNombre());
         assertEquals("3", volante.getVolanteEmpadronamientoDatosFirmados().getNumeroAcompanantes().toString());
     }

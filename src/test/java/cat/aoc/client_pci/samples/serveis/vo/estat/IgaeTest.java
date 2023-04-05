@@ -7,7 +7,7 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.vo.estat.igae.OperacioIgae;
 import cat.aoc.client_pci.samples.serveis.vo.estat.igae.PeticionBuilderIgae;
-import generated.igae.RespostaConsultaInhabilitacions;
+import generated.serveis.igae.RespostaConsultaInhabilitacions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

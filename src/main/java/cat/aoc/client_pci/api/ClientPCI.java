@@ -7,11 +7,11 @@ import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.api.soap.LoggerInterceptor;
 import cat.aoc.client_pci.api.soap.SignatureInterceptor;
 import cat.aoc.client_pci.api.soap.SoapMtomClient;
+import generated.pci.peticion.Peticion;
+import generated.pci.peticion.Procesa;
+import generated.pci.respuesta.ProcesaResponse;
+import generated.pci.respuesta.Respuesta;
 import lombok.extern.slf4j.Slf4j;
-import net.gencat.scsp.esquemes.peticion.Peticion;
-import net.gencat.scsp.esquemes.respuesta.Respuesta;
-import org.openuri.Procesa;
-import org.openuri.ProcesaResponse;
 import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 
 import java.util.Arrays;
@@ -21,9 +21,8 @@ import java.util.stream.Stream;
 @Slf4j
 public class ClientPCI extends SoapMtomClient<Procesa, ProcesaResponse> {
     private static final String[] PACKAGES = {
-            "org.openuri",
-            "net.gencat.scsp.esquemes.peticion",
-            "net.gencat.scsp.esquemes.respuesta"
+            "generated.pci.peticion",
+            "generated.pci.respuesta",
     };
 
     private static String[] processPackages(String... externalPackages) {

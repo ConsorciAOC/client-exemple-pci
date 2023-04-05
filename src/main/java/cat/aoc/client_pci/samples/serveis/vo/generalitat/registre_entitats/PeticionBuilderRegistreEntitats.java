@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.samples.serveis.vo.generalitat.registre_entitats;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.registre_entitats.PeticioBasicaConsulta;
+import generated.serveis.registre_entitats.PeticioBasicaConsulta;
 
 import java.util.Properties;
 

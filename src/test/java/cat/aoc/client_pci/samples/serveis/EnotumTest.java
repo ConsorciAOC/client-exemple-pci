@@ -8,7 +8,7 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.enotum.OperacioEnotum;
 import cat.aoc.client_pci.samples.serveis.enotum.PeticionBuilderEnotum;
-import generated.enotum.*;
+import generated.serveis.enotum.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -62,5 +62,5 @@ class EnotumTest extends AbstractClientPCITest<OperacioEnotum> {
         RespostaParaulaPas resposta = this.send(OperacioEnotum.PARAULA_PAS, Finalitat.PROVES);
         assertNotNull(resposta);
     }
-
+    
 }

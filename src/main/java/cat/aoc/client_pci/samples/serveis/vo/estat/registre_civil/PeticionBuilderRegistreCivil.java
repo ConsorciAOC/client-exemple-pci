@@ -1,8 +1,8 @@
 package cat.aoc.client_pci.samples.serveis.vo.estat.registre_civil;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.registre_civil.AltresDades;
-import generated.registre_civil.PeticioConsultaRegistreCivil;
+import generated.serveis.registre_civil.AltresDades;
+import generated.serveis.registre_civil.PeticioConsultaRegistreCivil;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;

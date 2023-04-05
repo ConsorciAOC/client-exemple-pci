@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.estat.dependencia.OperacioDependencia;
 import cat.aoc.client_pci.samples.serveis.vo.estat.dependencia.PeticionBuilderDependencia;
-import generated.dependencia.RespostaConsultaNivellGrauDependencia;
+import generated.serveis.dependencia.RespostaConsultaNivellGrauDependencia;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

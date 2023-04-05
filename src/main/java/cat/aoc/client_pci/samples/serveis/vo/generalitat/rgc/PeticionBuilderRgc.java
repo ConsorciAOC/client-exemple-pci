@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.samples.serveis.vo.generalitat.rgc;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.rgc.PeticioConsultaPrestacions;
+import generated.serveis.rgc.PeticioConsultaPrestacions;
 
 import java.util.Properties;
 

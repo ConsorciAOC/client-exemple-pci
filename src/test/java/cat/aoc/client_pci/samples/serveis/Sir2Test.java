@@ -8,8 +8,8 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.sir2.OperacioSir2;
 import cat.aoc.client_pci.samples.serveis.sir2.PeticionBuilderSir2;
-import generated.sir2.RespostaConsultaAssentament;
-import generated.sir2.RespostaEnviamentAssentament;
+import generated.serveis.sir2.RespostaConsultaAssentament;
+import generated.serveis.sir2.RespostaEnviamentAssentament;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

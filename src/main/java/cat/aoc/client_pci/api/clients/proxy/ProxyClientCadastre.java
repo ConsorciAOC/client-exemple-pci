@@ -5,16 +5,16 @@ import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.api.model.Cluster;
 import cat.aoc.client_pci.api.model.Entorn;
 import cat.aoc.client_pci.api.model.Frontal;
-import net.gencat.scsp.esquemes.peticion.Peticion;
-import net.gencat.scsp.esquemes.respuesta.Respuesta;
+import generated.pci.peticion.Peticion;
+import generated.pci.respuesta.Respuesta;
 
 import java.util.Properties;
 
 public class ProxyClientCadastre extends ClientPCI {
-    private static final String[] CERTIFICACIO_PACKAGES = {"generated.cadastre.certificacio",};
-    private static final String[] DADES_PACKAGES = {"generated.cadastre.dades",};
-    private static final String[] GRAFICA_PACKAGES = {"generated.cadastre.grafica",};
-    private static final String[] CSV_PACKAGES = {"generated.cadastre.csv",};
+    private static final String[] CERTIFICACIO_PACKAGES = {"generated.serveis.cadastre.certificacio",};
+    private static final String[] DADES_PACKAGES = {"generated.serveis.cadastre.dades",};
+    private static final String[] GRAFICA_PACKAGES = {"generated.serveis.cadastre.grafica",};
+    private static final String[] CSV_PACKAGES = {"generated.serveis.cadastre.csv",};
 
     private final ClientPCI clientCertificacio;
     private final ClientPCI clientDades;

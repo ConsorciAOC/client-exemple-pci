@@ -1,8 +1,8 @@
 package cat.aoc.client_pci.samples.serveis.enotum;
 
-import generated.enotum.EmissorType;
-import generated.enotum.PeticioParaulaPas;
-import generated.enotum.UsuariType;
+import generated.serveis.enotum.EmissorType;
+import generated.serveis.enotum.PeticioParaulaPas;
+import generated.serveis.enotum.UsuariType;
 
 interface PeticionBuilderEnotumParaulaPas {
     static PeticioParaulaPas buildPeticioParaulaPas(EmissorType emissor, UsuariType usuari) {

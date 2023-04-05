@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.registre_entitats.OperacioRegistreEntitats;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.registre_entitats.PeticionBuilderRegistreEntitats;
-import generated.registre_entitats.RespostaInscripcionsEntitats;
+import generated.serveis.registre_entitats.RespostaInscripcionsEntitats;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

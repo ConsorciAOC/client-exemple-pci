@@ -5,20 +5,20 @@ import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.api.model.Cluster;
 import cat.aoc.client_pci.api.model.Entorn;
 import cat.aoc.client_pci.api.model.Frontal;
-import net.gencat.scsp.esquemes.peticion.Peticion;
-import net.gencat.scsp.esquemes.respuesta.Respuesta;
+import generated.pci.peticion.Peticion;
+import generated.pci.respuesta.Respuesta;
 
 import java.util.Properties;
 
 public class ProxyClientPadro extends ClientPCI {
     private static final String[] EMPADRONAMIENTO_PACKAGES = {
-            "generated.padro",
-            "generated.padro.empadronamiento",
+            "generated.serveis.padro",
+            "generated.serveis.padro.empadronamiento",
     };
 
     private static final String[] CONVIVENVIA_PACKAGES = {
-            "generated.padro",
-            "generated.padro.convivencia",
+            "generated.serveis.padro",
+            "generated.serveis.padro.convivencia",
     };
 
     private final ClientPCI clientEmpadronamiento;

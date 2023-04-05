@@ -8,8 +8,8 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.estat.inss.OperacioInss;
 import cat.aoc.client_pci.samples.serveis.vo.estat.inss.PeticionBuilderInss;
-import generated.inss.RespostaConsultaPrestacions;
-import generated.inss_historic.RespostaConsultaPrestacionsHistoric;
+import generated.serveis.inss.RespostaConsultaPrestacions;
+import generated.serveis.inss_historic.RespostaConsultaPrestacionsHistoric;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

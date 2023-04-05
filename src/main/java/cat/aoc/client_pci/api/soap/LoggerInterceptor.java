@@ -1,9 +1,9 @@
 package cat.aoc.client_pci.api.soap;
 
 import cat.aoc.client_pci.api.exceptions.ClientException;
+import generated.pci.peticion.Procesa;
 import org.springframework.oxm.Unmarshaller;
 import lombok.extern.slf4j.Slf4j;
-import org.openuri.Procesa;
 import org.springframework.ws.client.WebServiceClientException;
 import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 import org.springframework.ws.context.MessageContext;

@@ -8,8 +8,8 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.padro_historic.OperacioPadroHistoric;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.padro_historic.PeticionBuilderPadroHistoric;
-import generated.padro_historic.RespuestaDatosConvivientesHistorico;
-import generated.padro_historic.RespuestaDatosTitularHistorico;
+import generated.serveis.padro_historic.RespuestaDatosConvivientesHistorico;
+import generated.serveis.padro_historic.RespuestaDatosTitularHistorico;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

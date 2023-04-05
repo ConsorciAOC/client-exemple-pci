@@ -1,9 +1,9 @@
 package cat.aoc.client_pci.samples.serveis.vo.generalitat.tfm;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.tfm.PeticioConsultaVigencia;
-import generated.tfm.PeticioDadesCompletes;
-import generated.tfm.TTipusDocumentacio;
+import generated.serveis.tfm.PeticioConsultaVigencia;
+import generated.serveis.tfm.PeticioDadesCompletes;
+import generated.serveis.tfm.TTipusDocumentacio;
 
 import java.util.Properties;
 

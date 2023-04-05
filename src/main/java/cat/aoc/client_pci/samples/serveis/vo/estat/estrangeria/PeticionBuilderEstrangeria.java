@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.samples.serveis.vo.estat.estrangeria;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.estrangeria.PeticioConsultaDadesResidenciaLegal;
+import generated.serveis.estrangeria.PeticioConsultaDadesResidenciaLegal;
 
 import java.util.Properties;
 

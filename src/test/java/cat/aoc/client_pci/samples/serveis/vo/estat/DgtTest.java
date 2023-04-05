@@ -7,7 +7,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.estat.dgt.OperacioDgt;
 import cat.aoc.client_pci.samples.serveis.vo.estat.dgt.PeticionBuilderDgt;
-import generated.dgt.RespostaConsultaVehicle;
+import generated.serveis.dgt.RespostaConsultaVehicle;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

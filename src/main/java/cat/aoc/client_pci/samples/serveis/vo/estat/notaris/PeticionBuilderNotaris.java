@@ -1,8 +1,8 @@
 package cat.aoc.client_pci.samples.serveis.vo.estat.notaris;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.notaris.IdEscriptura;
-import generated.notaris.PeticioConsultaSubsistenciaAdministradors;
+import generated.serveis.notaris.IdEscriptura;
+import generated.serveis.notaris.PeticioConsultaSubsistenciaAdministradors;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;

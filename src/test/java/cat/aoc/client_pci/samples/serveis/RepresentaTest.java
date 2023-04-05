@@ -8,7 +8,7 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.representa.OperacioRepresenta;
 import cat.aoc.client_pci.samples.serveis.representa.PeticionBuilderRepresenta;
-import generated.representa.ConsultarRepresentacioResponse;
+import generated.serveis.representa.ConsultarRepresentacioResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.rgc.OperacioRgc;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.rgc.PeticionBuilderRgc;
-import generated.rgc.RespostaConsultaPrestacions;
+import generated.serveis.rgc.RespostaConsultaPrestacions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

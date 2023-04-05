@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.samples.serveis.sir2;
 
-import generated.sir2.PeticioReenviamentAssentament;
+import generated.serveis.sir2.PeticioReenviamentAssentament;
 
 interface PeticionBuilderSir2Reenviar {
     static PeticioReenviamentAssentament buildPeticioReenviamentAssentament() {

@@ -1,0 +1,10 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pet="http://gencat.net/scsp/esquemes/peticion" xmlns:res="http://gencat.net/scsp/esquemes/respuesta" elementFormDefault="qualified" targetNamespace="http://www.openuri.org/">
+    <xs:import namespace="http://gencat.net/scsp/esquemes/peticion" schemaLocation="peticion.xsd"/>
+    <xs:element name="procesa">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="pet:Peticion"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

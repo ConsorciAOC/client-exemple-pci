@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.samples.serveis.vo.estat.dgt;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.dgt.PeticioConsultaVehicle;
+import generated.serveis.dgt.PeticioConsultaVehicle;
 
 import java.util.Properties;
 

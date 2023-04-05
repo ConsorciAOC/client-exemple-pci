@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.samples.serveis.eacat;
 
-import generated.eacat.PeticioConsultaEns;
+import generated.serveis.eacat.PeticioConsultaEns;
 
 interface PeticionBuilderEacatEns {
     static PeticioConsultaEns buildPeticioConsultaEns() {

@@ -9,7 +9,7 @@ import cat.aoc.client_pci.samples.serveis.enotum.OperacioEnotum;
 import cat.aoc.client_pci.samples.serveis.enotum.PeticionBuilderEnotum;
 import cat.aoc.client_pci.utils.PropertiesReader;
 import lombok.extern.slf4j.Slf4j;
-import net.gencat.scsp.esquemes.peticion.Peticion;
+import generated.pci.peticion.Peticion;
 
 import java.util.Properties;
 

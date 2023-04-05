@@ -8,7 +8,7 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.vo.estat.mepsyd.OperacioMepsyd;
 import cat.aoc.client_pci.samples.serveis.vo.estat.mepsyd.PeticionBuilderMepsyd;
-import generated.mepsyd.RespostaVerificacioTitolsUniversitaris;
+import generated.serveis.mepsyd.RespostaVerificacioTitolsUniversitaris;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

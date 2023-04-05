@@ -2,10 +2,10 @@ package cat.aoc.client_pci.samples.serveis.enotum;
 
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.enotum.*;
-import net.gencat.scsp.esquemes.peticion.Fichero;
-import net.gencat.scsp.esquemes.peticion.Ficheros;
-import net.gencat.scsp.esquemes.peticion.Peticion;
+import generated.serveis.enotum.*;
+import generated.pci.peticion.Peticion;
+import generated.pci.peticion.Fichero;
+import generated.pci.peticion.Ficheros;
 
 import java.util.Properties;
 

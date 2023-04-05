@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.estat.registre_civil.OperacioRegistreCivil;
 import cat.aoc.client_pci.samples.serveis.vo.estat.registre_civil.PeticionBuilderRegistreCivil;
-import generated.registre_civil.RespostaConsultaRegistreCivil;
+import generated.serveis.registre_civil.RespostaConsultaRegistreCivil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
 package cat.aoc.client_pci.samples.serveis.vo.generalitat.tfn;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.tfn.PeticioDadesCompletes;
-import generated.tfn.TTipusDocumentacio;
+import generated.serveis.tfn.PeticioDadesCompletes;
+import generated.serveis.tfn.TTipusDocumentacio;
 
 import java.util.Properties;
 

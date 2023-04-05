@@ -1,7 +1,7 @@
 package cat.aoc.client_pci.samples.serveis.sir2;
 
-import generated.sir2.FicheroIntercambioSICRES3;
-import generated.sir2.PeticioEnviamentAssentament;
+import generated.serveis.sir2.FicheroIntercambioSICRES3;
+import generated.serveis.sir2.PeticioEnviamentAssentament;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 import javax.xml.transform.Result;
@@ -18,7 +18,7 @@ interface PeticionBuilderSir2Enviar {
 
     static String buildFicheroIntercambioSICRES3Xml() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPaths("generated.sir2");
+        marshaller.setContextPaths("generated.serveis.sir2");
         FicheroIntercambioSICRES3 sicres3 = buildFicheroIntercambioSICRES3();
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);

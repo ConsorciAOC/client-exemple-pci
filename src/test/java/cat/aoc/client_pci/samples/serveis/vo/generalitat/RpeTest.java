@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.rpe.OperacioRpe;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.rpe.PeticionBuilderRpe;
-import generated.rpe.RespostaConsultaParellesEstables;
+import generated.serveis.rpe.RespostaConsultaParellesEstables;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

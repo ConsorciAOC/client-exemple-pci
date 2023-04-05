@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.samples.serveis.etauler;
 
-import generated.etauler.PeticioConsultarEstatEdicte;
+import generated.serveis.etauler.PeticioConsultarEstatEdicte;
 
 interface PeticionBuilderEtaulerConsultar {
 

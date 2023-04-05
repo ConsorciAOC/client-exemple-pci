@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.atc.OperacioAtc;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.atc.PeticionBuilderAtc;
-import generated.atc.InfDeutePICAResponse;
+import generated.serveis.atc.InfDeutePICAResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

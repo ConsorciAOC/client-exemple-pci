@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.samples.serveis.sir2;
 
-import generated.sir2.PeticioConfirmacioAssentament;
+import generated.serveis.sir2.PeticioConfirmacioAssentament;
 
 interface PeticionBuilderSir2Confirmar {
     static PeticioConfirmacioAssentament buildPeticioConfirmacioAssentament() {

@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.soc.OperacioSoc;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.soc.PeticionBuilderSoc;
-import generated.soc.CertUltimPeriodeResponse;
+import generated.serveis.soc.CertUltimPeriodeResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

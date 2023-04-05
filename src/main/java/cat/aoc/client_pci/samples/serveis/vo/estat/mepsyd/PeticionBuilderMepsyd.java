@@ -2,8 +2,8 @@ package cat.aoc.client_pci.samples.serveis.vo.estat.mepsyd;
 
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import net.gencat.scsp.esquemes.peticion.Peticion;
-import net.gencat.scsp.esquemes.peticion.Titular;
+import generated.pci.peticion.Peticion;
+import generated.pci.peticion.Titular;
 
 import java.util.Properties;
 

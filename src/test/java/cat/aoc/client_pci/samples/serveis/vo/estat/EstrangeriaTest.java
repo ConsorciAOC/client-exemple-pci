@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.estat.estrangeria.OperacioEstrangeria;
 import cat.aoc.client_pci.samples.serveis.vo.estat.estrangeria.PeticionBuilderEstrangeria;
-import generated.estrangeria.RespostaConsultaDadesResidenciaLegal;
+import generated.serveis.estrangeria.RespostaConsultaDadesResidenciaLegal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

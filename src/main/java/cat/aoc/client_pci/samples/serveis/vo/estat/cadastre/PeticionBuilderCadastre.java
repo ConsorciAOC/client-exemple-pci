@@ -1,10 +1,10 @@
 package cat.aoc.client_pci.samples.serveis.vo.estat.cadastre;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.cadastre.certificacio.Ambito;
-import generated.cadastre.certificacio.Cn;
-import generated.cadastre.certificacio.DatosEntrada;
-import generated.cadastre.certificacio.PeticioCertificacioTitular;
+import generated.serveis.cadastre.certificacio.Ambito;
+import generated.serveis.cadastre.certificacio.Cn;
+import generated.serveis.cadastre.certificacio.DatosEntrada;
+import generated.serveis.cadastre.certificacio.PeticioCertificacioTitular;
 
 import java.util.Properties;
 

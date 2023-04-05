@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.samples.serveis.sir2;
 
-import generated.sir2.PeticioRebuigAssentament;
+import generated.serveis.sir2.PeticioRebuigAssentament;
 
 interface PeticionBuilderSir2Rebutjar {
     static PeticioRebuigAssentament buildPeticioRebuigAssentament() {

@@ -8,7 +8,7 @@ import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.rca.OperacioRca;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.rca.PeticionBuilderRca;
-import generated.rca.RespostaVerificacioAssegurat;
+import generated.serveis.rca.RespostaVerificacioAssegurat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

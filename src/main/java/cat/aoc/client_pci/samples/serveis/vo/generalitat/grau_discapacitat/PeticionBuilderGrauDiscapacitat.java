@@ -1,8 +1,8 @@
 package cat.aoc.client_pci.samples.serveis.vo.generalitat.grau_discapacitat;
 
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.grau_discapacitat.DadesPersona;
-import generated.grau_discapacitat.PeticioConsultaDiscapacitatSimple;
+import generated.serveis.grau_discapacitat.DadesPersona;
+import generated.serveis.grau_discapacitat.PeticioConsultaDiscapacitatSimple;
 
 import java.util.Properties;
 

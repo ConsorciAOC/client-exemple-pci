@@ -1,6 +1,6 @@
 package cat.aoc.client_pci.samples.serveis.over;
 
-import generated.over.PeticioDocumentacioTramit;
+import generated.serveis.over.PeticioDocumentacioTramit;
 
 interface PeticionBuilderOverDocumentacio {
 
