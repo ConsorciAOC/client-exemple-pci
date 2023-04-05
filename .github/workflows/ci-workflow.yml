@@ -1,0 +1,97 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  JAR_PATH: ${{ './build/libs/' }}
+  APP_NAME: ${{ 'client-exemple-pci' }}
+  
+
+jobs:
+
+  ### CREATE RELEASE ###
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v2
+        
+    - name: Get App Version
+      id: version
+      run: |
+          echo "APP_VERSION=$(sed -e "s/'//g" <<< cat build.gradle | grep 'version = ' | cut -d'=' -f2 | awk '{$1=$1};1')" >> $GITHUB_ENV
+     
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ env.APP_VERSION }}
+        release_name: ${{ env.APP_VERSION }}
+        draft: false
+        prerelease: false
+
+  ### PUBLISH RELEASE ###
+  publish_release:
+    name: Publish Release
+    needs: create_release
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+        
+      - name: Get App Version
+        id: get_version
+        run: |
+          echo "APP_VERSION=$(sed -e "s/'//g" <<< cat build.gradle | grep 'version = ' | cut -d'=' -f2 | awk '{$1=$1};1')" >> $GITHUB_ENV
+          
+      - name: Set up JDK
+        id: setup_jdk
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      
+      - name: Cache Gradle packages
+        id: cache_gradle_packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: Build with Gradle
+        id: build_gradle
+        run: |
+          ./gradlew build
+      
+      - name: Upload Release Asset
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ${{ env.JAR_PATH }}${{ env.APP_NAME }}-${{ env.APP_VERSION }}-plain.jar
+          asset_name: ${{ env.APP_NAME }}-${{ env.APP_VERSION }}.jar
+          asset_content_type: application/octet-stream
+      
+      - name: Rollback Release
+        if: failure() && needs.create_release.outputs.id != ''
+        uses: author/action-rollback@stable
+        with:
+          id: ${{ needs.create_release.id }}
+          tag: ${{ github.ref }}
