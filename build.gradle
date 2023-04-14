@@ -9,6 +9,7 @@ version = 'BETA-1.0.0'
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
+def projectEncoding = 'UTF-8'
 
 repositories {
     mavenCentral()
@@ -74,6 +75,8 @@ def jaxb = tasks.register("jaxb") {
             ant.xjc(destdir: srcDir,
                     package: packageName){
                 schema(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xsd")
+                arg(value: "-encoding")
+                arg(value: projectEncoding)
             }
         })
         // Convert SERVICES (specific) XSD's
@@ -90,25 +93,24 @@ def jaxb = tasks.register("jaxb") {
                     schema(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xsd")
                     binding(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xjb")
                     arg(value: "-extension")
+                    arg(value: "-encoding")
+                    arg(value: projectEncoding)
                 }
             } else {
                 println('Genearating source code from: ' + xsdProjectDir.name)
                 ant.xjc(destdir: srcDir,
                         package: packageName){
                     schema(dir: xsdProjectDir.getAbsoluteFile(), includes: "**/*.xsd")
+                    arg(value: "-encoding")
+                    arg(value: projectEncoding)
                 }
             }
         })
     }
 }
 
-compileJava {options.encoding = "ISO-8859-1"}
+compileJava {options.encoding = projectEncoding}
 compileJava.dependsOn jaxb
 
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
-}
+bootJar {enabled = false}
+jar {enabled = true}

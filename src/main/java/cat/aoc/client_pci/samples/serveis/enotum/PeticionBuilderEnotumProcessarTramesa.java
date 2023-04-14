@@ -25,7 +25,7 @@ interface PeticionBuilderEnotumProcessarTramesa {
 
     private static PeticioProcessarTramesa.Tramesa.DadesAvisos getDadesAvisos() {
         PeticioProcessarTramesa.Tramesa.DadesAvisos dadesAvisos = new PeticioProcessarTramesa.Tramesa.DadesAvisos();
-        dadesAvisos.setPlantilla("Universitat Autònoma de Barcelona");
+        dadesAvisos.setPlantilla("Universitat Autï¿½noma de Barcelona");
         return dadesAvisos;
     }
 
@@ -65,7 +65,7 @@ interface PeticionBuilderEnotumProcessarTramesa {
     private static DocumentsType getDocument() {
         DocumentsType documentsType = new DocumentsType();
         DocumentsType.Document document = new DocumentsType.Document();
-        document.setTipus(TipusDocumentType.RESOLUCIÓ);
+        document.setTipus(TipusDocumentType.RESOLUCIÃ“);
         document.setNom("sample.pdf");
         document.setIdFicheroPCI("1234");
         documentsType.getDocument().add(document);

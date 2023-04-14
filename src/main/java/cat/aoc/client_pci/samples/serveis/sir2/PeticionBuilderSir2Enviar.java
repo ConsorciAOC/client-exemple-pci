@@ -41,7 +41,7 @@ interface PeticionBuilderSir2Enviar {
     private static FicheroIntercambioSICRES3.DeOrigenORemitente getDeOrigenORemitente() {
         FicheroIntercambioSICRES3.DeOrigenORemitente o = new FicheroIntercambioSICRES3.DeOrigenORemitente();
         o.setCodigoEntidadRegistralOrigen("O00015791");
-        o.setDecodificacionEntidadRegistralOrigen("Registro del Departamento de Agricultura, Ganadería, Pesca, Alimentación y Medi");
+        o.setDecodificacionEntidadRegistralOrigen("Registro del Departamento de Agricultura, GanaderÃ­a, Pesca, AlimentaciÃ³n y Medi");
         o.setNumeroRegistroEntrada("REGAGE21e00000013486");
         o.setFechaHoraEntrada("20210211192653");
         o.setCodigoUnidadTramitacionOrigen("A09018933");
@@ -52,9 +52,9 @@ interface PeticionBuilderSir2Enviar {
     private static FicheroIntercambioSICRES3.DeDestino getDeDestino() {
         FicheroIntercambioSICRES3.DeDestino destino = new FicheroIntercambioSICRES3.DeDestino();
         destino.setCodigoEntidadRegistralDestino("O00002721");
-        destino.setDecodificacionEntidadRegistralDestino("Consorcio Administración Abierta de Cataluña (CAOC)");
+        destino.setDecodificacionEntidadRegistralDestino("Consorcio AdministraciÃ³n Abierta de CataluÃ±a (CAOC)");
         destino.setCodigoUnidadTramitacionDestino("LA1000323");
-        destino.setDecodificacionUnidadTramitacionDestino("Consorcio Administración Abierta de Cataluña");
+        destino.setDecodificacionUnidadTramitacionDestino("Consorcio AdministraciÃ³n Abierta de CataluÃ±a");
         return destino;
     }
 
@@ -97,7 +97,7 @@ interface PeticionBuilderSir2Enviar {
         control.setObservacionesApunte("");
         control.setIndicadorPrueba("0");
         control.setCodigoEntidadRegistralInicio("O00015791");
-        control.setDecodificacionEntidadRegistralInicio("Registro del Departamento de Agricultura, Ganadería, Pesca, Alimentación y Medi");
+        control.setDecodificacionEntidadRegistralInicio("Registro del Departamento de Agricultura, Ganaderï¿½a, Pesca, Alimentaciï¿½n y Medi");
         return control;
     }
 
