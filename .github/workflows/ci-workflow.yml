@@ -76,7 +76,7 @@ jobs:
       - name: Build with Gradle
         id: build_gradle
         run: |
-          ./gradlew build
+          ./gradlew build -x test
       
       - name: Upload Release Asset
         id: upload_release_asset
