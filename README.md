@@ -61,6 +61,10 @@ compileJava.dependsOn jaxb
 
 
 ### Exemple d'ús
+Podeu fer servir el projecte clonant el mateix repositori, compilant-lo i testejant-lo o podeu descarregar el `jar` generat 
+amb l'última versió directament de github: https://github.com/ConsorciAOC/client-exemple-pci/releases/latest
+
+A continuació veureu una crida d'exemple pel servei `e-NOTUM`
 ```java
 // Obtenir el client del servei desitjat
 ClientPCI client = Serveis.ENOTUM.getClient(Entorn.PRE, Frontal.SINCRON);
@@ -75,3 +79,6 @@ client.send(peticion);
 
 ### Més exemples
 Podreu trobar més exemples dels diferents serveis sota l'apartat de test del projecte.
+
+> ⚠️ Els tests poden estar acoblats a les dades informades al fitxer `client.properties`, si canvieu el requeridor 
+> (codi INE10) que s'informa les peticions, per exemple, és possible que el resultat no sigui l'esperat.

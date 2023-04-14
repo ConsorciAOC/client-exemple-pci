@@ -23,7 +23,7 @@ interface PeticionBuilderEtaulerPublicar {
         } catch (DatatypeConfigurationException e) {
             e.printStackTrace();
         }
-edicte.setDestacat(false);
+        edicte.setDestacat(false);
         Diligencia diligencia = new Diligencia();
         diligencia.setIdioma(TIdioma.CA);
         diligencia.setFormat("electronica");
