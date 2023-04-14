@@ -8,7 +8,7 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.etauler.OperacioEtauler;
 import cat.aoc.client_pci.samples.serveis.etauler.PeticionBuilderEtauler;
-import generated.serveis.etauler.RespostaConsultarEstatEdicte;
+import generated.serveis.etauler.RespostaPublicarEdicte;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,12 +24,12 @@ class EtaulerTest extends AbstractClientPCITest<OperacioEtauler> {
     }
 
     @Test
-    @DisplayName("CONSULTAR")
-    void consultar() throws ClientException {
-        RespostaConsultarEstatEdicte resposta = this.send(OperacioEtauler.CONSULTAR, Finalitat.PROVES);
+    @DisplayName("PUBLICAR")
+    void publicar() throws ClientException {
+        RespostaPublicarEdicte resposta = this.send(OperacioEtauler.PUBLICAR, Finalitat.PROVES);
         assertNotNull(resposta);
-        assertEquals("2021-10-08+02:00", resposta.getDataFiPublicacioEfectiva().toString());
-        assertEquals("2021-10-08+02:00", resposta.getDataFiPublicacioEfectiva().toString());
+        assertNotNull(resposta.getResultat());
     }
+
 
 }
