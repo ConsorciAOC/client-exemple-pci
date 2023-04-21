@@ -34,14 +34,14 @@ public class ClientPCI extends SoapMtomClient<Procesa, ProcesaResponse> {
     private final Cluster cluster;
     private final Frontal frontal;
 
-    public ClientPCI(Entorn entorn, Cluster cluster, Frontal frontal, String[] externalPackages, Properties properties) {
+    public ClientPCI(Entorn entorn, Cluster cluster, Frontal frontal, String[] externalPackages, Properties keystoreProperties) {
         super(processPackages(externalPackages));
         this.entorn = entorn;
         this.cluster = cluster;
         this.frontal = frontal;
         try {
             setInterceptors(new ClientInterceptor[]{
-                    new SignatureInterceptor(properties),
+                    new SignatureInterceptor(keystoreProperties),
                     new LoggerInterceptor(getUnmarshaller())
             });
         } catch (ClientException e) {

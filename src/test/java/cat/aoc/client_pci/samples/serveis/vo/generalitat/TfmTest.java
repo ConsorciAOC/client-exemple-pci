@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TfmTest extends AbstractClientPCITest<OperacioTfm> {
     public TfmTest() throws IOException {
-        super(Serveis.TFM.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderTfm(PROPERTIES));
+        super(Serveis.TFM.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderTfm(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

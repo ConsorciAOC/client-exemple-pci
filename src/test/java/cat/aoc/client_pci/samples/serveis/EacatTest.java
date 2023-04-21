@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class EacatTest extends AbstractClientPCITest<OperacioEacat> {
 
     public EacatTest() throws IOException {
-        super(Serveis.EACAT.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderEacat(PROPERTIES));
+        super(Serveis.EACAT.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderEacat(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

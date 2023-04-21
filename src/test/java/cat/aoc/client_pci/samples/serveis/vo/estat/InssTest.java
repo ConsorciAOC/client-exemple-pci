@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class InssTest extends AbstractClientPCITest<OperacioInss> {
 
     public InssTest() throws IOException {
-        super(Serveis.INSS.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderInss(PROPERTIES));
+        super(Serveis.INSS.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderInss(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

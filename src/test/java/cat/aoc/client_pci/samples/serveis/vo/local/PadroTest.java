@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class PadroTest extends AbstractClientPCITest<OperacioPadro> {
 
     public PadroTest() throws IOException {
-        super(Serveis.PADRO.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderPadro(PROPERTIES));
+        super(Serveis.PADRO.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderPadro(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

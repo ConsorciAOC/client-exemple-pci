@@ -51,9 +51,6 @@ public enum Serveis {
     // VO - LOCAL
     PADRO(Cluster.IOP, "generated.serveis.padro", "generated.serveis.padro.empadronamiento");
 
-    private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
-    private static final String KEYSTORE_PATH = "src\\main\\resources\\keystore.properties";
-
     private final Cluster cluster;
     private final String[] packages;
 
@@ -62,8 +59,8 @@ public enum Serveis {
         this.packages = packages;
     }
 
-    public ClientPCI getClient(Entorn entorn, Frontal frontal) throws IOException {
-        Properties properties = PropertiesReader.load(KEYSTORE_PATH);
+    public ClientPCI getClient(Entorn entorn, Frontal frontal, String keystorePath) throws IOException {
+        Properties properties = PropertiesReader.load(keystorePath);
         return switch (this) {
             case PADRO -> new ProxyClientPadro(entorn, frontal, properties);
             case CADASTRE -> new ProxyClientCadastre(entorn, frontal, properties);

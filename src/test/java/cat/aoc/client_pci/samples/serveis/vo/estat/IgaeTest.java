@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class IgaeTest extends AbstractClientPCITest<OperacioIgae> {
 
     public IgaeTest() throws IOException {
-        super(Serveis.IGAE.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderIgae(PROPERTIES));
+        super(Serveis.IGAE.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderIgae(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

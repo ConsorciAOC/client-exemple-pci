@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class DependenciaTest extends AbstractClientPCITest<OperacioDependencia> {
 
     public DependenciaTest() throws IOException {
-        super(Serveis.DEPENDENCIA.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderDependencia(PROPERTIES));
+        super(Serveis.DEPENDENCIA.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderDependencia(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

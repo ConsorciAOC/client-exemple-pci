@@ -12,12 +12,14 @@ import java.util.Properties;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public abstract class AbstractClientPCITest<O extends Operacio> {
+    protected static final String KEYSTORE_PATH = "src\\main\\resources\\keystore.properties";
+
     private static final String PROPERTIES_PATH = "src\\main\\resources\\client.properties";
-    protected static final Properties PROPERTIES;
+    protected static final Properties CLIENT_BUILDER_PROPERTIES;
 
     static {
         try {
-            PROPERTIES = PropertiesReader.load(PROPERTIES_PATH);
+            CLIENT_BUILDER_PROPERTIES = PropertiesReader.load(PROPERTIES_PATH);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

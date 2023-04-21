@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class EnotumTest extends AbstractClientPCITest<OperacioEnotum> {
 
     public EnotumTest() throws IOException {
-        super(Serveis.ENOTUM.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderEnotum(PROPERTIES));
+        super(Serveis.ENOTUM.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderEnotum(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

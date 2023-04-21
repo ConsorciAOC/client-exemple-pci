@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RegistreEntitatsTest extends AbstractClientPCITest<OperacioRegistreEntitats> {
     public RegistreEntitatsTest() throws IOException {
-        super(Serveis.REGISTRE_ENTITATS.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderRegistreEntitats(PROPERTIES));
+        super(Serveis.REGISTRE_ENTITATS.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderRegistreEntitats(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class SepeTest extends AbstractClientPCITest<OperacioSepe> {
 
     public SepeTest() throws IOException {
-        super(Serveis.SEPE.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderSepe(PROPERTIES));
+        super(Serveis.SEPE.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderSepe(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

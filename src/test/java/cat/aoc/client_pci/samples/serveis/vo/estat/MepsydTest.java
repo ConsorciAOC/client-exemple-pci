@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class MepsydTest extends AbstractClientPCITest<OperacioMepsyd> {
 
     public MepsydTest() throws IOException {
-        super(Serveis.MEPSYD.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderMepsyd(PROPERTIES));
+        super(Serveis.MEPSYD.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderMepsyd(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

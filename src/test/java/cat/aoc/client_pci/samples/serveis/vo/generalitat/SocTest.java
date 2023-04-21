@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class SocTest extends AbstractClientPCITest<OperacioSoc> {
     public SocTest() throws IOException {
-        super(Serveis.SOC.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderSoc(PROPERTIES));
+        super(Serveis.SOC.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderSoc(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

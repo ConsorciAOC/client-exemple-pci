@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class BoeTest extends AbstractClientPCITest<OperacioBoe> {
 
     public BoeTest() throws IOException {
-        super(Serveis.BOE.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderBoe(PROPERTIES));
+        super(Serveis.BOE.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderBoe(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

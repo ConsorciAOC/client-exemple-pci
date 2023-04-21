@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class Sir2Test extends AbstractClientPCITest<OperacioSir2> {
 
     public Sir2Test() throws IOException {
-        super(Serveis.SIR2.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderSir2(PROPERTIES));
+        super(Serveis.SIR2.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderSir2(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

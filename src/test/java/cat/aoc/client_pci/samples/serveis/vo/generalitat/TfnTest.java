@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TfnTest extends AbstractClientPCITest<OperacioTfn> {
     public TfnTest() throws IOException {
-        super(Serveis.TFN.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderTfn(PROPERTIES));
+        super(Serveis.TFN.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderTfn(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

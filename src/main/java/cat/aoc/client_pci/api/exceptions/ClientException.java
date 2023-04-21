@@ -1,10 +1,9 @@
 package cat.aoc.client_pci.api.exceptions;
 
 import lombok.Getter;
-import org.springframework.ws.client.WebServiceClientException;
 
 @Getter
-public class ClientException extends WebServiceClientException {
+public class ClientException extends RuntimeException {
 
     private final String message;
     private final Exception exception;

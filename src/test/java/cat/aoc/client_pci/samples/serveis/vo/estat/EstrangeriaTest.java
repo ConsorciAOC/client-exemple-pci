@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class EstrangeriaTest extends AbstractClientPCITest<OperacioEstrangeria> {
 
     public EstrangeriaTest() throws IOException {
-        super(Serveis.ESTRANGERIA.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderEstrangeria(PROPERTIES));
+        super(Serveis.ESTRANGERIA.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderEstrangeria(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

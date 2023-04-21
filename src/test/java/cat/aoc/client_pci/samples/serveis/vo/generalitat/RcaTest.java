@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RcaTest extends AbstractClientPCITest<OperacioRca> {
     public RcaTest() throws IOException {
-        super(Serveis.RCA.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderRca(PROPERTIES));
+        super(Serveis.RCA.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderRca(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

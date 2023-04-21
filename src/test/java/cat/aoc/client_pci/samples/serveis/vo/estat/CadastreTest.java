@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class CadastreTest extends AbstractClientPCITest<OperacioCadastre> {
     public CadastreTest() throws IOException {
-        super(Serveis.CADASTRE.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderCadastre(PROPERTIES));
+        super(Serveis.CADASTRE.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderCadastre(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class DgpTest extends AbstractClientPCITest<OperacioDgp> {
 
     public DgpTest() throws IOException {
-        super(Serveis.DGP.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderDgp(PROPERTIES));
+        super(Serveis.DGP.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderDgp(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

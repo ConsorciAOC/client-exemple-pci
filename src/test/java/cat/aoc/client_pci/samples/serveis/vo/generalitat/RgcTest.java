@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RgcTest extends AbstractClientPCITest<OperacioRgc> {
     public RgcTest() throws IOException {
-        super(Serveis.RGC.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderRgc(PROPERTIES));
+        super(Serveis.RGC.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderRgc(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

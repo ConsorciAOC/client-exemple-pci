@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class RepresentaTest extends AbstractClientPCITest<OperacioRepresenta> {
 
     public RepresentaTest() throws IOException {
-        super(Serveis.REPRESENTA.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderRepresenta(PROPERTIES));
+        super(Serveis.REPRESENTA.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderRepresenta(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class GrauDiscapacitatTest extends AbstractClientPCITest<OperacioGrauDiscapacitat> {
     public GrauDiscapacitatTest() throws IOException {
-        super(Serveis.GRAU_DISCAPACITAT.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderGrauDiscapacitat(PROPERTIES));
+        super(Serveis.GRAU_DISCAPACITAT.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderGrauDiscapacitat(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

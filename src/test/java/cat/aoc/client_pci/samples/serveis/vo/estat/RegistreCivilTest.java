@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class RegistreCivilTest extends AbstractClientPCITest<OperacioRegistreCivil> {
 
     public RegistreCivilTest() throws IOException {
-        super(Serveis.REGISTRE_CIVIL.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderRegistreCivil(PROPERTIES));
+        super(Serveis.REGISTRE_CIVIL.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderRegistreCivil(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

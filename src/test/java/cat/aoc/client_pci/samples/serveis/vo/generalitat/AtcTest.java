@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AtcTest extends AbstractClientPCITest<OperacioAtc> {
     public AtcTest() throws IOException {
-        super(Serveis.ATC.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderAtc(PROPERTIES));
+        super(Serveis.ATC.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderAtc(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class OverTest extends AbstractClientPCITest<OperacioOver> {
 
     public OverTest() throws IOException {
-        super(Serveis.OVER.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderOver(PROPERTIES));
+        super(Serveis.OVER.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderOver(CLIENT_BUILDER_PROPERTIES));
     }
     @Test
     @DisplayName("OVER_DOCUMENTACIO")

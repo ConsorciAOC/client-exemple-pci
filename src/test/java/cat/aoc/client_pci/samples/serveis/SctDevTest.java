@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class SctDevTest extends AbstractClientPCITest<OperacioSctDev> {
 
     public SctDevTest() throws IOException {
-        super(Serveis.SCT_DEV.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderSctDev(PROPERTIES));
+        super(Serveis.SCT_DEV.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderSctDev(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class EtaulerTest extends AbstractClientPCITest<OperacioEtauler> {
 
     public EtaulerTest() throws IOException {
-        super(Serveis.ETAULER.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderEtauler(PROPERTIES));
+        super(Serveis.ETAULER.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderEtauler(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

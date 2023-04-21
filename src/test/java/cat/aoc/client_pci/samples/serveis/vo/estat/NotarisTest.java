@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class NotarisTest extends AbstractClientPCITest<OperacioNotaris> {
 
     public NotarisTest() throws IOException {
-        super(Serveis.NOTARIS.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderNotaris(PROPERTIES));
+        super(Serveis.NOTARIS.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderNotaris(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test

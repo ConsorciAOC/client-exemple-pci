@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RpeTest extends AbstractClientPCITest<OperacioRpe> {
     public RpeTest() throws IOException {
-        super(Serveis.RPE.getClient(Entorn.PRE, Frontal.SINCRON),
-                new PeticionBuilderRpe(PROPERTIES));
+        super(Serveis.RPE.getClient(Entorn.PRE, Frontal.SINCRON, KEYSTORE_PATH),
+                new PeticionBuilderRpe(CLIENT_BUILDER_PROPERTIES));
     }
 
     @Test
