@@ -35,7 +35,6 @@ public class ClientPCI {
     private final Frontal frontal;
     private final String[] externalPackages;
     private final Properties keystoreProperties;
-    //private final SoapMtomClient2<Procesa, ProcesaResponse> client;
 
     public ClientPCI(Entorn entorn, Cluster cluster, Frontal frontal, String[] externalPackages, Properties keystoreProperties) {
         this.entorn = entorn;
@@ -45,7 +44,6 @@ public class ClientPCI {
         this.keystoreProperties = keystoreProperties;
     }
 
-    //@Override
     public Respuesta send(Peticion peticion) throws ClientException {
         Procesa procesa = new Procesa();
         procesa.setPeticion(peticion);
