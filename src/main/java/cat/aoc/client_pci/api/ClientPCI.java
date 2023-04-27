@@ -19,7 +19,7 @@ import java.util.Properties;
 import java.util.stream.Stream;
 
 @Slf4j
-public class ClientPCI extends SoapMtomClient<Procesa, ProcesaResponse> {
+public class ClientPCI {
     private static final String[] PACKAGES = {
             "generated.pci.peticion",
             "generated.pci.respuesta",
@@ -33,27 +33,33 @@ public class ClientPCI extends SoapMtomClient<Procesa, ProcesaResponse> {
     private final Entorn entorn;
     private final Cluster cluster;
     private final Frontal frontal;
+    private final String[] externalPackages;
+    private final Properties keystoreProperties;
+    //private final SoapMtomClient2<Procesa, ProcesaResponse> client;
 
     public ClientPCI(Entorn entorn, Cluster cluster, Frontal frontal, String[] externalPackages, Properties keystoreProperties) {
-        super(processPackages(externalPackages));
         this.entorn = entorn;
         this.cluster = cluster;
         this.frontal = frontal;
-        try {
-            setInterceptors(new ClientInterceptor[]{
-                    new SignatureInterceptor(keystoreProperties),
-                    new LoggerInterceptor(getUnmarshaller())
-            });
-        } catch (ClientException e) {
-            e.printStackTrace();
-        }
+        this.externalPackages = externalPackages;
+        this.keystoreProperties = keystoreProperties;
     }
 
+    //@Override
     public Respuesta send(Peticion peticion) throws ClientException {
         Procesa procesa = new Procesa();
         procesa.setPeticion(peticion);
         String endpoint = getEndpoint();
-        ProcesaResponse response = this.send(endpoint, procesa);
+        SoapMtomClient<Procesa, ProcesaResponse> client = new SoapMtomClient<>(processPackages(externalPackages));
+        try {
+            client.setInterceptors(new ClientInterceptor[]{
+                    new SignatureInterceptor(keystoreProperties),
+                    new LoggerInterceptor(client.getUnmarshaller())
+            });
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        ProcesaResponse response = client.send(endpoint, procesa);
         return response.getRespuesta();
     }
 

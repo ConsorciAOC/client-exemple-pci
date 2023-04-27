@@ -6,13 +6,13 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
 @Slf4j
-public abstract class SoapMtomClient<P, R> extends WebServiceGatewaySupport {
+public class SoapMtomClient<P, R> extends WebServiceGatewaySupport {
 
     private static String processPackages(String... packages) {
         return String.join(":", packages);
     }
 
-    protected SoapMtomClient(String... packages) {
+    public SoapMtomClient(String... packages) {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPaths(processPackages(packages));
         marshaller.setMtomEnabled(true);
@@ -20,7 +20,7 @@ public abstract class SoapMtomClient<P, R> extends WebServiceGatewaySupport {
         this.setUnmarshaller(marshaller);
     }
 
-    protected R send(String endpoint, P procesa) {
+    public R send(String endpoint, P procesa) {
         log.debug("Enviando petición: " + endpoint);
         WebServiceTemplate template = getWebServiceTemplate();
         return (R) template.marshalSendAndReceive(endpoint, procesa);
