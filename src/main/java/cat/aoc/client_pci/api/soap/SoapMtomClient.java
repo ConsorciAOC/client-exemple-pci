@@ -20,6 +20,7 @@ public class SoapMtomClient<P, R> extends WebServiceGatewaySupport {
         this.setUnmarshaller(marshaller);
     }
 
+    @SuppressWarnings("unchecked")
     public R send(String endpoint, P procesa) {
         log.debug("Enviando petición: " + endpoint);
         WebServiceTemplate template = getWebServiceTemplate();
