@@ -112,5 +112,12 @@ def jaxb = tasks.register("jaxb") {
 compileJava {options.encoding = projectEncoding}
 compileJava.dependsOn jaxb
 
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
+    }
+}
+
 bootJar {enabled = false}
 jar {enabled = true}
