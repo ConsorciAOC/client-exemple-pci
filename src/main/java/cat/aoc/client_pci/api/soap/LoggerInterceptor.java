@@ -92,7 +92,7 @@ public class LoggerInterceptor implements ClientInterceptor {
             log.warn("Could not log soap message: " + e.getMessage());
             e.printStackTrace();
         }
-        log.info("###################################################################################");
+        log.info("#######################################################################################");
     }
 
 }
