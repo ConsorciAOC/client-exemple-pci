@@ -64,6 +64,7 @@ public enum Serveis {
         return switch (this) {
             case PADRO -> new ProxyClientPadro(entorn, frontal, properties);
             case CADASTRE -> new ProxyClientCadastre(entorn, frontal, properties);
+            case ENOTUM -> new ClientPCI(entorn, this.cluster, frontal, this.packages, properties, true);
             default -> new ClientPCI(entorn, this.cluster, frontal, this.packages, properties);
         };
     }
