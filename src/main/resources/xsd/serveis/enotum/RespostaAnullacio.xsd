@@ -5,20 +5,18 @@
 		targetNamespace="http://www.aocat.net/NT/v4.0"
 		elementFormDefault="qualified">
 
-	<xs:include schemaLocation="Peticio.xsd"/>
-	<xs:include schemaLocation="Commons.xsd"/>
+	<xs:include schemaLocation="Resposta.xsd"/>
 
-	<xs:element name="PeticioEvidencia">
+	<xs:element name="RespostaAnullacio">
 		<xs:complexType>
 			<xs:complexContent>
-				<xs:extension base="PeticioType">
-					<xs:sequence>
+				<xs:extension base="RespostaType">
+					<xs:sequence minOccurs="0">
 						<xs:element name="IdNotificacio" type="Number"/>
-						<xs:element name="TipusEvidencia" type="TipusEvidenciaType"/>
-						<xs:element name="IdiomaEvidenciaPDF" type="Idioma" minOccurs="0" />
 					</xs:sequence>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+
 </xs:schema>

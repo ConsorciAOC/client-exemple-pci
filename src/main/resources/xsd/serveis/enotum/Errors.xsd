@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns="http://www.aocat.net/NT/v3.2"
-	targetNamespace="http://www.aocat.net/NT/v3.2"
-	elementFormDefault="qualified"
-	attributeFormDefault="unqualified">
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns="http://www.aocat.net/NT/v4.0"
+		targetNamespace="http://www.aocat.net/NT/v4.0"
+		elementFormDefault="qualified">
+
+	<xs:include schemaLocation="Commons.xsd"/>
 
 	<xs:complexType name="ErrorsType">
 		<xs:sequence>
 			<xs:element name="Error" maxOccurs="unbounded">
 				<xs:complexType>
-					<xs:all>
-						<xs:element name="CodiError" type="xs:integer"/>
+					<xs:sequence>
+						<xs:element name="CodiError" type="Number"/>
 						<xs:element name="MissatgeError" type="xs:string"/>
 						<xs:element name="DadesNotificacio" type="DadesNotificacioErrorType" minOccurs="0"/>
 						<xs:element name="FaseError" type="xs:string" minOccurs="0"/>
 						<xs:element name="TipusError" type="xs:string" minOccurs="0"/>
-					</xs:all>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -24,7 +25,7 @@
 
 	<xs:complexType name="DadesNotificacioErrorType">
 		<xs:sequence>
-			<xs:element name="IdNotificacio" type="xs:integer"/>
+			<xs:element name="IdNotificacio" type="Number"/>
 			<xs:element name="Organisme" type="xs:string"/>
 			<xs:element name="Departament" type="xs:string"/>
 			<xs:element name="BackOffice" type="xs:string" minOccurs="0"/>

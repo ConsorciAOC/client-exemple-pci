@@ -1,15 +1,16 @@
 package cat.aoc.client_pci.samples.serveis.enotum;
 
-import generated.serveis.enotum.*;
-
-import java.math.BigInteger;
+import generated.serveis.enotum.IntervalValors;
+import generated.serveis.enotum.PeticioCerca;
+import generated.serveis.enotum.SentitOrdenacioType;
+import generated.serveis.enotum.UsuariType;
 
 interface PeticionBuilderEnotumCerca {
-    static PeticioCerca buildPeticioCerca(EmissorType emissor, UsuariType usuari) {
+
+    static PeticioCerca buildPeticioCerca(UsuariType usuari) {
         PeticioCerca peticio = new PeticioCerca();
         peticio.setDadesCerca(getDadesCerca());
         peticio.setUsuari(usuari);
-        peticio.setEmissor(emissor);
         return peticio;
     }
 
@@ -22,7 +23,7 @@ interface PeticionBuilderEnotumCerca {
 
     private static PeticioCerca.DadesCerca.Paginacio getPaginacio() {
         PeticioCerca.DadesCerca.Paginacio paginacio = new PeticioCerca.DadesCerca.Paginacio();
-        paginacio.setNumeroPagina(BigInteger.valueOf(1));
+        paginacio.setNumeroPagina(1);
         paginacio.setResultatsPerPagina(25);
         paginacio.setSentitOrdenacio(SentitOrdenacioType.DESCENDENT);
         return paginacio;

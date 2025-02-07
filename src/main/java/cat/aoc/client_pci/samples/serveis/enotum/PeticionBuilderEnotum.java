@@ -5,9 +5,9 @@ import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
 import generated.pci.peticion.Fichero;
 import generated.pci.peticion.Ficheros;
 import generated.pci.peticion.Peticion;
-import generated.serveis.enotum.EmissorType;
-import generated.serveis.enotum.RolType;
 import generated.serveis.enotum.UsuariType;
+import jakarta.activation.DataHandler;
+import jakarta.activation.FileDataSource;
 
 import java.util.Properties;
 
@@ -44,8 +44,8 @@ public class PeticionBuilderEnotum extends PeticionBuilderFromProperties<Operaci
         fichero.setNombreFichero("sample.pdf");
         fichero.setId("1234");
         fichero.setVia("Salida");
-        jakarta.activation.DataSource ds = new jakarta.activation.FileDataSource("src\\main\\resources\\examples\\example.pdf");
-        fichero.setContenido(new jakarta.activation.DataHandler(ds));
+        FileDataSource ds = new FileDataSource("src\\main\\resources\\examples\\example.pdf");
+        fichero.setContenido(new DataHandler(ds)); // XOP reference
         Ficheros ficheros = new Ficheros();
         ficheros.getFichero().add(fichero);
         return ficheros;
@@ -53,27 +53,24 @@ public class PeticionBuilderEnotum extends PeticionBuilderFromProperties<Operaci
 
     private Object getDatoEspecifico(OperacioEnotum operacio) {
         return switch (operacio) {
-            case CERCA -> buildPeticioCerca(buildEmissor(), buildUsuari());
-            case PROCESSAR_TRAMESA -> buildPeticioProcessarTramesa(buildEmissor(), buildUsuari());
-            case CONSULTA -> buildPeticioConsulta(buildEmissor(), buildUsuari());
-            case RESUM -> buildPeticioResum(buildEmissor(), buildUsuari());
-            case PARAULA_PAS -> buildPeticioParaulaPas(buildEmissor(), buildUsuari());
-            case EVIDENCIA,
-                    PRACTICAR,
-                    RECUPERAR_REPORT -> null;
+            case CERCA -> buildPeticioCerca(buildUsuari());
+            case PROCESSAR_TRAMESA -> buildPeticioProcessarTramesa(buildUsuari());
+            case CONSULTA -> buildPeticioConsulta(buildUsuari());
+            case RESUM -> buildPeticioResum(buildUsuari());
+            case PARAULA_PAS -> buildPeticioParaulaPas(buildUsuari());
+            case ANULLACIO,
+                 EVIDENCIA,
+                 PRACTICAR,
+                 RECUPERAR_REPORT -> null;
         };
     }
 
-    private EmissorType buildEmissor() {
-        EmissorType emissor = new EmissorType();
-        emissor.setCodiDepartament(properties.getProperty(CODI_ENS));
-        emissor.setCodiOrganisme(properties.getProperty(CODI_ENS));
-        return emissor;
-    }
-
-    private static UsuariType buildUsuari() {
+    private UsuariType buildUsuari() {
         UsuariType usuari = new UsuariType();
-        usuari.setRol(RolType.EMPLEAT);
+        UsuariType.Empleat empleat = new UsuariType.Empleat();
+        empleat.setCodiOrganisme(properties.getProperty(CODI_ENS));
+        empleat.setCodiDepartament(properties.getProperty(CODI_ENS));
+        usuari.setEmpleat(empleat);
         return usuari;
     }
 

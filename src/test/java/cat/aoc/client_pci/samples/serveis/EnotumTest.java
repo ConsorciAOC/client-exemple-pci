@@ -62,5 +62,5 @@ class EnotumTest extends AbstractClientPCITest<OperacioEnotum> {
         RespostaParaulaPas resposta = this.send(OperacioEnotum.PARAULA_PAS, Finalitat.PROVES);
         assertNotNull(resposta);
     }
-    
+
 }
