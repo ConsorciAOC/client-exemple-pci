@@ -2,10 +2,10 @@ package cat.aoc.client_pci.samples.serveis.vo.estat.dgp;
 
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.serveis.dgp.PeticioConsultaDadesIdentitat;
-import generated.serveis.dgp.PeticioVerificacioDadesIdentitat;
 import generated.pci.peticion.Peticion;
 import generated.pci.peticion.Titular;
+import generated.serveis.dgp.PeticioConsultaDadesIdentitat;
+import generated.serveis.dgp.PeticioVerificacioDadesIdentitat;
 
 import java.util.Properties;
 

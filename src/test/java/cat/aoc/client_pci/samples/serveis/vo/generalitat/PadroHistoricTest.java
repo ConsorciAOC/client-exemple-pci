@@ -1,11 +1,11 @@
 package cat.aoc.client_pci.samples.serveis.vo.generalitat;
 
+import cat.aoc.client_pci.api.clients.Serveis;
+import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.api.model.Entorn;
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.api.model.Frontal;
-import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
-import cat.aoc.client_pci.api.clients.Serveis;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.padro_historic.OperacioPadroHistoric;
 import cat.aoc.client_pci.samples.serveis.vo.generalitat.padro_historic.PeticionBuilderPadroHistoric;
 import generated.serveis.padro_historic.RespuestaDatosConvivientesHistorico;

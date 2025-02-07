@@ -4,7 +4,6 @@ import cat.aoc.client_pci.api.ClientPCI;
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.utils.PropertiesReader;
 import generated.pci.respuesta.Respuesta;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -27,12 +26,13 @@ public abstract class AbstractClientPCITest<O extends Operacio> {
 
     private final ClientPCI client;
     private final PeticionBuilderFromProperties<O> builder;
+
     public AbstractClientPCITest(ClientPCI client, PeticionBuilderFromProperties<O> builder) {
         this.client = client;
         this.builder = builder;
     }
 
-    @Test
+    @SuppressWarnings("unchecked")
     protected <T> T send(O operacio, Finalitat finalitat) {
         Respuesta respuesta = client.send(builder.build(operacio, finalitat));
         assertNotNull(respuesta);
@@ -40,7 +40,7 @@ public abstract class AbstractClientPCITest<O extends Operacio> {
         return (T) respuesta.getTransmisiones().getTransmisionDatos().get(0).getDatosEspecificos().getAny().get(0);
     }
 
-    @Test
+    @SuppressWarnings("unchecked")
     protected <T> T send(O operacio, String procedimiento) {
         Respuesta respuesta = client.send(builder.build(operacio, procedimiento));
         assertNotNull(respuesta);

@@ -2,9 +2,9 @@ package cat.aoc.client_pci.samples.serveis.vo.estat.inss;
 
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.serveis.inss_historic.PeticioConsultaPrestacionsHistoric;
 import generated.pci.peticion.Peticion;
 import generated.pci.peticion.Titular;
+import generated.serveis.inss_historic.PeticioConsultaPrestacionsHistoric;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;

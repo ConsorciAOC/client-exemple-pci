@@ -1,6 +1,8 @@
 package cat.aoc.client_pci.samples.serveis.enotum;
 
-import generated.serveis.enotum.*;
+import generated.serveis.enotum.EmissorType;
+import generated.serveis.enotum.PeticioConsulta;
+import generated.serveis.enotum.UsuariType;
 
 import java.math.BigInteger;
 
