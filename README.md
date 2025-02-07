@@ -32,7 +32,7 @@ Amb l'alta se us assignaran permisos per consumir els serveis demanats i necessi
 - Codi de la modalitat
 - Codi de la finalitat
 - El certificat digital amb el qual signareu les peticions XML (XMLDSIG)
-- Executar el codi des d'un ordinador que la seva IP hagi estat habilitada.
+- Executar el codi des d'una IP que hagi estat habilitada
 
 ## Primeres passes
 ### Configurar el certificat
@@ -53,7 +53,7 @@ Per executar la tasca:
 gradlew jaxb
 ```
 
-La compilació del projecte java depèn d'aquesta tasca, per tant, cada cop que es necessiti compilar quelcom s'executarà abans la taca jaxb mencionada.
+La compilació del projecte java depèn d'aquesta tasca, per tant, cada cop que es necessiti compilar el projecte, s'executarà abans la tasca jaxb mencionada.
 Si desitgeu eliminar aquesta dependència per agilitzar les builds, podeu comentar la següent línia al fitxer build.gradle:
 ```groovy
 compileJava.dependsOn jaxb

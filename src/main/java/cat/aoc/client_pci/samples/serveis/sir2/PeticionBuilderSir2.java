@@ -2,9 +2,9 @@ package cat.aoc.client_pci.samples.serveis.sir2;
 
 import cat.aoc.client_pci.api.model.Finalitat;
 import cat.aoc.client_pci.samples.PeticionBuilderFromProperties;
-import generated.pci.peticion.Peticion;
 import generated.pci.peticion.Fichero;
 import generated.pci.peticion.Ficheros;
+import generated.pci.peticion.Peticion;
 
 import java.util.Properties;
 

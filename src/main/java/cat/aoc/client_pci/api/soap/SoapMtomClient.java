@@ -12,10 +12,10 @@ public class SoapMtomClient<P, R> extends WebServiceGatewaySupport {
         return String.join(":", packages);
     }
 
-    public SoapMtomClient(String... packages) {
+    public SoapMtomClient(boolean useMtom, String... packages) {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPaths(processPackages(packages));
-        marshaller.setMtomEnabled(true);
+        marshaller.setMtomEnabled(useMtom);
         this.setMarshaller(marshaller);
         this.setUnmarshaller(marshaller);
     }

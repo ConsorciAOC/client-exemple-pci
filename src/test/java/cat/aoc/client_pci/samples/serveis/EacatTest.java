@@ -8,7 +8,10 @@ import cat.aoc.client_pci.api.model.Frontal;
 import cat.aoc.client_pci.samples.AbstractClientPCITest;
 import cat.aoc.client_pci.samples.serveis.eacat.OperacioEacat;
 import cat.aoc.client_pci.samples.serveis.eacat.PeticionBuilderEacat;
-import generated.serveis.eacat.*;
+import generated.serveis.eacat.RespostaConsultaEns;
+import generated.serveis.eacat.RespostaConsultaServei;
+import generated.serveis.eacat.RespostaConsultaTipusEns;
+import generated.serveis.eacat.RespostaConsultaUsuari;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

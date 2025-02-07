@@ -8,23 +8,13 @@
 	<xs:include schemaLocation="Peticio.xsd"/>
 	<xs:include schemaLocation="Commons.xsd"/>
 
-	<xs:element name="PeticioRecuperarReport">
+	<xs:element name="PeticioAnullacio">
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="PeticioType">
 					<xs:sequence>
-						<xs:choice>
-							<xs:element name="IdNotificacio" type="Number">
-								<xs:annotation>
-									<xs:documentation>Identificador de la notificació a consultar.</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="DataReport" type="xs:date">
-								<xs:annotation>
-									<xs:documentation>Data del dia del qual es vol obtenir el report.</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-						</xs:choice>
+						<xs:element name="IdNotificacio" type="Number"/>
+						<xs:element name="Motiu" type="String500Max"/>
 					</xs:sequence>
 				</xs:extension>
 			</xs:complexContent>

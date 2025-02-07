@@ -1,37 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns="http://www.aocat.net/NT/v3.2"
-	targetNamespace="http://www.aocat.net/NT/v3.2"
-	elementFormDefault="qualified"
-	attributeFormDefault="unqualified">
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns="http://www.aocat.net/NT/v4.0"
+		targetNamespace="http://www.aocat.net/NT/v4.0"
+		elementFormDefault="qualified">
 
 	<xs:include schemaLocation="Commons.xsd"/>
 
-    <xs:element name="Report">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="Capcalera" type="ReportCapcaleraType"/>
-                <xs:element name="Dades" type="ReportDadesType" maxOccurs="unbounded" minOccurs="0"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>   
+	<xs:element name="Report">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Emissor" type="EmissorType"/>
+				<xs:element name="DataInforme" type="xs:date"/>
+				<xs:element name="TipusInforme" type="TipusInformeType"/>
+				<xs:element name="DadesNotificacio" type="ReportNotificacioType" maxOccurs="unbounded" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
-	<xs:complexType name="ReportCapcaleraType">
-		<xs:annotation>
-			<xs:documentation xml:lang="ca">Esquema que representa la capçalera de l'informe</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="CodiOrganisme" type="xs:string"/>
-			<xs:element name="CodiDepartament" type="xs:string"/>
-			<xs:element name="NomOrganisme" type="xs:string"/>
-			<xs:element name="NomDepartament" type="xs:string"/>
-			<xs:element name="DataInforme" type="xs:date"/>
-			<xs:element name="TipusInforme" type="TipusInformeType"/>
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="ReportDadesType">
+	<xs:complexType name="ReportNotificacioType">
 		<xs:annotation>
 			<xs:documentation xml:lang="ca">Esquema que representa un registre de l'informe</xs:documentation>
 		</xs:annotation>
@@ -39,8 +26,7 @@
 			<xs:element name="DadesEstat">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Estat" type="xs:integer"/>
-						<xs:element name="DescripcioEstat" type="xs:string"/>
+						<xs:element name="Estat" type="EstatType"/>
 						<xs:element name="DataActualitzacio" type="xs:dateTime"/>
 					</xs:sequence>
 				</xs:complexType>
@@ -48,12 +34,11 @@
 			<xs:element name="DadesNotificacio">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Referencia" type="xs:string"/>
-						<xs:element name="IdNotificacio" type="xs:integer"/>
+						<xs:element name="Referencia" type="String255Max"/>
+						<xs:element name="IdNotificacio" type="Number"/>
 						<xs:element name="TipusObjecte" type="TipusObjecteType"/>
-						<xs:element name="AmbitObjecte" type="xs:string" minOccurs="0"/>
-						<xs:element name="DiesExpiracio" type="xs:integer" minOccurs="0"/>
-						<xs:element name="IdNotificacioEmissor" type="xs:string" minOccurs="0"/>
+						<xs:element name="DiesExpiracio" type="PositiveNumber1000Max" minOccurs="0"/>
+						<xs:element name="IdNotificacioEmissor" type="String255Max" minOccurs="0"/>
 						<xs:element name="Canal" type="CanalType" minOccurs="0"/>
 					</xs:sequence>
 				</xs:complexType>
@@ -62,37 +47,13 @@
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="DataRegistre" type="xs:dateTime" nillable="true"/>
-						<xs:element name="NumeroRegistreSortida" type="xs:string" nillable="true"/>
+						<xs:element name="NumeroRegistreSortida" type="String100Max" nillable="true"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="DadesActor">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:choice>
-							<xs:element name="PracticadaPaper" type="DadesPracticarCanalPaperType"/>
-							<xs:element name="PersonaFisica">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="DocumentIdentificatiu" type="DocumentPersonaFisicaType"/>
-										<xs:element name="NomComplet" type="xs:string"/>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="PersonaJuridica">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="DocumentIdentificatiu" type="DocumentPersonaJuridicaType"/>
-										<xs:element name="RaoSocial" type="xs:string"/>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:choice>
-						<xs:element name="CanviCanal" type="DadesCanviCanalType" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="CodiBackOffice" type="xs:string" minOccurs="0"/>
+			<xs:element name="DadesSignador" type="DadesSignadorType" minOccurs="0"/>
+			<xs:element name="DadesCanviCanal" type="DadesCanviCanalType" minOccurs="0"/>
+			<xs:element name="BackOffice" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 
